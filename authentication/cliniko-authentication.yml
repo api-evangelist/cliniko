@@ -1,0 +1,24 @@
+generated: '2026-07-12'
+method: derived
+source: openapi/cliniko-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: >-
+    HTTP Basic authentication over HTTPS. The Cliniko API key is supplied as the
+    username and the password is left empty (curl: `-u API_KEY:`). Construct the
+    header as `Authorization: Basic ` + base64(api_key + ":"). API keys are
+    generated per user in Cliniko under "My Info". The shard suffix on the key
+    (for example `-uk1`) selects the base host, e.g. https://api.uk1.cliniko.com;
+    keys with no suffix belong to the au1 shard. Every request must also send
+    `Accept: application/json` and a `User-Agent` header of the form
+    `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` with a valid contact email, or requests
+    may be automatically blocked.
+  sources:
+  - openapi/cliniko-openapi.yml
+  - https://docs.api.cliniko.com/
+  - https://github.com/redguava/cliniko-api

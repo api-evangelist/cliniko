@@ -1,0 +1,195 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Cliniko
+providerId: cliniko
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Practice Management
+- Healthcare
+- Allied Health
+- SaaS
+- Plans
+description: >-
+  Cliniko is sold as a per-practitioner SaaS subscription in US dollars, billed
+  monthly, with a single feature set across every tier - the price scales with
+  the number of practitioners, not with feature gating. There is a 30-day free
+  trial (no upfront cost, no card required to start). Every subscription includes
+  all Cliniko features, unlimited admin and reception users, unlimited locations,
+  unlimited patients, unlimited file storage, and full support. The public REST
+  API is part of the product and is available to subscribers at no separate
+  charge. SMS messaging is billed separately as pre-paid credits (about 10 cents
+  per message). The tier prices below are drawn from Cliniko's public pricing
+  page and are not reconciled against a live quote here.
+notes: >-
+  API access carries no separate fee; it is included with a Cliniko
+  subscription. SMS is pre-paid and priced per message. Verify current tier
+  prices and practitioner bands on https://www.cliniko.com/pricing/ during
+  reconciliation - published rates change over time.
+sources:
+- https://www.cliniko.com/pricing/
+- https://docs.api.cliniko.com/
+- https://github.com/redguava/cliniko-api
+plans:
+- id: cliniko-trial
+  name: Free Trial
+  type: free
+  description: >-
+    30-day free trial of the full product with no upfront cost and no payment
+    details required to begin. Includes full API access.
+  entries:
+  - label: Trial Period
+    name: trial_period
+    type: flat
+    metric: days
+    limit: 30
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: free for 30 days
+    userMultiplied: false
+  elements:
+  - name: Every Cliniko Feature
+  - name: Public REST API
+  - name: Unlimited Admin and Reception Users
+  - name: Unlimited Locations and Patients
+- id: cliniko-1-practitioner
+  name: 1 Practitioner
+  type: paid
+  description: Subscription for a single practitioner.
+  entries:
+  - label: Per Practitioner (1)
+    name: band_1
+    type: flat
+    metric: subscription
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '45'
+    userMultiplied: false
+  elements:
+  - name: Every Cliniko Feature
+  - name: Public REST API
+- id: cliniko-2-5-practitioners
+  name: 2-5 Practitioners
+  type: paid
+  description: Subscription band covering 2 to 5 practitioners.
+  entries:
+  - label: Practitioner Band (2-5)
+    name: band_2_5
+    type: flat
+    metric: subscription
+    limit: 5
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '95'
+    userMultiplied: false
+  elements:
+  - name: Every Cliniko Feature
+  - name: Public REST API
+- id: cliniko-6-8-practitioners
+  name: 6-8 Practitioners
+  type: paid
+  description: Subscription band covering 6 to 8 practitioners.
+  entries:
+  - label: Practitioner Band (6-8)
+    name: band_6_8
+    type: flat
+    metric: subscription
+    limit: 8
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '145'
+    userMultiplied: false
+  elements:
+  - name: Every Cliniko Feature
+  - name: Public REST API
+- id: cliniko-9-12-practitioners
+  name: 9-12 Practitioners
+  type: paid
+  description: Subscription band covering 9 to 12 practitioners.
+  entries:
+  - label: Practitioner Band (9-12)
+    name: band_9_12
+    type: flat
+    metric: subscription
+    limit: 12
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '195'
+    userMultiplied: false
+  elements:
+  - name: Every Cliniko Feature
+  - name: Public REST API
+- id: cliniko-13-25-practitioners
+  name: 13-25 Practitioners
+  type: paid
+  description: Subscription band covering 13 to 25 practitioners.
+  entries:
+  - label: Practitioner Band (13-25)
+    name: band_13_25
+    type: flat
+    metric: subscription
+    limit: 25
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '295'
+    userMultiplied: false
+  elements:
+  - name: Every Cliniko Feature
+  - name: Public REST API
+- id: cliniko-26-200-practitioners
+  name: 26-200 Practitioners
+  type: paid
+  description: Subscription band covering 26 to 200 practitioners.
+  entries:
+  - label: Practitioner Band (26-200)
+    name: band_26_200
+    type: flat
+    metric: subscription
+    limit: 200
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: '395'
+    userMultiplied: false
+  elements:
+  - name: Every Cliniko Feature
+  - name: Public REST API
+- id: cliniko-sms
+  name: SMS Credits (Add-on)
+  type: usage
+  description: >-
+    Optional pre-paid SMS messaging used for appointment reminders and
+    confirmations, billed per message on top of the subscription.
+  entries:
+  - label: SMS Message
+    name: sms_message
+    type: usage
+    metric: messages
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    currency: USD
+    price: ~0.10 per message (pre-paid credits)
+    userMultiplied: false
+  elements:
+  - name: Appointment Reminders
+  - name: Confirmations
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Cliniko
+providerId: cliniko
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Practice Management
+- Healthcare
+- SaaS
+- Rate Limiting
+- Quotas
+description: >-
+  Cliniko documents a fixed request rate limit of 200 requests per minute per
+  user (per API key). Exceeding it returns HTTP 429 with an `X-RateLimit-Reset`
+  response header carrying a UNIX timestamp for when the window resets. Cliniko
+  also reserves the right to block requests that exceed fair-use allocation, and
+  to block requests that omit a compliant `User-Agent` header (which must contain
+  an app/vendor name and a valid contact email). List endpoints are paginated at
+  50 items per page by default and a maximum of 100 per page via the `per_page`
+  parameter, which is the primary lever for reducing request volume.
+notes: >-
+  The 200/minute figure is per user/key and is the documented published limit as
+  of the review date. Honor Retry-After / X-RateLimit-Reset and back off on 429.
+  Prefer larger per_page values and server-side filtering (q[]) to stay within
+  the limit. Reconcile against the live docs during verification.
+sources:
+- https://docs.api.cliniko.com/
+- https://github.com/redguava/cliniko-api
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Minute
+  scope: user
+  metric: requests
+  limit: 200 per minute per user
+  notes: Documented published limit. 429 returned on exceed, with X-RateLimit-Reset.
+- name: Fair Use
+  scope: account
+  metric: requests
+  limit: not published (fair-use)
+  notes: Requests beyond fair-use allocation may be blocked.
+- name: Pagination Page Size
+  scope: request
+  metric: records
+  limit: 50 default, 100 max per page
+  notes: Controlled by the per_page parameter on list endpoints.
+policies:
+- name: Rate Limit Reset Header
+  description: 429 responses include X-RateLimit-Reset, a UNIX timestamp for when the per-minute window resets.
+- name: User-Agent Enforcement
+  description: Requests without a User-Agent containing an app/vendor name and valid contact email may be automatically blocked.
+- name: Backoff Strategy
+  description: Clients should honor X-RateLimit-Reset, implement exponential backoff with jitter, and reduce request volume via larger per_page and q[] filtering.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

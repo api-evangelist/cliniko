@@ -1,0 +1,118 @@
+aid: cliniko
+name: Cliniko
+review:
+  question: Does Cliniko expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Cliniko's public developer surface is a
+    request/response REST API over HTTPS (https://api.<shard>.cliniko.com/v1).
+    There is no documented server-push transport - no wss:// WebSocket and no
+    Server-Sent Events endpoint - on Cliniko's public API to model. Cliniko does
+    offer outbound webhooks for change notifications, but webhooks are
+    server-to-endpoint HTTP callbacks, not a WebSocket, and are out of scope for
+    an AsyncAPI document here.
+findings:
+  summary: |
+    Cliniko does not publish a documented public WebSocket API. Cliniko is
+    practice management software for allied health clinics. Its public API is a
+    well-documented REST API over HTTPS, region-sharded so the base host is
+    derived from the shard suffix on the API key (e.g. https://api.au1.cliniko.com/v1,
+    https://api.uk1.cliniko.com/v1). Authentication is HTTP Basic with the API
+    key as the username and an empty password. Every request must send
+    Accept: application/json and a User-Agent of the form
+    APP_VENDOR_NAME (APP_VENDOR_EMAIL) with a valid contact email or it may be
+    blocked. Requests are rate limited to 200 per minute per user (429 with
+    X-RateLimit-Reset on exceed). All documented interaction is
+    request/response REST; no realtime, bidirectional, or streaming WebSocket
+    (ws:// or wss://) endpoint is documented.
+  openSource: |
+    Cliniko itself is proprietary SaaS. Its API reference and per-resource
+    guides are published openly in the redguava/cliniko-api GitHub repository
+    (archived read-only May 2025) and at the current developer portal
+    docs.api.cliniko.com. Official and community client libraries exist, but the
+    Cliniko service is not open source.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.au1.cliniko.com/v1
+      documented: true
+      note: >-
+        Primary API. Base host is shard-specific (au1/au2/au3/au4/uk1/eu1/us1/ca1)
+        derived from the API key suffix; keys with no suffix use au1.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: >-
+        Cliniko supports outbound webhooks for change notifications. Server-to-endpoint
+        HTTP callbacks, not a WebSocket. Not modeled as AsyncAPI here.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Cliniko's public API as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.au1.cliniko.com/v1/patients
+    - POST   https://api.au1.cliniko.com/v1/patients
+    - GET    https://api.au1.cliniko.com/v1/patients/{id}
+    - PATCH  https://api.au1.cliniko.com/v1/patients/{id}
+    - POST   https://api.au1.cliniko.com/v1/patients/{id}/archive
+    - POST   https://api.au1.cliniko.com/v1/patients/{id}/unarchive
+    - GET    https://api.au1.cliniko.com/v1/individual_appointments
+    - POST   https://api.au1.cliniko.com/v1/individual_appointments
+    - GET    https://api.au1.cliniko.com/v1/individual_appointments/{id}
+    - PATCH  https://api.au1.cliniko.com/v1/individual_appointments/{id}
+    - PATCH  https://api.au1.cliniko.com/v1/individual_appointments/{id}/cancel
+    - GET    https://api.au1.cliniko.com/v1/individual_appointments/{id}/conflicts
+    - GET    https://api.au1.cliniko.com/v1/bookings
+    - GET    https://api.au1.cliniko.com/v1/bookings/{id}
+    - GET    https://api.au1.cliniko.com/v1/practitioners
+    - GET    https://api.au1.cliniko.com/v1/practitioners/{id}
+    - GET    https://api.au1.cliniko.com/v1/businesses
+    - GET    https://api.au1.cliniko.com/v1/businesses/{id}
+    - GET    https://api.au1.cliniko.com/v1/appointment_types
+    - GET    https://api.au1.cliniko.com/v1/appointment_types/{id}
+    - GET    https://api.au1.cliniko.com/v1/invoices
+    - GET    https://api.au1.cliniko.com/v1/invoices/{id}
+    - GET    https://api.au1.cliniko.com/v1/treatment_notes
+    - POST   https://api.au1.cliniko.com/v1/treatment_notes
+    - GET    https://api.au1.cliniko.com/v1/treatment_notes/{id}
+  endpointsModeled:
+    - note: >-
+        Request-body schemas (PatientInput, IndividualAppointmentInput,
+        TreatmentNoteInput) and the create/cancel field sets are representative,
+        assembled from the documented example responses and resource guides
+        rather than transcribed from a formal request schema. Response field
+        lists are grounded in the documented example JSON but may omit some
+        optional attributes. The full Cliniko API documents 50+ resources; only
+        a representative subset (patients, individual appointments, bookings,
+        practitioners, businesses, appointment types, invoices, treatment notes)
+        is captured in the OpenAPI.
+sources:
+  - url: https://docs.api.cliniko.com/
+    type: Documentation
+    note: Current Cliniko API developer portal. REST over HTTPS, sharded base URLs, Basic auth, 200/min limit.
+  - url: https://github.com/redguava/cliniko-api
+    type: SourceCode
+    note: Official API reference repo (archived read-only May 2025) with per-resource guides and example requests/responses.
+  - url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
+    type: APIReference
+    note: Patient resource endpoints and example fields.
+  - url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
+    type: APIReference
+    note: Individual appointment endpoints (list/get/create/update/cancel/conflicts) and example fields.
+  - url: https://docs.api.cliniko.com/guides/sharding
+    type: Documentation
+    note: Sharding scheme - API key suffix maps to base host (au1/au2/au3/au4/uk1/eu1/us1/ca1).
+  - url: https://www.cliniko.com/pricing/
+    type: Pricing
+    note: Per-practitioner USD subscription banding; 30-day free trial; API included.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on Cliniko's public API - it is
+    request/response REST over HTTPS with optional outbound webhooks. No
+    AsyncAPI document was created because there is no server-push (WebSocket or
+    SSE) transport on Cliniko's own API to model.

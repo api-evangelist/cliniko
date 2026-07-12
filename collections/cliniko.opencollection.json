@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cliniko API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{apiKey}}",
+      "password": ""
+    },
+    "headers": [
+      { "name": "Accept", "value": "application/json" },
+      { "name": "User-Agent", "value": "MyClinicApp (dev@myclinic.example)" }
+    ]
+  },
+  "items": [
+    {
+      "info": { "name": "Patients", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get patients", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.au1.cliniko.com/v1/patients" },
+          "docs": "Returns a paginated list of all patients."
+        },
+        {
+          "info": { "name": "Create patient", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.au1.cliniko.com/v1/patients",
+            "body": { "type": "json", "data": "{\n  \"first_name\": \"Peter\",\n  \"last_name\": \"Patientman\",\n  \"email\": \"peter@example.com\"\n}" }
+          },
+          "docs": "Creates a new patient."
+        },
+        {
+          "info": { "name": "Get patient", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.au1.cliniko.com/v1/patients/:id",
+            "params": [{ "name": "id", "value": "", "type": "path", "description": "The patient ID." }]
+          },
+          "docs": "Returns a single patient by ID."
+        },
+        {
+          "info": { "name": "Update patient", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.au1.cliniko.com/v1/patients/:id",
+            "params": [{ "name": "id", "value": "", "type": "path", "description": "The patient ID." }],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Updates an existing patient."
+        },
+        {
+          "info": { "name": "Archive patient", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.au1.cliniko.com/v1/patients/:id/archive",
+            "params": [{ "name": "id", "value": "", "type": "path", "description": "The patient ID." }]
+          },
+          "docs": "Archives a patient."
+        },
+        {
+          "info": { "name": "Unarchive patient", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.au1.cliniko.com/v1/patients/:id/unarchive",
+            "params": [{ "name": "id", "value": "", "type": "path", "description": "The patient ID." }]
+          },
+          "docs": "Unarchives a previously archived patient."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Appointments", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get individual appointments", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.au1.cliniko.com/v1/individual_appointments" },
+          "docs": "Returns a paginated list of individual appointments."
+        },
+        {
+          "info": { "name": "Create individual appointment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.au1.cliniko.com/v1/individual_appointments",
+            "body": { "type": "json", "data": "{\n  \"starts_at\": \"2026-07-21T03:45:00Z\",\n  \"ends_at\": \"2026-07-21T04:30:00Z\",\n  \"patient_id\": \"82\",\n  \"practitioner_id\": \"1\",\n  \"business_id\": \"1\",\n  \"appointment_type_id\": \"2\"\n}" }
+          },
+          "docs": "Books a new individual appointment."
+        },
+        {
+          "info": { "name": "Get individual appointment", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.au1.cliniko.com/v1/individual_appointments/:id",
+            "params": [{ "name": "id", "value": "", "type": "path", "description": "The appointment ID." }]
+          },
+          "docs": "Returns a single individual appointment by ID."
+        },
+        {
+          "info": { "name": "Cancel individual appointment", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.au1.cliniko.com/v1/individual_appointments/:id/cancel",
+            "params": [{ "name": "id", "value": "", "type": "path", "description": "The appointment ID." }],
+            "body": { "type": "json", "data": "{\n  \"cancellation_note\": \"Patient rescheduled\"\n}" }
+          },
+          "docs": "Cancels an individual appointment."
+        },
+        {
+          "info": { "name": "Get bookings", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.au1.cliniko.com/v1/bookings" },
+          "docs": "Returns a paginated list of bookings (individual appointments, group appointments, and unavailable blocks)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Practitioners and Businesses", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get practitioners", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.au1.cliniko.com/v1/practitioners" },
+          "docs": "Returns a paginated list of all active practitioners."
+        },
+        {
+          "info": { "name": "Get businesses", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.au1.cliniko.com/v1/businesses" },
+          "docs": "Returns a paginated list of all businesses (locations)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Appointment Types", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get appointment types", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.au1.cliniko.com/v1/appointment_types" },
+          "docs": "Returns a paginated list of all appointment types."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Invoices", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get invoices", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.au1.cliniko.com/v1/invoices?q[]=issue_date:>=2015-01-01",
+            "params": [{ "name": "q[]", "value": "issue_date:>=2015-01-01", "type": "query", "description": "Filter by issue_date, number, or status." }]
+          },
+          "docs": "Returns a paginated list of invoices, optionally filtered by issue_date, number, or status."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Treatment Notes", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get treatment notes", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.au1.cliniko.com/v1/treatment_notes" },
+          "docs": "Returns a paginated list of treatment notes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

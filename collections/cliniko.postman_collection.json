@@ -1,0 +1,257 @@
+{
+  "info": {
+    "name": "Cliniko API",
+    "description": "A representative subset of the public Cliniko practice-management REST API, grounded in https://docs.api.cliniko.com and github.com/redguava/cliniko-api. Base URL is region-sharded: https://api.{{shard}}.cliniko.com/v1 (the shard is the suffix on your API key; keys with no suffix use au1). Authentication is HTTP Basic with the API key as the username and an empty password. Every request must also send an Accept: application/json header and a User-Agent header of the form APP_VENDOR_NAME (APP_VENDOR_EMAIL) with a valid contact email. Rate limit: 200 requests/minute per user.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{apiKey}}", "type": "string" },
+      { "key": "password", "value": "", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "shard", "value": "au1", "type": "string" },
+    { "key": "baseUrl", "value": "https://api.au1.cliniko.com/v1", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" },
+    { "key": "userAgent", "value": "MyClinicApp (dev@myclinic.example)", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Patients",
+      "item": [
+        {
+          "name": "Get patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/patients", "host": ["{{baseUrl}}"], "path": ["patients"] },
+            "description": "Returns a paginated list of all patients."
+          }
+        },
+        {
+          "name": "Create patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"first_name\": \"Peter\",\n  \"last_name\": \"Patientman\",\n  \"email\": \"peter@example.com\"\n}" },
+            "url": { "raw": "{{baseUrl}}/patients", "host": ["{{baseUrl}}"], "path": ["patients"] },
+            "description": "Creates a new patient."
+          }
+        },
+        {
+          "name": "Get patient",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/patients/:id", "host": ["{{baseUrl}}"], "path": ["patients", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Returns a single patient by ID."
+          }
+        },
+        {
+          "name": "Update patient",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/patients/:id", "host": ["{{baseUrl}}"], "path": ["patients", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Updates an existing patient."
+          }
+        },
+        {
+          "name": "Archive patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/patients/:id/archive", "host": ["{{baseUrl}}"], "path": ["patients", ":id", "archive"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Archives a patient."
+          }
+        },
+        {
+          "name": "Unarchive patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/patients/:id/unarchive", "host": ["{{baseUrl}}"], "path": ["patients", ":id", "unarchive"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Unarchives a previously archived patient."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "Get individual appointments",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/individual_appointments", "host": ["{{baseUrl}}"], "path": ["individual_appointments"] },
+            "description": "Returns a paginated list of individual appointments."
+          }
+        },
+        {
+          "name": "Create individual appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"starts_at\": \"2026-07-21T03:45:00Z\",\n  \"ends_at\": \"2026-07-21T04:30:00Z\",\n  \"patient_id\": \"82\",\n  \"practitioner_id\": \"1\",\n  \"business_id\": \"1\",\n  \"appointment_type_id\": \"2\"\n}" },
+            "url": { "raw": "{{baseUrl}}/individual_appointments", "host": ["{{baseUrl}}"], "path": ["individual_appointments"] },
+            "description": "Books a new individual appointment."
+          }
+        },
+        {
+          "name": "Get individual appointment",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/individual_appointments/:id", "host": ["{{baseUrl}}"], "path": ["individual_appointments", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Returns a single individual appointment by ID."
+          }
+        },
+        {
+          "name": "Cancel individual appointment",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"cancellation_note\": \"Patient rescheduled\"\n}" },
+            "url": { "raw": "{{baseUrl}}/individual_appointments/:id/cancel", "host": ["{{baseUrl}}"], "path": ["individual_appointments", ":id", "cancel"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Cancels an individual appointment."
+          }
+        },
+        {
+          "name": "Get bookings",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/bookings", "host": ["{{baseUrl}}"], "path": ["bookings"] },
+            "description": "Returns a paginated list of bookings (individual appointments, group appointments, and unavailable blocks)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Practitioners and Businesses",
+      "item": [
+        {
+          "name": "Get practitioners",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/practitioners", "host": ["{{baseUrl}}"], "path": ["practitioners"] },
+            "description": "Returns a paginated list of all active practitioners."
+          }
+        },
+        {
+          "name": "Get businesses",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/businesses", "host": ["{{baseUrl}}"], "path": ["businesses"] },
+            "description": "Returns a paginated list of all businesses (locations)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointment Types",
+      "item": [
+        {
+          "name": "Get appointment types",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/appointment_types", "host": ["{{baseUrl}}"], "path": ["appointment_types"] },
+            "description": "Returns a paginated list of all appointment types."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "Get invoices",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/invoices?q[]=issue_date:>=2015-01-01",
+              "host": ["{{baseUrl}}"],
+              "path": ["invoices"],
+              "query": [{ "key": "q[]", "value": "issue_date:>=2015-01-01" }]
+            },
+            "description": "Returns a paginated list of invoices, optionally filtered by issue_date, number, or status."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Treatment Notes",
+      "item": [
+        {
+          "name": "Get treatment notes",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "User-Agent", "value": "{{userAgent}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/treatment_notes", "host": ["{{baseUrl}}"], "path": ["treatment_notes"] },
+            "description": "Returns a paginated list of treatment notes."
+          }
+        }
+      ]
+    }
+  ]
+}

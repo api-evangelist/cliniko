@@ -1,0 +1,172 @@
+aid: cliniko
+url: https://raw.githubusercontent.com/api-evangelist/cliniko/refs/heads/main/apis.yml
+name: Cliniko
+kind: company
+description: Cliniko is practice management software for allied health practices and
+  clinics - physiotherapy, osteopathy, chiropractic, podiatry, psychology, massage,
+  and similar - covering patient records, appointment scheduling and online bookings,
+  practitioners and businesses (locations), treatment notes, invoicing, and payments.
+  Cliniko exposes a well-documented public REST API over HTTPS. The API is
+  region-sharded - the base host is derived from the shard suffix on your API key
+  (for example `https://api.au1.cliniko.com/v1/`) - and is authenticated with an
+  API key passed as the username in HTTP Basic authentication. Every request must
+  also send a `User-Agent` header containing an app/vendor name and a valid contact
+  email, or requests may be blocked.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Practice Management
+- Healthcare
+- Allied Health
+- Appointments
+- Scheduling
+- Patients
+- EHR
+- Clinics
+- Bookings
+- SaaS
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: cliniko:cliniko-patients-api
+  name: Cliniko Patients API
+  tags:
+  - Patients
+  - Healthcare
+  - EHR
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
+  baseURL: https://api.au1.cliniko.com/v1
+  properties:
+  - url: https://docs.api.cliniko.com/
+    type: Documentation
+  - url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
+    type: APIReference
+  - url: openapi/cliniko-openapi.yml
+    type: OpenAPI
+  description: Create, list, retrieve, update, archive, and unarchive patient records -
+    the people who book in for appointments. Patient records carry demographics,
+    contact details, phone numbers, custom fields, privacy-policy consent, marketing
+    consent, IANA time zone, and links to appointments, invoices, and medical alerts.
+- aid: cliniko:cliniko-appointments-api
+  name: Cliniko Appointments API
+  tags:
+  - Appointments
+  - Scheduling
+  - Bookings
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
+  baseURL: https://api.au1.cliniko.com/v1
+  properties:
+  - url: https://docs.api.cliniko.com/
+    type: Documentation
+  - url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
+    type: APIReference
+  - url: openapi/cliniko-openapi.yml
+    type: OpenAPI
+  description: Book, retrieve, update, and cancel individual appointments, check for
+    scheduling conflicts, and read the unified bookings feed (which returns individual
+    appointments, group appointments, and unavailable blocks). Appointments link a
+    patient, practitioner, business, and appointment type over a start/end window.
+- aid: cliniko:cliniko-practitioners-businesses-api
+  name: Cliniko Practitioners and Businesses API
+  tags:
+  - Practitioners
+  - Businesses
+  - Locations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
+  baseURL: https://api.au1.cliniko.com/v1
+  properties:
+  - url: https://docs.api.cliniko.com/
+    type: Documentation
+  - url: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
+    type: APIReference
+  - url: openapi/cliniko-openapi.yml
+    type: OpenAPI
+  description: List and retrieve practitioners (each backed by a user account) and the
+    businesses / physical locations they work from. Read active and inactive
+    practitioners, and the appointment types a practitioner offers or a business
+    supports, to drive scheduling and online-booking availability.
+- aid: cliniko:cliniko-appointment-types-api
+  name: Cliniko Appointment Types API
+  tags:
+  - Appointment Types
+  - Scheduling
+  - Services
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
+  baseURL: https://api.au1.cliniko.com/v1
+  properties:
+  - url: https://docs.api.cliniko.com/
+    type: Documentation
+  - url: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
+    type: APIReference
+  - url: openapi/cliniko-openapi.yml
+    type: OpenAPI
+  description: Create, list, retrieve, update, and delete appointment types - the named
+    services a clinic offers, each with a category, colour, duration in minutes, max
+    attendees, online-booking visibility, and links to billable items, products, and
+    treatment note templates.
+- aid: cliniko:cliniko-invoices-api
+  name: Cliniko Invoices API
+  tags:
+  - Invoices
+  - Billing
+  - Payments
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
+  baseURL: https://api.au1.cliniko.com/v1
+  properties:
+  - url: https://docs.api.cliniko.com/
+    type: Documentation
+  - url: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
+    type: APIReference
+  - url: openapi/cliniko-openapi.yml
+    type: OpenAPI
+  description: List and retrieve invoices, filtered by issue date, number, or status,
+    and scoped to an appointment, practitioner, or patient. Invoices carry totals, tax
+    and net amounts, discounts, status, and links to the related business,
+    practitioner, patient, and appointment.
+- aid: cliniko:cliniko-treatment-notes-api
+  name: Cliniko Treatment Notes API
+  tags:
+  - Treatment Notes
+  - Clinical
+  - EHR
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
+  baseURL: https://api.au1.cliniko.com/v1
+  properties:
+  - url: https://docs.api.cliniko.com/
+    type: Documentation
+  - url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
+    type: APIReference
+  - url: openapi/cliniko-openapi.yml
+    type: OpenAPI
+  description: Create, list, retrieve, update, and delete treatment notes - the clinical
+    notes taken about a patient visit. Notes use a structured sections/questions format
+    (paragraph, text, radio buttons, checkboxes, and more) and are built from treatment
+    note templates.
+common:
+- type: DomainSecurity
+  url: security/cliniko-domain-security.yml
+- type: Authentication
+  url: authentication/cliniko-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/redguava
+- type: LinkedIn
+  url: https://www.linkedin.com/company/cliniko
+- type: Website
+  url: https://www.cliniko.com
+- type: Documentation
+  url: https://docs.api.cliniko.com
+- type: Plans
+  url: plans/cliniko-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/cliniko-rate-limits.yml
+- type: FinOps
+  url: finops/cliniko-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

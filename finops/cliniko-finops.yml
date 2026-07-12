@@ -1,0 +1,95 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Cliniko
+providerId: cliniko
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Practice Management
+- Healthcare
+- Allied Health
+- SaaS
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Cliniko spend. Cliniko is a per-practitioner SaaS subscription
+  billed monthly in USD; cost scales with the number of practitioners in banded
+  tiers rather than with API usage. The public REST API is included in the
+  subscription at no additional charge, so API adoption does not directly add
+  line-item cost - the meaningful variable cost is the practitioner headcount
+  band and optional pre-paid SMS credits (used for reminders/confirmations, which
+  the API can trigger). Because API calls do not carry per-request fees, FinOps
+  attention is on right-sizing the practitioner band, monitoring SMS consumption,
+  and staying within the 200-requests-per-minute limit to avoid throttling rather
+  than on metered API charges.
+notes: >-
+  Per-unit SMS rates and tier prices are not reconciled here; verify on
+  https://www.cliniko.com/pricing/. API usage is not separately metered or
+  billed, so there is no per-call FOCUS charge to allocate - allocation is by
+  subscription band and SMS credits.
+sources:
+- https://www.cliniko.com/pricing/
+- https://docs.api.cliniko.com/
+- https://github.com/redguava/cliniko-api
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Cliniko
+serviceCategory: Practice Management Software (SaaS)
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Cliniko
+  ServiceCategory: Practice Management Software
+  ProviderName: Cliniko
+  PublisherName: Cliniko
+  InvoiceIssuerName: Cliniko
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: practitioner_subscription
+  description: Monthly subscription priced by the practitioner-count band; the dominant cost line.
+  unit: practitioners
+  aggregation: max
+  dimensions:
+  - account
+  - band
+- name: sms_credits
+  description: Pre-paid SMS messages consumed for reminders/confirmations, billed per message.
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+  - business
+- name: api_requests
+  description: API requests made against the account. Not billed - tracked only against the 200/minute rate limit.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - user
+principles:
+- name: Visibility
+  description: Track the active practitioner count against the current pricing band, and monitor monthly SMS credit burn.
+- name: Allocation
+  description: Attribute subscription cost by practitioner and SMS usage by business/location; API calls carry no direct charge to allocate.
+- name: Optimization
+  description: Right-size the practitioner band, avoid over-provisioning SMS credits, and batch/paginate API calls (larger per_page, q[] filters) to stay under the rate limit without adding cost.
+- name: Accountability
+  description: Assign an owner for the Cliniko subscription and SMS budget; review the practitioner band and SMS spend monthly.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
