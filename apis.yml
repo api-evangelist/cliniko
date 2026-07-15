@@ -149,6 +149,8 @@ apis:
     (paragraph, text, radio buttons, checkboxes, and more) and are built from treatment
     note templates.
 common:
+- type: AgenticAccess
+  url: agentic-access/cliniko-agentic-access.yml
 - type: DomainSecurity
   url: security/cliniko-domain-security.yml
 - type: Authentication
