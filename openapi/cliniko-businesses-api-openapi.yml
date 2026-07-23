@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: Cliniko Appointment Types Businesses API
+  description: 'Cliniko is practice management software for allied health practices and clinics. This is a representative subset of the public Cliniko REST API, grounded in the official documentation at https://docs.api.cliniko.com and the redguava/cliniko-api GitHub repository. It is not the complete surface - Cliniko documents 50+ resources (appointment types, attendees, availability blocks, billable items, bookings, businesses, communications, concession types, contacts, group appointments, individual appointments, invoices, invoice items, medical alerts, patients, patient attachments, patient cases, patient forms, practitioners, products, recalls, referral sources, services, settings, stock adjustments, taxes, treatment notes, users, and more).
+
+    Base URL is region-sharded. The shard is the suffix on your API key (for example a key ending `-uk1` is served from `https://api.uk1.cliniko.com`); keys with no suffix belong to the `au1` shard. All paths are prefixed with `/v1`.
+
+    Authentication is HTTP Basic: the API key is the username and the password is empty (`-u API_KEY:`). Every request MUST also send an `Accept: application/json` header and a `User-Agent` header of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` containing a valid contact email, or requests may be automatically blocked. Requests are rate limited to 200 per minute per user; a `429` response includes an `X-RateLimit-Reset` header with a UNIX timestamp.
+
+    Modeled note - the field sets below are drawn from the documented example responses; some optional attributes may be omitted, and request-body schemas are representative rather than exhaustive.'
+  version: v1
+  contact:
+    name: Cliniko API Support
+    url: https://docs.api.cliniko.com/
+  license:
+    name: Proprietary
+    url: https://www.cliniko.com/terms/
+servers:
+- url: https://api.{shard}.cliniko.com/v1
+  description: Cliniko region-sharded API. The shard is the suffix on your API key.
+  variables:
+    shard:
+      default: au1
+      enum:
+      - au1
+      - au2
+      - au3
+      - au4
+      - uk1
+      - eu1
+      - us1
+      - ca1
+      description: Region shard derived from the API key suffix. Keys without a suffix use au1.
+security:
+- basicAuth: []
+tags:
+- name: Businesses
+  description: Businesses / physical locations in a Cliniko account.
+paths:
+  /businesses:
+    parameters:
+    - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listBusinesses
+      tags:
+      - Businesses
+      summary: Get businesses
+      description: Returns a paginated list of all businesses (locations).
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of businesses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  businesses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Business'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /businesses/{id}:
+    parameters:
+    - $ref: '#/components/parameters/UserAgent'
+    - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getBusiness
+      tags:
+      - Businesses
+      summary: Get business
+      description: Returns a single business by ID.
+      responses:
+        '200':
+          description: The requested business.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Business'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      in: query
+      required: false
+      description: Items per page. Default 50, maximum 100.
+      schema:
+        type: integer
+        default: 50
+        maximum: 100
+    UserAgent:
+      name: User-Agent
+      in: header
+      required: true
+      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
+      schema:
+        type: string
+        example: MyClinicApp (dev@myclinic.example)
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number (pagination).
+      schema:
+        type: integer
+        default: 1
+  schemas:
+    Business:
+      type: object
+      properties:
+        id:
+          type: string
+        business_name:
+          type: string
+        display_name:
+          type: string
+          nullable: true
+        business_registration_name:
+          type: string
+        business_registration_value:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        state:
+          type: string
+        post_code:
+          type: string
+        country:
+          type: string
+        country_code:
+          type: string
+        contact_information:
+          type: string
+        email_reply_to:
+          type: string
+        website_address:
+          type: string
+        show_in_online_bookings:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        practitioners:
+          $ref: '#/components/schemas/Reference'
+        appointments:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    Reference:
+      type: object
+      description: A link to a related resource.
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+    Links:
+      type: object
+      description: HAL-style pagination and self links.
+      properties:
+        self:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+        previous:
+          type: string
+          format: uri
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties: true
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. The API key is the username and the password is left empty (curl: `-u API_KEY:`). The shard suffix on the key selects the base host.'
