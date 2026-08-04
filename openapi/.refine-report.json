@@ -1,0 +1,26 @@
+{
+  "provider": "cliniko",
+  "sources": [
+    "cliniko-appointment-types-api-openapi.yml",
+    "cliniko-appointments-api-openapi.yml",
+    "cliniko-businesses-api-openapi.yml",
+    "cliniko-invoices-api-openapi.yml",
+    "cliniko-patients-api-openapi.yml",
+    "cliniko-practitioners-api-openapi.yml",
+    "cliniko-treatment-notes-api-openapi.yml"
+  ],
+  "outputs": [
+    "cliniko-appointment-types-api-openapi.yml",
+    "cliniko-appointments-api-openapi.yml",
+    "cliniko-businesses-api-openapi.yml",
+    "cliniko-invoices-api-openapi.yml",
+    "cliniko-patients-api-openapi.yml",
+    "cliniko-practitioners-api-openapi.yml",
+    "cliniko-treatment-notes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

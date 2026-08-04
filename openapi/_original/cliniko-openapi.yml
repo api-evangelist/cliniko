@@ -1,0 +1,1358 @@
+openapi: 3.0.3
+info:
+  title: Cliniko API
+  description: >-
+    Cliniko is practice management software for allied health practices and
+    clinics. This is a representative subset of the public Cliniko REST API,
+    grounded in the official documentation at https://docs.api.cliniko.com and
+    the redguava/cliniko-api GitHub repository. It is not the complete surface -
+    Cliniko documents 50+ resources (appointment types, attendees, availability
+    blocks, billable items, bookings, businesses, communications, concession
+    types, contacts, group appointments, individual appointments, invoices,
+    invoice items, medical alerts, patients, patient attachments, patient cases,
+    patient forms, practitioners, products, recalls, referral sources, services,
+    settings, stock adjustments, taxes, treatment notes, users, and more).
+
+    Base URL is region-sharded. The shard is the suffix on your API key (for
+    example a key ending `-uk1` is served from `https://api.uk1.cliniko.com`);
+    keys with no suffix belong to the `au1` shard. All paths are prefixed with
+    `/v1`.
+
+    Authentication is HTTP Basic: the API key is the username and the password
+    is empty (`-u API_KEY:`). Every request MUST also send an `Accept:
+    application/json` header and a `User-Agent` header of the form
+    `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` containing a valid contact email, or
+    requests may be automatically blocked. Requests are rate limited to 200 per
+    minute per user; a `429` response includes an `X-RateLimit-Reset` header
+    with a UNIX timestamp.
+
+    Modeled note - the field sets below are drawn from the documented example
+    responses; some optional attributes may be omitted, and request-body schemas
+    are representative rather than exhaustive.
+  version: v1
+  contact:
+    name: Cliniko API Support
+    url: https://docs.api.cliniko.com/
+  license:
+    name: Proprietary
+    url: https://www.cliniko.com/terms/
+servers:
+  - url: https://api.{shard}.cliniko.com/v1
+    description: Cliniko region-sharded API. The shard is the suffix on your API key.
+    variables:
+      shard:
+        default: au1
+        enum:
+          - au1
+          - au2
+          - au3
+          - au4
+          - uk1
+          - eu1
+          - us1
+          - ca1
+        description: >-
+          Region shard derived from the API key suffix. Keys without a suffix
+          use au1.
+security:
+  - basicAuth: []
+tags:
+  - name: Patients
+    description: The people who book in for appointments.
+  - name: Appointments
+    description: Individual appointments and the unified bookings feed.
+  - name: Practitioners
+    description: Practitioners and the businesses (locations) they work from.
+  - name: Businesses
+    description: Businesses / physical locations in a Cliniko account.
+  - name: Appointment Types
+    description: The named services a clinic offers.
+  - name: Invoices
+    description: Patient and appointment invoices.
+  - name: Treatment Notes
+    description: Structured clinical notes about a patient visit.
+paths:
+  /patients:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listPatients
+      tags:
+        - Patients
+      summary: Get patients
+      description: Returns a paginated list of all patients.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/Query'
+      responses:
+        '200':
+          description: A paginated list of patients.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patients:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Patient'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: createPatient
+      tags:
+        - Patients
+      summary: Create patient
+      description: Creates a new patient.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientInput'
+      responses:
+        '201':
+          description: The created patient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /patients/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getPatient
+      tags:
+        - Patients
+      summary: Get patient
+      description: Returns a single patient by ID.
+      responses:
+        '200':
+          description: The requested patient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updatePatient
+      tags:
+        - Patients
+      summary: Update patient
+      description: Updates an existing patient.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientInput'
+      responses:
+        '200':
+          description: The updated patient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /patients/{id}/archive:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: archivePatient
+      tags:
+        - Patients
+      summary: Archive patient
+      description: Archives a patient.
+      responses:
+        '200':
+          description: The archived patient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /patients/{id}/unarchive:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    post:
+      operationId: unarchivePatient
+      tags:
+        - Patients
+      summary: Unarchive patient
+      description: Unarchives a previously archived patient.
+      responses:
+        '200':
+          description: The unarchived patient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /individual_appointments:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listIndividualAppointments
+      tags:
+        - Appointments
+      summary: Get individual appointments
+      description: Returns a paginated list of individual appointments.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of individual appointments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  individual_appointments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IndividualAppointment'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: createIndividualAppointment
+      tags:
+        - Appointments
+      summary: Create individual appointment
+      description: Books a new individual appointment.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndividualAppointmentInput'
+      responses:
+        '201':
+          description: The created appointment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualAppointment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /individual_appointments/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getIndividualAppointment
+      tags:
+        - Appointments
+      summary: Get individual appointment
+      description: Returns a single individual appointment by ID.
+      responses:
+        '200':
+          description: The requested appointment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualAppointment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateIndividualAppointment
+      tags:
+        - Appointments
+      summary: Update individual appointment
+      description: Updates an existing individual appointment.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndividualAppointmentInput'
+      responses:
+        '200':
+          description: The updated appointment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualAppointment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /individual_appointments/{id}/cancel:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    patch:
+      operationId: cancelIndividualAppointment
+      tags:
+        - Appointments
+      summary: Cancel individual appointment
+      description: Cancels an individual appointment, optionally with a cancellation reason.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cancellation_reason:
+                  type: integer
+                  description: Numeric cancellation reason code.
+                cancellation_note:
+                  type: string
+      responses:
+        '200':
+          description: The cancelled appointment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualAppointment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /individual_appointments/{id}/conflicts:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getIndividualAppointmentConflicts
+      tags:
+        - Appointments
+      summary: Get appointment conflicts
+      description: Returns whether the specified individual appointment has scheduling conflicts.
+      responses:
+        '200':
+          description: Conflict information for the appointment.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conflicts:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /bookings:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listBookings
+      tags:
+        - Appointments
+      summary: Get bookings
+      description: >-
+        Returns a paginated list of bookings. Bookings is a convenience feed
+        that can return group appointments, individual appointments, and
+        unavailable blocks; the shape of each object depends on its type.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of bookings.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bookings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Booking'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /bookings/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getBooking
+      tags:
+        - Appointments
+      summary: Get booking
+      description: Returns a single booking by ID.
+      responses:
+        '200':
+          description: The requested booking.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /practitioners:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listPractitioners
+      tags:
+        - Practitioners
+      summary: Get practitioners
+      description: Returns a paginated list of all active practitioners.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of practitioners.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  practitioners:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Practitioner'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /practitioners/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getPractitioner
+      tags:
+        - Practitioners
+      summary: Get practitioner
+      description: Returns a single practitioner by ID.
+      responses:
+        '200':
+          description: The requested practitioner.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Practitioner'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /businesses:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listBusinesses
+      tags:
+        - Businesses
+      summary: Get businesses
+      description: Returns a paginated list of all businesses (locations).
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of businesses.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  businesses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Business'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /businesses/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getBusiness
+      tags:
+        - Businesses
+      summary: Get business
+      description: Returns a single business by ID.
+      responses:
+        '200':
+          description: The requested business.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Business'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /appointment_types:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listAppointmentTypes
+      tags:
+        - Appointment Types
+      summary: Get appointment types
+      description: Returns a paginated list of all appointment types.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of appointment types.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appointment_types:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppointmentType'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /appointment_types/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getAppointmentType
+      tags:
+        - Appointment Types
+      summary: Get appointment type
+      description: Returns a single appointment type by ID.
+      responses:
+        '200':
+          description: The requested appointment type.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentType'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /invoices:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listInvoices
+      tags:
+        - Invoices
+      summary: Get invoices
+      description: >-
+        Returns a paginated list of invoices. Supports filtering by issue_date,
+        number, and status via the `q[]` query parameter.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - name: q[]
+          in: query
+          required: false
+          description: >-
+            Filter expression, e.g. `q[]=issue_date:>=2015-01-01` or
+            `q[]=status:=10`. Repeatable.
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: A paginated list of invoices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /invoices/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getInvoice
+      tags:
+        - Invoices
+      summary: Get invoice
+      description: Returns a single invoice by ID.
+      responses:
+        '200':
+          description: The requested invoice.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /treatment_notes:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+    get:
+      operationId: listTreatmentNotes
+      tags:
+        - Treatment Notes
+      summary: Get treatment notes
+      description: Returns a paginated list of treatment notes.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A paginated list of treatment notes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  treatment_notes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TreatmentNote'
+                  total_entries:
+                    type: integer
+                  links:
+                    $ref: '#/components/schemas/Links'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createTreatmentNote
+      tags:
+        - Treatment Notes
+      summary: Create treatment note
+      description: Creates a treatment note for a patient, based on a treatment note template.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TreatmentNoteInput'
+      responses:
+        '201':
+          description: The created treatment note.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentNote'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /treatment_notes/{id}:
+    parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getTreatmentNote
+      tags:
+        - Treatment Notes
+      summary: Get treatment note
+      description: Returns a single treatment note by ID.
+      responses:
+        '200':
+          description: The requested treatment note.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentNote'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication. The API key is the username and the password
+        is left empty (curl: `-u API_KEY:`). The shard suffix on the key selects
+        the base host.
+  parameters:
+    UserAgent:
+      name: User-Agent
+      in: header
+      required: true
+      description: >-
+        Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a
+        valid contact email. Requests without a compliant User-Agent may be
+        automatically blocked.
+      schema:
+        type: string
+        example: MyClinicApp (dev@myclinic.example)
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number (pagination).
+      schema:
+        type: integer
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      required: false
+      description: Items per page. Default 50, maximum 100.
+      schema:
+        type: integer
+        default: 50
+        maximum: 100
+    Query:
+      name: q[]
+      in: query
+      required: false
+      description: Optional filter expression(s). Repeatable.
+      schema:
+        type: array
+        items:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: >-
+        Too many requests. The API is limited to 200 requests per minute per
+        user. The X-RateLimit-Reset header carries a UNIX timestamp for when the
+        window resets.
+      headers:
+        X-RateLimit-Reset:
+          description: UNIX timestamp when the rate-limit window resets.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Links:
+      type: object
+      description: HAL-style pagination and self links.
+      properties:
+        self:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+        previous:
+          type: string
+          format: uri
+    Reference:
+      type: object
+      description: A link to a related resource.
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties: true
+    PatientPhoneNumber:
+      type: object
+      properties:
+        phone_type:
+          type: string
+          example: Mobile
+        number:
+          type: string
+          example: '61444444444'
+    Patient:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        preferred_first_name:
+          type: string
+        email:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        gender:
+          type: string
+        gender_identity:
+          type: string
+        pronouns:
+          type: string
+          nullable: true
+        address_1:
+          type: string
+        address_2:
+          type: string
+        address_3:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        post_code:
+          type: string
+        country:
+          type: string
+        occupation:
+          type: string
+        notes:
+          type: string
+        appointment_notes:
+          type: string
+        accepted_privacy_policy:
+          type: boolean
+          nullable: true
+          description: null (no response), true (accepted), or false (rejected).
+        accepted_email_marketing:
+          type: boolean
+          nullable: true
+        accepted_sms_marketing:
+          type: boolean
+          nullable: true
+        receives_confirmation_emails:
+          type: boolean
+        reminder_type:
+          type: string
+        time_zone:
+          type: string
+          nullable: true
+          description: A valid IANA time zone identifier, or null.
+        patient_phone_numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PatientPhoneNumber'
+        custom_fields:
+          type: object
+          additionalProperties: true
+        archived_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        appointments:
+          $ref: '#/components/schemas/Reference'
+        invoices:
+          $ref: '#/components/schemas/Reference'
+        medical_alerts:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    PatientInput:
+      type: object
+      required:
+        - first_name
+        - last_name
+      properties:
+        title:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        preferred_first_name:
+          type: string
+        email:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        address_1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        post_code:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+          description: An IANA time zone identifier.
+        accepted_privacy_policy:
+          type: boolean
+          nullable: true
+    IndividualAppointment:
+      type: object
+      properties:
+        id:
+          type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        patient_name:
+          type: string
+        notes:
+          type: string
+          nullable: true
+        did_not_arrive:
+          type: boolean
+        patient_arrived:
+          type: boolean
+        email_reminder_sent:
+          type: boolean
+        sms_reminder_sent:
+          type: boolean
+        cancelled_at:
+          type: string
+          format: date-time
+          nullable: true
+        cancellation_note:
+          type: string
+          nullable: true
+        cancellation_reason:
+          type: integer
+          nullable: true
+        cancellation_reason_description:
+          type: string
+        invoice_status:
+          type: integer
+          nullable: true
+        treatment_note_status:
+          type: integer
+          nullable: true
+        repeat_rule:
+          type: object
+          additionalProperties: true
+        repeats:
+          type: string
+          nullable: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        appointment_type:
+          $ref: '#/components/schemas/Reference'
+        business:
+          $ref: '#/components/schemas/Reference'
+        practitioner:
+          $ref: '#/components/schemas/Reference'
+        patient:
+          $ref: '#/components/schemas/Reference'
+        conflicts:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    IndividualAppointmentInput:
+      type: object
+      required:
+        - starts_at
+        - ends_at
+        - patient_id
+        - practitioner_id
+        - business_id
+        - appointment_type_id
+      properties:
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        patient_id:
+          type: string
+        practitioner_id:
+          type: string
+        business_id:
+          type: string
+        appointment_type_id:
+          type: string
+        notes:
+          type: string
+    Booking:
+      type: object
+      description: >-
+        A booking may represent an individual appointment, a group appointment,
+        or an unavailable block; fields present vary by type.
+      properties:
+        id:
+          type: integer
+        starts_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        notes:
+          type: string
+          nullable: true
+        max_attendees:
+          type: integer
+        patient_ids:
+          type: array
+          items:
+            type: integer
+        repeat_rule:
+          type: object
+          additionalProperties: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        appointment_type:
+          $ref: '#/components/schemas/Reference'
+        business:
+          $ref: '#/components/schemas/Reference'
+        practitioner:
+          $ref: '#/components/schemas/Reference'
+        conflicts:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    Practitioner:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        label:
+          type: string
+        designation:
+          type: string
+        description:
+          type: string
+          nullable: true
+        show_in_online_bookings:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        default_appointment_type:
+          $ref: '#/components/schemas/Reference'
+        user:
+          $ref: '#/components/schemas/Reference'
+        appointments:
+          $ref: '#/components/schemas/Reference'
+        invoices:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    Business:
+      type: object
+      properties:
+        id:
+          type: string
+        business_name:
+          type: string
+        display_name:
+          type: string
+          nullable: true
+        business_registration_name:
+          type: string
+        business_registration_value:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        state:
+          type: string
+        post_code:
+          type: string
+        country:
+          type: string
+        country_code:
+          type: string
+        contact_information:
+          type: string
+        email_reply_to:
+          type: string
+        website_address:
+          type: string
+        show_in_online_bookings:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        practitioners:
+          $ref: '#/components/schemas/Reference'
+        appointments:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    AppointmentType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+          nullable: true
+        color:
+          type: string
+        duration_in_minutes:
+          type: integer
+        max_attendees:
+          type: integer
+        show_in_online_bookings:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        billable_item:
+          $ref: '#/components/schemas/Reference'
+        product:
+          $ref: '#/components/schemas/Reference'
+        practitioners:
+          $ref: '#/components/schemas/Reference'
+        treatment_note_template:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+        number:
+          type: integer
+        issue_date:
+          type: string
+          format: date
+        total_amount:
+          type: string
+        tax_amount:
+          type: string
+        net_amount:
+          type: string
+        discounted_amount:
+          type: string
+        status:
+          type: integer
+        status_description:
+          type: string
+        notes:
+          type: string
+        invoice_to:
+          type: string
+        patient_extra_information:
+          type: string
+        closed_at:
+          type: string
+          format: date-time
+          nullable: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        appointment:
+          $ref: '#/components/schemas/Reference'
+        business:
+          $ref: '#/components/schemas/Reference'
+        practitioner:
+          $ref: '#/components/schemas/Reference'
+        patient:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    TreatmentNoteContent:
+      type: object
+      description: Structured note content as an array of sections, each with questions.
+      properties:
+        sections:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              questions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: string
+                      description: >-
+                        Question type, e.g. paragraph, text, radiobuttons,
+                        checkboxes.
+                    answer:
+                      type: string
+                    answers:
+                      type: array
+                      items:
+                        type: object
+                        additionalProperties: true
+    TreatmentNote:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          $ref: '#/components/schemas/TreatmentNoteContent'
+        draft:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        patient:
+          $ref: '#/components/schemas/Reference'
+        practitioner:
+          $ref: '#/components/schemas/Reference'
+        treatment_note_template:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+    TreatmentNoteInput:
+      type: object
+      required:
+        - patient_id
+        - treatment_note_template_id
+      properties:
+        patient_id:
+          type: string
+        practitioner_id:
+          type: string
+        treatment_note_template_id:
+          type: string
+        content:
+          $ref: '#/components/schemas/TreatmentNoteContent'
+        draft:
+          type: boolean
