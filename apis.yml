@@ -39,7 +39,7 @@ tags:
 - SaaS
 created: '2026-07-12'
 modified: '2026-07-12'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: cliniko:cliniko-appointment-types-api
   name: Cliniko Appointment Types API
