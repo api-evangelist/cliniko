@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cliniko Appointment Types Appointments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Appointments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get individual appointments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/individual_appointments",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (pagination)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page. Default 50, maximum 100."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of individual appointments."
+        },
+        {
+          "info": {
+            "name": "Create individual appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.{shard}.cliniko.com/v1/individual_appointments",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Books a new individual appointment."
+        },
+        {
+          "info": {
+            "name": "Get individual appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/individual_appointments/:id",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Returns a single individual appointment by ID."
+        },
+        {
+          "info": {
+            "name": "Update individual appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.{shard}.cliniko.com/v1/individual_appointments/:id",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing individual appointment."
+        },
+        {
+          "info": {
+            "name": "Cancel individual appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.{shard}.cliniko.com/v1/individual_appointments/:id/cancel",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an individual appointment, optionally with a cancellation reason."
+        },
+        {
+          "info": {
+            "name": "Get appointment conflicts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/individual_appointments/:id/conflicts",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Returns whether the specified individual appointment has scheduling conflicts."
+        },
+        {
+          "info": {
+            "name": "Get bookings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/bookings",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (pagination)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page. Default 50, maximum 100."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of bookings. Bookings is a convenience feed that can return group appointments, individual appointments, and unavailable blocks; the shape of each object depends on its type."
+        },
+        {
+          "info": {
+            "name": "Get booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/bookings/:id",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Returns a single booking by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

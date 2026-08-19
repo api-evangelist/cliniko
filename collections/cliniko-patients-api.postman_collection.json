@@ -1,0 +1,1714 @@
+{
+  "item": [
+    {
+      "id": "c34041d1-918f-4192-b7e1-228a67f52538",
+      "name": "Patients",
+      "description": {
+        "content": "The people who book in for appointments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64815140-ba90-4449-b4df-a0ddb28f3fcd",
+          "name": "Get patients",
+          "request": {
+            "name": "Get patients",
+            "description": {
+              "content": "Returns a paginated list of all patients.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (pagination)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "50",
+                  "description": "Items per page. Default 50, maximum 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "q[]",
+                  "value": "<string>",
+                  "description": "Optional filter expression(s). Repeatable."
+                },
+                {
+                  "disabled": false,
+                  "key": "q[]",
+                  "value": "<string>",
+                  "description": "Optional filter expression(s). Repeatable."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "947786e3-c293-4d8d-b545-dc2db56b5142",
+              "name": "A paginated list of patients.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "50"
+                    },
+                    {
+                      "key": "q[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"patients\": [\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"preferred_first_name\": \"string\",\n      \"email\": \"string\",\n      \"date_of_birth\": \"2018-12-15\",\n      \"gender\": \"string\",\n      \"gender_identity\": \"string\",\n      \"pronouns\": \"string\",\n      \"address_1\": \"string\",\n      \"address_2\": \"string\",\n      \"address_3\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"post_code\": \"string\",\n      \"country\": \"string\",\n      \"occupation\": \"string\",\n      \"notes\": \"string\",\n      \"appointment_notes\": \"string\",\n      \"accepted_privacy_policy\": true,\n      \"accepted_email_marketing\": false,\n      \"accepted_sms_marketing\": false,\n      \"receives_confirmation_emails\": true,\n      \"reminder_type\": \"string\",\n      \"time_zone\": \"string\",\n      \"patient_phone_numbers\": [\n        {\n          \"phone_type\": \"Mobile\",\n          \"number\": \"61444444444\"\n        },\n        {\n          \"phone_type\": \"Mobile\",\n          \"number\": \"61444444444\"\n        }\n      ],\n      \"custom_fields\": {\n        \"key_0\": false,\n        \"key_1\": 9848.563482592514,\n        \"key_2\": \"string\"\n      },\n      \"archived_at\": \"1976-12-12T20:21:45.199Z\",\n      \"created_at\": \"1969-07-24T23:19:24.839Z\",\n      \"updated_at\": \"1992-03-01T17:41:18.964Z\",\n      \"appointments\": {\n        \"links\": {\n          \"self\": \"http://xhtvRTNilpwnUgKZ.bucpoa1w2P3ydl56u6KSSQa1dOxxHu736yjFmzuzBr0MNjOo0NjE\"\n        }\n      },\n      \"invoices\": {\n        \"links\": {\n          \"self\": \"https://QykrskilwqZKdcnL.ntxgs-XHAuV7rzTdkagq-EbvanYXGztolGdtUaBXv6eBrSp8wi5JZZc5ifDhu\"\n        }\n      },\n      \"medical_alerts\": {\n        \"links\": {\n          \"self\": \"http://nZHWSioxvmhvKS.gpyjEEPf5P,RZPD156744snGqFhh5DXSW.ULMucwAadd10De+ri\"\n        }\n      },\n      \"links\": {\n        \"self\": \"http://RptjbVgKiHlZhRNx.rdYttjqKCK8VTRCtqjV,6syuWy\",\n        \"next\": \"http://WjlcqInLopdfcaOLeqrZWK.imdvxZDS0ueYyJpelEHhp6alVBLbl4J\",\n        \"previous\": \"https://zaEBZZHPoEzkhLtAORqOqAmjuxhsrgsTg.zqcwtdJ+8K5IYd77Zib-b+VDUPM,TrlziXDWI.O0NIszfYrOLFokFJlS\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"preferred_first_name\": \"string\",\n      \"email\": \"string\",\n      \"date_of_birth\": \"1951-09-11\",\n      \"gender\": \"string\",\n      \"gender_identity\": \"string\",\n      \"pronouns\": \"string\",\n      \"address_1\": \"string\",\n      \"address_2\": \"string\",\n      \"address_3\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"post_code\": \"string\",\n      \"country\": \"string\",\n      \"occupation\": \"string\",\n      \"notes\": \"string\",\n      \"appointment_notes\": \"string\",\n      \"accepted_privacy_policy\": true,\n      \"accepted_email_marketing\": true,\n      \"accepted_sms_marketing\": false,\n      \"receives_confirmation_emails\": true,\n      \"reminder_type\": \"string\",\n      \"time_zone\": \"string\",\n      \"patient_phone_numbers\": [\n        {\n          \"phone_type\": \"Mobile\",\n          \"number\": \"61444444444\"\n        },\n        {\n          \"phone_type\": \"Mobile\",\n          \"number\": \"61444444444\"\n        }\n      ],\n      \"custom_fields\": {\n        \"key_0\": false\n      },\n      \"archived_at\": \"1972-10-18T15:18:55.446Z\",\n      \"created_at\": \"2014-11-20T01:50:34.783Z\",\n      \"updated_at\": \"2025-02-10T05:37:03.168Z\",\n      \"appointments\": {\n        \"links\": {\n          \"self\": \"http://tpymuAbCefalWQ.ztQQo7Apxm\"\n        }\n      },\n      \"invoices\": {\n        \"links\": {\n          \"self\": \"https://aDZZUrdxefBgOPSLaMYsNQQzsSRhUAOW.xkcd6.Trv,52NAWOjZp,KS.o6lygl0mL-F0WjMg5ImGPlOF\"\n        }\n      },\n      \"medical_alerts\": {\n        \"links\": {\n          \"self\": \"https://XxZdBryDuFDhHxUUIazyhqXRWbWEXCjPE.zlbwUH+cKW4FiEZaMNuWShoJ55n.LLyEYYrjZTRSj6A5HpLitla88iMkgjK1z,MraYl2D,2WHh8AuDtTDjz0\"\n        }\n      },\n      \"links\": {\n        \"self\": \"https://MzJcOzQifH.ltzCV7j.uC1FAF,el808eOcW2eJ-Augp24.U,SEBGavMTS+4Lnf7H1DfteMg8kjXgj\",\n        \"next\": \"https://PNNcWFxafMktTkftMIEejzOxg.gaqgnwqii\",\n        \"previous\": \"http://GQzNvnFvSesc.baR8kJfez5kx0\"\n      }\n    }\n  ],\n  \"total_entries\": 954,\n  \"links\": {\n    \"self\": \"http://VQsR.mhmiuTXbi.MD5H.+vRui\",\n    \"next\": \"http://RBaNJoYCuTCVfyliYAubfulOZUNtIJ.quqrHkb3RyHxrWvsOWPaognjLvzDyewgteMIGG\",\n    \"previous\": \"https://KcccmMR.oeKOTKjobFXSHWcA4+j9ZQAXTBWjncBz4BCbGYT\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c0499d4-9dd5-489d-9f12-977285e510d6",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "50"
+                    },
+                    {
+                      "key": "q[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0772a7ea-2f02-4599-8bfa-4fc3289283a5",
+              "name": "Too many requests. The API is limited to 200 requests per minute per user. The X-RateLimit-Reset header carries a UNIX timestamp for when the window resets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "50"
+                    },
+                    {
+                      "key": "q[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q[]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "UNIX timestamp when the rate-limit window resets.",
+                  "key": "X-RateLimit-Reset",
+                  "value": "525"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a792d886-246f-411d-852d-4b6e0c09a881",
+          "name": "Create patient",
+          "request": {
+            "name": "Create patient",
+            "description": {
+              "content": "Creates a new patient.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5eb47dc6-facd-4402-8846-f228d671c0fd",
+              "name": "The created patient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"preferred_first_name\": \"string\",\n  \"email\": \"string\",\n  \"date_of_birth\": \"1974-01-31\",\n  \"gender\": \"string\",\n  \"gender_identity\": \"string\",\n  \"pronouns\": \"string\",\n  \"address_1\": \"string\",\n  \"address_2\": \"string\",\n  \"address_3\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"post_code\": \"string\",\n  \"country\": \"string\",\n  \"occupation\": \"string\",\n  \"notes\": \"string\",\n  \"appointment_notes\": \"string\",\n  \"accepted_privacy_policy\": false,\n  \"accepted_email_marketing\": true,\n  \"accepted_sms_marketing\": true,\n  \"receives_confirmation_emails\": false,\n  \"reminder_type\": \"string\",\n  \"time_zone\": \"string\",\n  \"patient_phone_numbers\": [\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    },\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    }\n  ],\n  \"custom_fields\": {\n    \"key_0\": true,\n    \"key_1\": 1568.0806351073584\n  },\n  \"archived_at\": \"2012-12-11T11:26:45.140Z\",\n  \"created_at\": \"2014-09-20T04:09:27.493Z\",\n  \"updated_at\": \"1949-08-07T02:58:38.694Z\",\n  \"appointments\": {\n    \"links\": {\n      \"self\": \"http://AdGbRLtGI.yczSy8fEg0,8ZNaxcbC1XxJC6DdjtnMDLrVsD6DoHkJ6xsp0E0hUmte5qsz0rEFqwqT5zpS37\"\n    }\n  },\n  \"invoices\": {\n    \"links\": {\n      \"self\": \"http://tFkdlbfAPCnJrsyRpFTVwS.pbDDyv9vPJ5JJ7+ytZemax1xExb-kfUsEoxCMHbEHBYbcDP6R4qi-Kri4CxLunqsmPgONR1U1\"\n    }\n  },\n  \"medical_alerts\": {\n    \"links\": {\n      \"self\": \"http://pYQXiVHZGJeDK.bclRl04fXNla5Rcle8tzMqO\"\n    }\n  },\n  \"links\": {\n    \"self\": \"https://wyYwOrPJ.ztibpJ2ws21R\",\n    \"next\": \"http://oodujwwUphUqBYClKYkQZc.vgIT0gaXCflO\",\n    \"previous\": \"https://KKJ.nbnAGHUPI+i+QkdtzxmzdWPwPnxv4y3d,vMNUSAShBgzG\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1119dff3-233f-4cac-98da-f03d659503bf",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7819b1ab-32e3-4507-8ae1-6959452a3a92",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "621f27fe-c6c6-438c-94c7-0685a72f7d38",
+          "name": "Get patient",
+          "request": {
+            "name": "Get patient",
+            "description": {
+              "content": "Returns a single patient by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                },
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f946a35b-27d2-44ab-85c9-fc1d12aa8137",
+              "name": "The requested patient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"preferred_first_name\": \"string\",\n  \"email\": \"string\",\n  \"date_of_birth\": \"1974-01-31\",\n  \"gender\": \"string\",\n  \"gender_identity\": \"string\",\n  \"pronouns\": \"string\",\n  \"address_1\": \"string\",\n  \"address_2\": \"string\",\n  \"address_3\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"post_code\": \"string\",\n  \"country\": \"string\",\n  \"occupation\": \"string\",\n  \"notes\": \"string\",\n  \"appointment_notes\": \"string\",\n  \"accepted_privacy_policy\": false,\n  \"accepted_email_marketing\": true,\n  \"accepted_sms_marketing\": true,\n  \"receives_confirmation_emails\": false,\n  \"reminder_type\": \"string\",\n  \"time_zone\": \"string\",\n  \"patient_phone_numbers\": [\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    },\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    }\n  ],\n  \"custom_fields\": {\n    \"key_0\": true,\n    \"key_1\": 1568.0806351073584\n  },\n  \"archived_at\": \"2012-12-11T11:26:45.140Z\",\n  \"created_at\": \"2014-09-20T04:09:27.493Z\",\n  \"updated_at\": \"1949-08-07T02:58:38.694Z\",\n  \"appointments\": {\n    \"links\": {\n      \"self\": \"http://AdGbRLtGI.yczSy8fEg0,8ZNaxcbC1XxJC6DdjtnMDLrVsD6DoHkJ6xsp0E0hUmte5qsz0rEFqwqT5zpS37\"\n    }\n  },\n  \"invoices\": {\n    \"links\": {\n      \"self\": \"http://tFkdlbfAPCnJrsyRpFTVwS.pbDDyv9vPJ5JJ7+ytZemax1xExb-kfUsEoxCMHbEHBYbcDP6R4qi-Kri4CxLunqsmPgONR1U1\"\n    }\n  },\n  \"medical_alerts\": {\n    \"links\": {\n      \"self\": \"http://pYQXiVHZGJeDK.bclRl04fXNla5Rcle8tzMqO\"\n    }\n  },\n  \"links\": {\n    \"self\": \"https://wyYwOrPJ.ztibpJ2ws21R\",\n    \"next\": \"http://oodujwwUphUqBYClKYkQZc.vgIT0gaXCflO\",\n    \"previous\": \"https://KKJ.nbnAGHUPI+i+QkdtzxmzdWPwPnxv4y3d,vMNUSAShBgzG\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89e562bd-f338-47fe-960b-1d5a2d0baec2",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d08b1fd-03ec-4118-ac4e-91eb464bd1e9",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7bca286-da2f-4edc-b51c-d57869f0ba2b",
+          "name": "Update patient",
+          "request": {
+            "name": "Update patient",
+            "description": {
+              "content": "Updates an existing patient.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                },
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ad3ae3d-80ab-437b-8eb8-3d3b54bb7cf5",
+              "name": "The updated patient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"preferred_first_name\": \"string\",\n  \"email\": \"string\",\n  \"date_of_birth\": \"1974-01-31\",\n  \"gender\": \"string\",\n  \"gender_identity\": \"string\",\n  \"pronouns\": \"string\",\n  \"address_1\": \"string\",\n  \"address_2\": \"string\",\n  \"address_3\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"post_code\": \"string\",\n  \"country\": \"string\",\n  \"occupation\": \"string\",\n  \"notes\": \"string\",\n  \"appointment_notes\": \"string\",\n  \"accepted_privacy_policy\": false,\n  \"accepted_email_marketing\": true,\n  \"accepted_sms_marketing\": true,\n  \"receives_confirmation_emails\": false,\n  \"reminder_type\": \"string\",\n  \"time_zone\": \"string\",\n  \"patient_phone_numbers\": [\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    },\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    }\n  ],\n  \"custom_fields\": {\n    \"key_0\": true,\n    \"key_1\": 1568.0806351073584\n  },\n  \"archived_at\": \"2012-12-11T11:26:45.140Z\",\n  \"created_at\": \"2014-09-20T04:09:27.493Z\",\n  \"updated_at\": \"1949-08-07T02:58:38.694Z\",\n  \"appointments\": {\n    \"links\": {\n      \"self\": \"http://AdGbRLtGI.yczSy8fEg0,8ZNaxcbC1XxJC6DdjtnMDLrVsD6DoHkJ6xsp0E0hUmte5qsz0rEFqwqT5zpS37\"\n    }\n  },\n  \"invoices\": {\n    \"links\": {\n      \"self\": \"http://tFkdlbfAPCnJrsyRpFTVwS.pbDDyv9vPJ5JJ7+ytZemax1xExb-kfUsEoxCMHbEHBYbcDP6R4qi-Kri4CxLunqsmPgONR1U1\"\n    }\n  },\n  \"medical_alerts\": {\n    \"links\": {\n      \"self\": \"http://pYQXiVHZGJeDK.bclRl04fXNla5Rcle8tzMqO\"\n    }\n  },\n  \"links\": {\n    \"self\": \"https://wyYwOrPJ.ztibpJ2ws21R\",\n    \"next\": \"http://oodujwwUphUqBYClKYkQZc.vgIT0gaXCflO\",\n    \"previous\": \"https://KKJ.nbnAGHUPI+i+QkdtzxmzdWPwPnxv4y3d,vMNUSAShBgzG\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b85a3894-7d4d-4166-8381-05948705b520",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e48e884-bab4-4777-9791-e99399ae23f5",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a29c443-addc-4607-b9fc-6d974e501d99",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"preferred_first_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"date_of_birth\": \"<date>\",\n  \"address_1\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"post_code\": \"<string>\",\n  \"country\": \"<string>\",\n  \"time_zone\": \"<string>\",\n  \"accepted_privacy_policy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b41aa0c-6960-493c-81ec-e83599cb6d1a",
+          "name": "Archive patient",
+          "request": {
+            "name": "Archive patient",
+            "description": {
+              "content": "Archives a patient.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":id",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                },
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bd8df99-3382-4fd2-acd7-391b0abdf194",
+              "name": "The archived patient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"preferred_first_name\": \"string\",\n  \"email\": \"string\",\n  \"date_of_birth\": \"1974-01-31\",\n  \"gender\": \"string\",\n  \"gender_identity\": \"string\",\n  \"pronouns\": \"string\",\n  \"address_1\": \"string\",\n  \"address_2\": \"string\",\n  \"address_3\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"post_code\": \"string\",\n  \"country\": \"string\",\n  \"occupation\": \"string\",\n  \"notes\": \"string\",\n  \"appointment_notes\": \"string\",\n  \"accepted_privacy_policy\": false,\n  \"accepted_email_marketing\": true,\n  \"accepted_sms_marketing\": true,\n  \"receives_confirmation_emails\": false,\n  \"reminder_type\": \"string\",\n  \"time_zone\": \"string\",\n  \"patient_phone_numbers\": [\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    },\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    }\n  ],\n  \"custom_fields\": {\n    \"key_0\": true,\n    \"key_1\": 1568.0806351073584\n  },\n  \"archived_at\": \"2012-12-11T11:26:45.140Z\",\n  \"created_at\": \"2014-09-20T04:09:27.493Z\",\n  \"updated_at\": \"1949-08-07T02:58:38.694Z\",\n  \"appointments\": {\n    \"links\": {\n      \"self\": \"http://AdGbRLtGI.yczSy8fEg0,8ZNaxcbC1XxJC6DdjtnMDLrVsD6DoHkJ6xsp0E0hUmte5qsz0rEFqwqT5zpS37\"\n    }\n  },\n  \"invoices\": {\n    \"links\": {\n      \"self\": \"http://tFkdlbfAPCnJrsyRpFTVwS.pbDDyv9vPJ5JJ7+ytZemax1xExb-kfUsEoxCMHbEHBYbcDP6R4qi-Kri4CxLunqsmPgONR1U1\"\n    }\n  },\n  \"medical_alerts\": {\n    \"links\": {\n      \"self\": \"http://pYQXiVHZGJeDK.bclRl04fXNla5Rcle8tzMqO\"\n    }\n  },\n  \"links\": {\n    \"self\": \"https://wyYwOrPJ.ztibpJ2ws21R\",\n    \"next\": \"http://oodujwwUphUqBYClKYkQZc.vgIT0gaXCflO\",\n    \"previous\": \"https://KKJ.nbnAGHUPI+i+QkdtzxmzdWPwPnxv4y3d,vMNUSAShBgzG\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff027593-608f-405f-b63f-9fe4ff177aa6",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3c07393-b9f5-43a4-ae58-6acc1b10f3f9",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed851414-416f-4a84-9456-6b011a64e19c",
+          "name": "Unarchive patient",
+          "request": {
+            "name": "Unarchive patient",
+            "description": {
+              "content": "Unarchives a previously archived patient.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "patients",
+                ":id",
+                "unarchive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                },
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5889166b-dd00-471f-9f5f-7e33c6b68279",
+              "name": "The unarchived patient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"preferred_first_name\": \"string\",\n  \"email\": \"string\",\n  \"date_of_birth\": \"1974-01-31\",\n  \"gender\": \"string\",\n  \"gender_identity\": \"string\",\n  \"pronouns\": \"string\",\n  \"address_1\": \"string\",\n  \"address_2\": \"string\",\n  \"address_3\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"post_code\": \"string\",\n  \"country\": \"string\",\n  \"occupation\": \"string\",\n  \"notes\": \"string\",\n  \"appointment_notes\": \"string\",\n  \"accepted_privacy_policy\": false,\n  \"accepted_email_marketing\": true,\n  \"accepted_sms_marketing\": true,\n  \"receives_confirmation_emails\": false,\n  \"reminder_type\": \"string\",\n  \"time_zone\": \"string\",\n  \"patient_phone_numbers\": [\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    },\n    {\n      \"phone_type\": \"Mobile\",\n      \"number\": \"61444444444\"\n    }\n  ],\n  \"custom_fields\": {\n    \"key_0\": true,\n    \"key_1\": 1568.0806351073584\n  },\n  \"archived_at\": \"2012-12-11T11:26:45.140Z\",\n  \"created_at\": \"2014-09-20T04:09:27.493Z\",\n  \"updated_at\": \"1949-08-07T02:58:38.694Z\",\n  \"appointments\": {\n    \"links\": {\n      \"self\": \"http://AdGbRLtGI.yczSy8fEg0,8ZNaxcbC1XxJC6DdjtnMDLrVsD6DoHkJ6xsp0E0hUmte5qsz0rEFqwqT5zpS37\"\n    }\n  },\n  \"invoices\": {\n    \"links\": {\n      \"self\": \"http://tFkdlbfAPCnJrsyRpFTVwS.pbDDyv9vPJ5JJ7+ytZemax1xExb-kfUsEoxCMHbEHBYbcDP6R4qi-Kri4CxLunqsmPgONR1U1\"\n    }\n  },\n  \"medical_alerts\": {\n    \"links\": {\n      \"self\": \"http://pYQXiVHZGJeDK.bclRl04fXNla5Rcle8tzMqO\"\n    }\n  },\n  \"links\": {\n    \"self\": \"https://wyYwOrPJ.ztibpJ2ws21R\",\n    \"next\": \"http://oodujwwUphUqBYClKYkQZc.vgIT0gaXCflO\",\n    \"previous\": \"https://KKJ.nbnAGHUPI+i+QkdtzxmzdWPwPnxv4y3d,vMNUSAShBgzG\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe432401-3797-4a63-a2d9-09a738e70f5c",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6761b95a-802f-4f2b-bbfd-a24adc435625",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "patients",
+                    ":id",
+                    "unarchive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": \"string\",\n    \"key_1\": 6656,\n    \"key_2\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "au1",
+      "key": "shard"
+    },
+    {
+      "type": "string",
+      "value": "https://api.{{shard}}.cliniko.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e8e0607-087a-41b7-b0a3-e23dfec4c5d6",
+    "name": "Cliniko Appointment Types Patients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Cliniko is practice management software for allied health practices and clinics. This is a representative subset of the public Cliniko REST API, grounded in the official documentation at https://docs.api.cliniko.com and the redguava/cliniko-api GitHub repository. It is not the complete surface - Cliniko documents 50+ resources (appointment types, attendees, availability blocks, billable items, bookings, businesses, communications, concession types, contacts, group appointments, individual appointments, invoices, invoice items, medical alerts, patients, patient attachments, patient cases, patient forms, practitioners, products, recalls, referral sources, services, settings, stock adjustments, taxes, treatment notes, users, and more).\nBase URL is region-sharded. The shard is the suffix on your API key (for example a key ending `-uk1` is served from `https://api.uk1.cliniko.com`); keys with no suffix belong to the `au1` shard. All paths are prefixed with `/v1`.\nAuthentication is HTTP Basic: the API key is the username and the password is empty (`-u API_KEY:`). Every request MUST also send an `Accept: application/json` header and a `User-Agent` header of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` containing a valid contact email, or requests may be automatically blocked. Requests are rate limited to 200 per minute per user; a `429` response includes an `X-RateLimit-Reset` header with a UNIX timestamp.\nModeled note - the field sets below are drawn from the documented example responses; some optional attributes may be omitted, and request-body schemas are representative rather than exhaustive.\n\nContact Support:\n Name: Cliniko API Support",
+      "type": "text/plain"
+    }
+  }
+}

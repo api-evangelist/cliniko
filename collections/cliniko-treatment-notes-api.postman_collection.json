@@ -1,0 +1,746 @@
+{
+  "item": [
+    {
+      "id": "5f414c5a-bd06-42b2-aae2-9f1789417a7f",
+      "name": "Treatment Notes",
+      "description": {
+        "content": "Structured clinical notes about a patient visit.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10c9575b-06b7-4f68-8f6d-0525cf8a75a3",
+          "name": "Get treatment notes",
+          "request": {
+            "name": "Get treatment notes",
+            "description": {
+              "content": "Returns a paginated list of treatment notes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "treatment_notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (pagination)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "50",
+                  "description": "Items per page. Default 50, maximum 100."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83001c64-d360-4a30-b752-4d71a1cf388a",
+              "name": "A paginated list of treatment notes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "treatment_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"treatment_notes\": [\n    {\n      \"id\": 8316,\n      \"content\": {\n        \"sections\": [\n          {\n            \"name\": \"string\",\n            \"questions\": [\n              {\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answer\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answers\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answer\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answers\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          {\n            \"name\": \"string\",\n            \"questions\": [\n              {\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answer\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answers\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answer\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answers\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          }\n        ]\n      },\n      \"draft\": false,\n      \"created_at\": \"1981-04-20T06:13:59.369Z\",\n      \"updated_at\": \"2025-07-17T23:42:11.080Z\",\n      \"patient\": {\n        \"links\": {\n          \"self\": \"http://xxPiyihOZHnwWVjXSAu.oowS1BqPIE,UiC0hL+2LivzbVxFjsyyT.Xo3Mgnv,efJu\"\n        }\n      },\n      \"practitioner\": {\n        \"links\": {\n          \"self\": \"http://YSQROzfNLnCSkCVCngnIcWeKrVSEzMaRV.odI3KqTskLVk7.i49bHEIApHCbEy-TPgGkcwt2JsnhNcQOWGQ367O\"\n        }\n      },\n      \"treatment_note_template\": {\n        \"links\": {\n          \"self\": \"https://RGdAUtcNjOrfqUBbcaG.budWtfUo\"\n        }\n      },\n      \"links\": {\n        \"self\": \"https://TOJRtI.rfhxBbrav,cjCFJOYyvdEyd8o2ZSmnnDhT,\",\n        \"next\": \"https://Jw.thlUhmOfHN57zYEchTvengU-CPYR280tTJTpkMpf.x4+9kq.h\",\n        \"previous\": \"https://kRooboXOeNLM.kgdV5+y+-aYfCa6BUXxQRHJ98f1R9aEg\"\n      }\n    },\n    {\n      \"id\": 1843,\n      \"content\": {\n        \"sections\": [\n          {\n            \"name\": \"string\",\n            \"questions\": [\n              {\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answer\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answers\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answer\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answers\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          {\n            \"name\": \"string\",\n            \"questions\": [\n              {\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answer\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answers\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"name\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"type\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answer\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"answers\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          }\n        ]\n      },\n      \"draft\": false,\n      \"created_at\": \"1981-02-20T08:55:40.145Z\",\n      \"updated_at\": \"1974-01-31T09:24:05.572Z\",\n      \"patient\": {\n        \"links\": {\n          \"self\": \"https://umryA.kirbL7YU7Z2fl5ZUTsAe+udXHUVJlJPI1s2sfa7LWrSzfX2EFqp6BM\"\n        }\n      },\n      \"practitioner\": {\n        \"links\": {\n          \"self\": \"https://iUSvvvX.ouszboApJbhWqd1cHtc-rFJnm9fwTNK\"\n        }\n      },\n      \"treatment_note_template\": {\n        \"links\": {\n          \"self\": \"http://fYYqNAEEDwCUMvIheyAGsYcYNwA.khDMs8KkDhPb-HxDBdV\"\n        }\n      },\n      \"links\": {\n        \"self\": \"http://rExSfkcKnZ.lihMe,E+OsVftQLkP32sdFp0DS6fYfYFQtVhswLQBhCqEq,2tB4g6sxsHbc\",\n        \"next\": \"http://zPYp.oufaEjS56dubadncxxvsMdoYoG9a+AVh6mHaq\",\n        \"previous\": \"http://tfWtaMNufIyH.rpoBNftVEoCoS08tgFDXEDU56xqXRWBaaXQec3MlhoHDb,\"\n      }\n    }\n  ],\n  \"total_entries\": 7282,\n  \"links\": {\n    \"self\": \"http://EdOBGlzPCQUhdE.piwfm4H\",\n    \"next\": \"http://LfTDBfZX.xdiQje1ARCTLtS0mb\",\n    \"previous\": \"http://qwXnAfBdyHOSjcoSDcerRTf.ywQlJLPJcktRE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46dd2744-6f5e-47e8-ba65-dc3942559790",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "treatment_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": 2605.891982443095,\n    \"key_1\": 1511,\n    \"key_2\": 3259\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38862492-9f2d-4526-ac52-665dbd44c916",
+          "name": "Create treatment note",
+          "request": {
+            "name": "Create treatment note",
+            "description": {
+              "content": "Creates a treatment note for a patient, based on a treatment note template.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "treatment_notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patient_id\": \"<string>\",\n  \"treatment_note_template_id\": \"<string>\",\n  \"practitioner_id\": \"<string>\",\n  \"content\": {\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 2057\n              },\n              {\n                \"key_0\": false,\n                \"key_1\": false\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 452.2331553610548\n              },\n              {\n                \"key_0\": 162.59627760334627,\n                \"key_1\": 6149,\n                \"key_2\": 9798\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": \"string\",\n                \"key_1\": 3692,\n                \"key_2\": 4858\n              },\n              {\n                \"key_0\": false\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 9769,\n                \"key_1\": 9200\n              },\n              {\n                \"key_0\": 6000.9141358343895\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"draft\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a237c407-956d-42c9-9c9c-337747e2a6f2",
+              "name": "The created treatment note.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "treatment_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patient_id\": \"<string>\",\n  \"treatment_note_template_id\": \"<string>\",\n  \"practitioner_id\": \"<string>\",\n  \"content\": {\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": true,\n                \"key_1\": 787,\n                \"key_2\": \"string\"\n              },\n              {\n                \"key_0\": 1471.910064687104,\n                \"key_1\": 6939\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": true,\n                \"key_1\": 460.11224263702076,\n                \"key_2\": 7853\n              },\n              {\n                \"key_0\": 9056,\n                \"key_1\": \"string\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 7046.197561612667,\n                \"key_1\": \"string\",\n                \"key_2\": 5743\n              },\n              {\n                \"key_0\": \"string\"\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 837.9080941622885\n              },\n              {\n                \"key_0\": 990\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"draft\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 110,\n  \"content\": {\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 6839.907746789543\n              },\n              {\n                \"key_0\": 5359.604022437361\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 3393.45392263129,\n                \"key_1\": \"string\",\n                \"key_2\": 9247\n              },\n              {\n                \"key_0\": 3387.6272042796318,\n                \"key_1\": 6378.174187989004\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": \"string\"\n              },\n              {\n                \"key_0\": true,\n                \"key_1\": 318\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 8282.578397161808,\n                \"key_1\": false\n              },\n              {\n                \"key_0\": false\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"draft\": true,\n  \"created_at\": \"1987-01-27T05:28:03.270Z\",\n  \"updated_at\": \"1947-07-17T03:20:00.911Z\",\n  \"patient\": {\n    \"links\": {\n      \"self\": \"http://gtU.koW20ENXvcNTShom7aGrYWWhyxWHmeJ\"\n    }\n  },\n  \"practitioner\": {\n    \"links\": {\n      \"self\": \"http://iQJLQilBNWQ.ivGEKyUOuphyYHkIV,bwd0ZTzcoQS.tQYFDKQ8wSwTcb1Tk\"\n    }\n  },\n  \"treatment_note_template\": {\n    \"links\": {\n      \"self\": \"http://vxyjMYpILbERTbX.dkrxTr9k.yZvUL+fbdVgh,rkdo7lc.WKt-9cVBeoYJPSYRS6Z+I9xc\"\n    }\n  },\n  \"links\": {\n    \"self\": \"https://dLwdAKXnSQiZOsXekAbmWvKrDKWNL.sjML47wy,nQlS,SUR+yj,sbCPUWLbsd79dXMlKJTnRzt\",\n    \"next\": \"https://OoEsuUeFxNEppBOaKxzBxpGbLaITczWQT.uhwqKJbYzqpv-sLa0IsVgNDZCBc+A7lgQ-ftb,wqbvLHWAWv\",\n    \"previous\": \"http://HojitPRAQdMiUXCVCINN.ujctrYezKJfG3fHMOf+9nuuwPiH7wEvzhRJ4YT.ItrTezndcS8.agU7s6PyhIOYYWipWZDpDofHjTKnYcHZpiP\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8eddfbfc-b947-429f-b16d-b9aa89b63107",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "treatment_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patient_id\": \"<string>\",\n  \"treatment_note_template_id\": \"<string>\",\n  \"practitioner_id\": \"<string>\",\n  \"content\": {\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": true,\n                \"key_1\": 787,\n                \"key_2\": \"string\"\n              },\n              {\n                \"key_0\": 1471.910064687104,\n                \"key_1\": 6939\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": true,\n                \"key_1\": 460.11224263702076,\n                \"key_2\": 7853\n              },\n              {\n                \"key_0\": 9056,\n                \"key_1\": \"string\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 7046.197561612667,\n                \"key_1\": \"string\",\n                \"key_2\": 5743\n              },\n              {\n                \"key_0\": \"string\"\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 837.9080941622885\n              },\n              {\n                \"key_0\": 990\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"draft\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": 2605.891982443095,\n    \"key_1\": 1511,\n    \"key_2\": 3259\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4cab0dd-9da8-422e-ad3b-c4b9649571c8",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "treatment_notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"patient_id\": \"<string>\",\n  \"treatment_note_template_id\": \"<string>\",\n  \"practitioner_id\": \"<string>\",\n  \"content\": {\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": true,\n                \"key_1\": 787,\n                \"key_2\": \"string\"\n              },\n              {\n                \"key_0\": 1471.910064687104,\n                \"key_1\": 6939\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": true,\n                \"key_1\": 460.11224263702076,\n                \"key_2\": 7853\n              },\n              {\n                \"key_0\": 9056,\n                \"key_1\": \"string\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 7046.197561612667,\n                \"key_1\": \"string\",\n                \"key_2\": 5743\n              },\n              {\n                \"key_0\": \"string\"\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 837.9080941622885\n              },\n              {\n                \"key_0\": 990\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"draft\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": 2605.891982443095,\n    \"key_1\": 1511,\n    \"key_2\": 3259\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47cc3415-3eb4-45bb-996a-726358e5c4c3",
+          "name": "Get treatment note",
+          "request": {
+            "name": "Get treatment note",
+            "description": {
+              "content": "Returns a single treatment note by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "treatment_notes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                },
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfc9aea6-3b39-441f-9cf5-c5eb5f9bd1ba",
+              "name": "The requested treatment note.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "treatment_notes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 110,\n  \"content\": {\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 6839.907746789543\n              },\n              {\n                \"key_0\": 5359.604022437361\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 3393.45392263129,\n                \"key_1\": \"string\",\n                \"key_2\": 9247\n              },\n              {\n                \"key_0\": 3387.6272042796318,\n                \"key_1\": 6378.174187989004\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"questions\": [\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": \"string\"\n              },\n              {\n                \"key_0\": true,\n                \"key_1\": 318\n              }\n            ]\n          },\n          {\n            \"name\": \"<string>\",\n            \"type\": \"<string>\",\n            \"answer\": \"<string>\",\n            \"answers\": [\n              {\n                \"key_0\": 8282.578397161808,\n                \"key_1\": false\n              },\n              {\n                \"key_0\": false\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"draft\": true,\n  \"created_at\": \"1987-01-27T05:28:03.270Z\",\n  \"updated_at\": \"1947-07-17T03:20:00.911Z\",\n  \"patient\": {\n    \"links\": {\n      \"self\": \"http://gtU.koW20ENXvcNTShom7aGrYWWhyxWHmeJ\"\n    }\n  },\n  \"practitioner\": {\n    \"links\": {\n      \"self\": \"http://iQJLQilBNWQ.ivGEKyUOuphyYHkIV,bwd0ZTzcoQS.tQYFDKQ8wSwTcb1Tk\"\n    }\n  },\n  \"treatment_note_template\": {\n    \"links\": {\n      \"self\": \"http://vxyjMYpILbERTbX.dkrxTr9k.yZvUL+fbdVgh,rkdo7lc.WKt-9cVBeoYJPSYRS6Z+I9xc\"\n    }\n  },\n  \"links\": {\n    \"self\": \"https://dLwdAKXnSQiZOsXekAbmWvKrDKWNL.sjML47wy,nQlS,SUR+yj,sbCPUWLbsd79dXMlKJTnRzt\",\n    \"next\": \"https://OoEsuUeFxNEppBOaKxzBxpGbLaITczWQT.uhwqKJbYzqpv-sLa0IsVgNDZCBc+A7lgQ-ftb,wqbvLHWAWv\",\n    \"previous\": \"http://HojitPRAQdMiUXCVCINN.ujctrYezKJfG3fHMOf+9nuuwPiH7wEvzhRJ4YT.ItrTezndcS8.agU7s6PyhIOYYWipWZDpDofHjTKnYcHZpiP\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e7b7e00-9077-4d9b-8af5-64ccf33e90e2",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "treatment_notes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": 2605.891982443095,\n    \"key_1\": 1511,\n    \"key_2\": 3259\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e08357d4-44e5-4035-a72a-82fd3e3a35ea",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "treatment_notes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": 2605.891982443095,\n    \"key_1\": 1511,\n    \"key_2\": 3259\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "au1",
+      "key": "shard"
+    },
+    {
+      "type": "string",
+      "value": "https://api.{{shard}}.cliniko.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1e94edce-b991-4a2f-b5f4-a005ef63ae7c",
+    "name": "Cliniko Appointment Types Treatment Notes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Cliniko is practice management software for allied health practices and clinics. This is a representative subset of the public Cliniko REST API, grounded in the official documentation at https://docs.api.cliniko.com and the redguava/cliniko-api GitHub repository. It is not the complete surface - Cliniko documents 50+ resources (appointment types, attendees, availability blocks, billable items, bookings, businesses, communications, concession types, contacts, group appointments, individual appointments, invoices, invoice items, medical alerts, patients, patient attachments, patient cases, patient forms, practitioners, products, recalls, referral sources, services, settings, stock adjustments, taxes, treatment notes, users, and more).\nBase URL is region-sharded. The shard is the suffix on your API key (for example a key ending `-uk1` is served from `https://api.uk1.cliniko.com`); keys with no suffix belong to the `au1` shard. All paths are prefixed with `/v1`.\nAuthentication is HTTP Basic: the API key is the username and the password is empty (`-u API_KEY:`). Every request MUST also send an `Accept: application/json` header and a `User-Agent` header of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` containing a valid contact email, or requests may be automatically blocked. Requests are rate limited to 200 per minute per user; a `429` response includes an `X-RateLimit-Reset` header with a UNIX timestamp.\nModeled note - the field sets below are drawn from the documented example responses; some optional attributes may be omitted, and request-body schemas are representative rather than exhaustive.\n\nContact Support:\n Name: Cliniko API Support",
+      "type": "text/plain"
+    }
+  }
+}

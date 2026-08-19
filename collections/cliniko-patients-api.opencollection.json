@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cliniko Appointment Types Patients API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Patients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get patients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/patients",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (pagination)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page. Default 50, maximum 100."
+              },
+              {
+                "name": "q[]",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter expression(s). Repeatable."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all patients."
+        },
+        {
+          "info": {
+            "name": "Create patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.{shard}.cliniko.com/v1/patients",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new patient."
+        },
+        {
+          "info": {
+            "name": "Get patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/patients/:id",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Returns a single patient by ID."
+        },
+        {
+          "info": {
+            "name": "Update patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.{shard}.cliniko.com/v1/patients/:id",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing patient."
+        },
+        {
+          "info": {
+            "name": "Archive patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.{shard}.cliniko.com/v1/patients/:id/archive",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Archives a patient."
+        },
+        {
+          "info": {
+            "name": "Unarchive patient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.{shard}.cliniko.com/v1/patients/:id/unarchive",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Unarchives a previously archived patient."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

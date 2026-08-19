@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cliniko Appointment Types Treatment Notes API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Treatment Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get treatment notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/treatment_notes",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (pagination)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page. Default 50, maximum 100."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of treatment notes."
+        },
+        {
+          "info": {
+            "name": "Create treatment note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.{shard}.cliniko.com/v1/treatment_notes",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a treatment note for a patient, based on a treatment note template."
+        },
+        {
+          "info": {
+            "name": "Get treatment note",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/treatment_notes/:id",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Returns a single treatment note by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

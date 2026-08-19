@@ -1,0 +1,493 @@
+{
+  "item": [
+    {
+      "id": "27ba1eac-ae54-4a15-95e0-4df1637d857a",
+      "name": "Practitioners",
+      "description": {
+        "content": "Practitioners and the businesses (locations) they work from.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "482d6a49-303e-40e8-9cd1-1e15f516f37a",
+          "name": "Get practitioners",
+          "request": {
+            "name": "Get practitioners",
+            "description": {
+              "content": "Returns a paginated list of all active practitioners.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "practitioners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (pagination)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "50",
+                  "description": "Items per page. Default 50, maximum 100."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97aa6723-0a69-487a-a2cd-64f3dc755f14",
+              "name": "A paginated list of practitioners.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "practitioners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"practitioners\": [\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"label\": \"string\",\n      \"designation\": \"string\",\n      \"description\": \"string\",\n      \"show_in_online_bookings\": true,\n      \"created_at\": \"2002-05-20T22:08:18.404Z\",\n      \"updated_at\": \"1971-12-17T07:22:42.892Z\",\n      \"default_appointment_type\": {\n        \"links\": {\n          \"self\": \"http://yqqAPqnyMnPdAUFCCwtcwXY.btRQt6Bfhaeaf4t,hpZL+Bqxa9QYG.JuqMXGlIXKWM6sIxwqaWtSgTI0-+X,M\"\n        }\n      },\n      \"user\": {\n        \"links\": {\n          \"self\": \"http://ggBrGdOniRcrjQKWRqoYb.odsYCRdOSiwAbM7o4MoCi.K6Qt8aeRAo,Me-7qfxW6txYntlHG0RM54\"\n        }\n      },\n      \"appointments\": {\n        \"links\": {\n          \"self\": \"https://enHfBgVpj.qud9L9o9QUy.e\"\n        }\n      },\n      \"invoices\": {\n        \"links\": {\n          \"self\": \"http://hDpDLaiVvezzxylqqvPUiRRw.kcgbTS5L.XK6krv4pFDWsva10enqigX5Tl-LmpGJF,0Tn\"\n        }\n      },\n      \"links\": {\n        \"self\": \"https://AdLlmVEOcWxJdjXzKMJDsRlLOE.xxlVi+\",\n        \"next\": \"http://BvTAzsdUoWrdcUjKxYMcpNScYRXDPAen.feUqLWCKPMiA7Rjamuau-4KUQWxD1NYigICIe8rl7nWsm9rYG0vY03\",\n        \"previous\": \"http://iDEpicQeqRqjIAzffCwgAuYiAdpMy.pmglWQAlJ+rqDloEQbOlMKruQLYSvKfLjVMbW7PHft5UkxZvfGgds0jgt3-CCZnCW\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"label\": \"string\",\n      \"designation\": \"string\",\n      \"description\": \"string\",\n      \"show_in_online_bookings\": false,\n      \"created_at\": \"2022-03-17T13:10:34.568Z\",\n      \"updated_at\": \"1979-08-21T22:27:21.393Z\",\n      \"default_appointment_type\": {\n        \"links\": {\n          \"self\": \"http://qNrEg.qzejRJ2-Ek7mW-AxtoXLyHYHWpB\"\n        }\n      },\n      \"user\": {\n        \"links\": {\n          \"self\": \"https://yxtJfjvykPC.aqanmQFAo-ckiZj5GRaSt\"\n        }\n      },\n      \"appointments\": {\n        \"links\": {\n          \"self\": \"http://jnA.dxrh8DRzWSK2WqnPKNcm60voDAj,v5CRSzxfjb+UdGvMui0mEwXp\"\n        }\n      },\n      \"invoices\": {\n        \"links\": {\n          \"self\": \"http://pz.tyxdEtqR2D,xd4e+wUUxOljScFxWRvAB-wECpduzZYgfN3xKqYJ-gih7kcKUwyfFuMN9QxmF96Fx\"\n        }\n      },\n      \"links\": {\n        \"self\": \"https://tsEwOOzvEzwkxtgRBf.ruyIbOSlijq8GYC5KUwY5dTWZViRdd9DEpuTQqj78vz0bI\",\n        \"next\": \"http://EkwBIgUPqOylPIkiEhVvieXDAkUE.hfjZA,b0J-llgm.45GicqXeshJUYPF3OX2W-VHhMkudKVBAusG8hWg5t4wM.dQe\",\n        \"previous\": \"https://UMDmXgnYSPVH.advVqoaR6B-ynikcfGA5nOVPR1m.uZDrHZd,FErgLk-BUJzZNKE\"\n      }\n    }\n  ],\n  \"total_entries\": 7224,\n  \"links\": {\n    \"self\": \"https://LnDAKJlzTBRYaNdwPEBMSvsVUXE.mdUCinuKKTTKBavU1o5Bpe5MIGI5J\",\n    \"next\": \"http://vjXFtdJYlYSEPYyoNg.fttvXU6bi5Mq9XBgnLOGiDD5jsAn8Z,D4ce-pR8hXaHeChdR1gqDQvFkKqaR\",\n    \"previous\": \"https://VdnLyXwczXxS.kkhfbFfAUud-LUlmKtsjZXQ+o9Si9D-pmUIbN2KDqe\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0c22f19-5dc5-40f7-839d-a7a37b732a2c",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "practitioners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": 726.854253703978,\n    \"key_1\": false,\n    \"key_2\": false,\n    \"key_3\": 9645.218863181806\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "896534c5-7a17-4855-8d11-82505baa1103",
+          "name": "Get practitioner",
+          "request": {
+            "name": "Get practitioner",
+            "description": {
+              "content": "Returns a single practitioner by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "practitioners",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the resource."
+                },
+                {
+                  "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                  "type": "any",
+                  "value": "{{shard}}",
+                  "key": "shard"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62aef2d5-8eef-49ae-90d9-a8f3b19cbbcc",
+              "name": "The requested practitioner.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "practitioners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"label\": \"string\",\n  \"designation\": \"string\",\n  \"description\": \"string\",\n  \"show_in_online_bookings\": true,\n  \"created_at\": \"1957-05-20T07:31:51.957Z\",\n  \"updated_at\": \"1987-07-05T00:26:26.753Z\",\n  \"default_appointment_type\": {\n    \"links\": {\n      \"self\": \"https://iMqtiaVkvPfcjzEElRSiSkPHV.mvjrt5iFXTI+THDitYlUFlBBiAqfRk0xF\"\n    }\n  },\n  \"user\": {\n    \"links\": {\n      \"self\": \"http://mIM.sjyKjNp4qcglU\"\n    }\n  },\n  \"appointments\": {\n    \"links\": {\n      \"self\": \"http://pcDOmKqp.equuj0gJhuadEs-Oc2Y5pSEhXk1e-kZLwqSgqZasBVXPFKsHIatUxEs--vv7yb-DjgjxAc0Sp3XyPTn7\"\n    }\n  },\n  \"invoices\": {\n    \"links\": {\n      \"self\": \"http://bUckjmJlr.oshyR\"\n    }\n  },\n  \"links\": {\n    \"self\": \"https://ureJXpqZLJYWVmADvYqcZxZUPGA.rfdqk.bOZ-bUTI+soEumGK9u4uSXU39CCouoOwazXzZ7Qfz2KLWcdkerZ\",\n    \"next\": \"http://DSvvBw.rsitTzG1tuuHEnEanHdU3ksLVJCUtWWIzS.nMo8M5L4g.MlHugjXe7pCLRFhxjWgP4-kFbJ9\",\n    \"previous\": \"http://vPYIwLPLUYJcFiMrimLjqXpRZSTKTRI.yeXDCNqFYGWcPs0yE0DwziFfxV2PPe6UEWbdNDJeer2d3LvV7GomulGDUzpofsyn\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c049f89-0d55-4c81-9229-03c544367c67",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "practitioners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": 726.854253703978,\n    \"key_1\": false,\n    \"key_2\": false,\n    \"key_3\": 9645.218863181806\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37a78096-abc9-4e1b-9563-3e1c8cf7ee40",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "practitioners",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the resource."
+                    },
+                    {
+                      "description": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+                      "type": "any",
+                      "value": "{{shard}}",
+                      "key": "shard"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.",
+                    "key": "User-Agent",
+                    "value": "MyClinicApp (dev@myclinic.example)"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"errors\": {\n    \"key_0\": 726.854253703978,\n    \"key_1\": false,\n    \"key_2\": false,\n    \"key_3\": 9645.218863181806\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Region shard derived from the API key suffix. Keys without a suffix use au1. (This can only be one of au1,au2,au3,au4,uk1,eu1,us1,ca1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "au1",
+      "key": "shard"
+    },
+    {
+      "type": "string",
+      "value": "https://api.{{shard}}.cliniko.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1db383e1-cfa6-48a1-841c-3f22f51fe20a",
+    "name": "Cliniko Appointment Types Practitioners API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Cliniko is practice management software for allied health practices and clinics. This is a representative subset of the public Cliniko REST API, grounded in the official documentation at https://docs.api.cliniko.com and the redguava/cliniko-api GitHub repository. It is not the complete surface - Cliniko documents 50+ resources (appointment types, attendees, availability blocks, billable items, bookings, businesses, communications, concession types, contacts, group appointments, individual appointments, invoices, invoice items, medical alerts, patients, patient attachments, patient cases, patient forms, practitioners, products, recalls, referral sources, services, settings, stock adjustments, taxes, treatment notes, users, and more).\nBase URL is region-sharded. The shard is the suffix on your API key (for example a key ending `-uk1` is served from `https://api.uk1.cliniko.com`); keys with no suffix belong to the `au1` shard. All paths are prefixed with `/v1`.\nAuthentication is HTTP Basic: the API key is the username and the password is empty (`-u API_KEY:`). Every request MUST also send an `Accept: application/json` header and a `User-Agent` header of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` containing a valid contact email, or requests may be automatically blocked. Requests are rate limited to 200 per minute per user; a `429` response includes an `X-RateLimit-Reset` header with a UNIX timestamp.\nModeled note - the field sets below are drawn from the documented example responses; some optional attributes may be omitted, and request-body schemas are representative rather than exhaustive.\n\nContact Support:\n Name: Cliniko API Support",
+      "type": "text/plain"
+    }
+  }
+}

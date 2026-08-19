@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cliniko Appointment Types API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Appointment Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get appointment types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/appointment_types",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (pagination)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page. Default 50, maximum 100."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all appointment types."
+        },
+        {
+          "info": {
+            "name": "Get appointment type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.{shard}.cliniko.com/v1/appointment_types/:id",
+            "headers": [
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the resource."
+              }
+            ]
+          },
+          "docs": "Returns a single appointment type by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
