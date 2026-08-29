@@ -18,39 +18,38 @@ edges:
   capability_id: BC-2800.10
   capability_id_l1: BC-2800
   capability_name: Scheduling & Appointment Management
-  confidence: 0.95
-  evidence: POST /individual_appointments "Create individual appointment"; PATCH /individual_appointments/{id}/cancel
-    "Cancel individual appointment"; GET /individual_appointments/{id}/conflicts "Get appointment conflicts"
-  reason: Booking, updating, cancelling and conflict-checking patient appointments in a clinical practice
-    management system is plainly provider scheduling and appointment management.
+  confidence: 0.93
+  evidence: POST /individual_appointments createIndividualAppointment Create individual appointment; PATCH
+    /individual_appointments/{id}/cancel Cancel individual appointment; GET /bookings listBookings
+  reason: Direct creation, update, cancellation and conflict checking of patient appointments and bookings
+    in clinic practice management — plainly appointment scheduling.
 - tag: Treatment Notes
   spec_file: cliniko-treatment-notes-api-openapi.yml
   capability_id: BC-2830.10
   capability_id_l1: BC-2830
   capability_name: Clinical Note Documentation
-  confidence: 0.9
-  evidence: POST /treatment_notes createTreatmentNote "Create treatment note"; schemas TreatmentNote,
+  confidence: 0.88
+  evidence: POST /treatment_notes createTreatmentNote 'Create treatment note'; schemas TreatmentNote,
     TreatmentNoteContent
-  reason: Authoring and retrieval of clinician treatment notes for patient encounters is clinical note
-    documentation.
-- tag: Appointment Types
-  spec_file: cliniko-appointment-types-api-openapi.yml
-  capability_id: BC-2800.10
-  capability_id_l1: BC-2800
-  capability_name: Scheduling & Appointment Management
-  confidence: 0.75
-  evidence: GET /appointment_types listAppointmentTypes "Get appointment types"; schema AppointmentType
-  reason: Appointment type reference data configuring a clinic's appointment booking in practice management
-    software — supports scheduling and appointment management. Read-only configuration surface, hence
-    moderate confidence.
+  reason: Authoring and retrieval of clinician treatment notes (structured note content) for allied-health
+    encounters — this is clinical note documentation in the active patient record.
 - tag: Patients
   spec_file: cliniko-patients-api-openapi.yml
   capability_id: BC-2800.20
   capability_id_l1: BC-2800
   capability_name: Patient Registration Management
-  confidence: 0.75
-  evidence: POST /patients createPatient "Create patient"; PATCH /patients/{id} "Update patient"; POST
-    /patients/{id}/archive; schemas Patient, PatientPhoneNumber
-  reason: Creation and stewardship of patient demographic/contact records in a clinical practice management
-    system corresponds to patient registration data capture. Some ambiguity with master patient index
-    stewardship keeps this below 0.9.
+  confidence: 0.85
+  evidence: POST /patients createPatient 'Create patient'; schemas Patient, PatientPhoneNumber, PatientInput;
+    vendor covers 'patient records'
+  reason: CRUD plus archive/unarchive over patient demographic and contact records in a clinic practice-management
+    system — capture and stewardship of patient identity/demographic data, i.e. patient registration master
+    data rather than clinical care or billing.
+- tag: Appointment Types
+  spec_file: cliniko-appointment-types-api-openapi.yml
+  capability_id: BC-2800.10
+  capability_id_l1: BC-2800
+  capability_name: Scheduling & Appointment Management
+  confidence: 0.78
+  evidence: GET /appointment_types listAppointmentTypes Get appointment types
+  reason: Appointment type reference data within clinic practice-management scheduling; supports appointment
+    booking configuration. Read-only reference data lowers confidence slightly.
