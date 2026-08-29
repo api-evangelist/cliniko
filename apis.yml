@@ -233,6 +233,9 @@ apis:
   - type: APIReference
     url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
 common:
+- type: CapabilityMap
+  url: capabilities/cliniko-capability-edges.yml
+  name: Cliniko Business Capability Map
 - type: AgenticAccess
   url: agentic-access/cliniko-agentic-access.yml
 - type: DomainSecurity
