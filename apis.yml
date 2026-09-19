@@ -47,7 +47,7 @@ tags:
 - Patients
 - EHR
 - Clinics
-- Bookings
+- Booking
 - Software-as-a-Service
 tags_raw:
 - Practice Management
@@ -118,6 +118,8 @@ apis:
   humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
   baseURL: https://api.au1.cliniko.com/v1
   tags:
+  - Business
+  tags_raw:
   - Businesses
   properties:
   - type: OpenAPI
