@@ -91,39 +91,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      required: false
-      description: Page number (pagination).
-      schema:
-        type: integer
-        default: 1
-    PerPage:
-      name: per_page
-      in: query
-      required: false
-      description: Items per page. Default 50, maximum 100.
-      schema:
-        type: integer
-        default: 50
-        maximum: 100
-    UserAgent:
-      name: User-Agent
-      in: header
-      required: true
-      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
-      schema:
-        type: string
-        example: MyClinicApp (dev@myclinic.example)
   schemas:
     Error:
       type: object
@@ -143,19 +110,6 @@ components:
             self:
               type: string
               format: uri
-    Links:
-      type: object
-      description: HAL-style pagination and self links.
-      properties:
-        self:
-          type: string
-          format: uri
-        next:
-          type: string
-          format: uri
-        previous:
-          type: string
-          format: uri
     Invoice:
       type: object
       properties:
@@ -210,15 +164,61 @@ components:
           $ref: '#/components/schemas/Reference'
         links:
           $ref: '#/components/schemas/Links'
+    Links:
+      type: object
+      description: HAL-style pagination and self links.
+      properties:
+        self:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+        previous:
+          type: string
+          format: uri
+  parameters:
+    UserAgent:
+      name: User-Agent
+      in: header
+      required: true
+      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
+      schema:
+        type: string
+        example: MyClinicApp (dev@myclinic.example)
+    PerPage:
+      name: per_page
+      in: query
+      required: false
+      description: Items per page. Default 50, maximum 100.
+      schema:
+        type: integer
+        default: 50
+        maximum: 100
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number (pagination).
+      schema:
+        type: integer
+        default: 1
   responses:
-    Unauthorized:
-      description: Missing or invalid credentials.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid credentials.
       content:
         application/json:
           schema:
