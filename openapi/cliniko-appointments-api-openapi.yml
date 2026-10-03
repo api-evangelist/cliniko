@@ -245,6 +245,24 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties: true
+    Reference:
+      type: object
+      description: A link to a related resource.
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
     IndividualAppointmentInput:
       type: object
       required:
@@ -271,24 +289,6 @@ components:
           type: string
         notes:
           type: string
-    Error:
-      type: object
-      properties:
-        message:
-          type: string
-        errors:
-          type: object
-          additionalProperties: true
-    Reference:
-      type: object
-      description: A link to a related resource.
-      properties:
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
     IndividualAppointment:
       type: object
       properties:
@@ -427,6 +427,12 @@ components:
           type: string
           format: uri
   responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     RateLimited:
       description: Too many requests. The API is limited to 200 requests per minute per user. The X-RateLimit-Reset header carries a UNIX timestamp for when the window resets.
       headers:
@@ -444,12 +450,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     UnprocessableEntity:
       description: The request payload failed validation.
       content:
@@ -457,14 +457,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   parameters:
-    UserAgent:
-      name: User-Agent
-      in: header
-      required: true
-      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
-      schema:
-        type: string
-        example: MyClinicApp (dev@myclinic.example)
     PerPage:
       name: per_page
       in: query
@@ -481,6 +473,14 @@ components:
       description: The unique identifier of the resource.
       schema:
         type: string
+    UserAgent:
+      name: User-Agent
+      in: header
+      required: true
+      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
+      schema:
+        type: string
+        example: MyClinicApp (dev@myclinic.example)
     Page:
       name: page
       in: query

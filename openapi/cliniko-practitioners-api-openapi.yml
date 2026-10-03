@@ -152,15 +152,20 @@ components:
           $ref: '#/components/schemas/Reference'
         links:
           $ref: '#/components/schemas/Links'
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    UserAgent:
-      name: User-Agent
-      in: header
-      required: true
-      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
-      schema:
-        type: string
-        example: MyClinicApp (dev@myclinic.example)
     PerPage:
       name: per_page
       in: query
@@ -177,6 +182,14 @@ components:
       description: The unique identifier of the resource.
       schema:
         type: string
+    UserAgent:
+      name: User-Agent
+      in: header
+      required: true
+      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
+      schema:
+        type: string
+        example: MyClinicApp (dev@myclinic.example)
     Page:
       name: page
       in: query
@@ -185,19 +198,6 @@ components:
       schema:
         type: integer
         default: 1
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

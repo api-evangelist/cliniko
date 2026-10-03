@@ -107,29 +107,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    TreatmentNote:
-      type: object
-      properties:
-        id:
-          type: integer
-        content:
-          $ref: '#/components/schemas/TreatmentNoteContent'
-        draft:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        patient:
-          $ref: '#/components/schemas/Reference'
-        practitioner:
-          $ref: '#/components/schemas/Reference'
-        treatment_note_template:
-          $ref: '#/components/schemas/Reference'
-        links:
-          $ref: '#/components/schemas/Links'
     Error:
       type: object
       properties:
@@ -205,15 +182,49 @@ components:
         previous:
           type: string
           format: uri
+    TreatmentNote:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          $ref: '#/components/schemas/TreatmentNoteContent'
+        draft:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        patient:
+          $ref: '#/components/schemas/Reference'
+        practitioner:
+          $ref: '#/components/schemas/Reference'
+        treatment_note_template:
+          $ref: '#/components/schemas/Reference'
+        links:
+          $ref: '#/components/schemas/Links'
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    UserAgent:
-      name: User-Agent
-      in: header
-      required: true
-      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
-      schema:
-        type: string
-        example: MyClinicApp (dev@myclinic.example)
     PerPage:
       name: per_page
       in: query
@@ -230,6 +241,14 @@ components:
       description: The unique identifier of the resource.
       schema:
         type: string
+    UserAgent:
+      name: User-Agent
+      in: header
+      required: true
+      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
+      schema:
+        type: string
+        example: MyClinicApp (dev@myclinic.example)
     Page:
       name: page
       in: query
@@ -238,25 +257,6 @@ components:
       schema:
         type: integer
         default: 1
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
