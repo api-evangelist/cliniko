@@ -176,6 +176,78 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    UnprocessableEntity:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Too many requests. The API is limited to 200 requests per minute per user. The X-RateLimit-Reset header carries a UNIX timestamp for when the window resets.
+      headers:
+        X-RateLimit-Reset:
+          description: UNIX timestamp when the rate-limit window resets.
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the resource.
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      in: query
+      required: false
+      description: Items per page. Default 50, maximum 100.
+      schema:
+        type: integer
+        default: 50
+        maximum: 100
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number (pagination).
+      schema:
+        type: integer
+        default: 1
+    Query:
+      name: q[]
+      in: query
+      required: false
+      description: Optional filter expression(s). Repeatable.
+      schema:
+        type: array
+        items:
+          type: string
+    UserAgent:
+      name: User-Agent
+      in: header
+      required: true
+      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
+      schema:
+        type: string
+        example: MyClinicApp (dev@myclinic.example)
   schemas:
     Error:
       type: object
@@ -185,74 +257,6 @@ components:
         errors:
           type: object
           additionalProperties: true
-    Reference:
-      type: object
-      description: A link to a related resource.
-      properties:
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: uri
-    PatientInput:
-      type: object
-      required:
-      - first_name
-      - last_name
-      properties:
-        title:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        preferred_first_name:
-          type: string
-        email:
-          type: string
-        date_of_birth:
-          type: string
-          format: date
-        address_1:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        post_code:
-          type: string
-        country:
-          type: string
-        time_zone:
-          type: string
-          description: An IANA time zone identifier.
-        accepted_privacy_policy:
-          type:
-          - boolean
-          - 'null'
-    Links:
-      type: object
-      description: HAL-style pagination and self links.
-      properties:
-        self:
-          type: string
-          format: uri
-        next:
-          type: string
-          format: uri
-        previous:
-          type: string
-          format: uri
-    PatientPhoneNumber:
-      type: object
-      properties:
-        phone_type:
-          type: string
-          example: Mobile
-        number:
-          type: string
-          example: '61444444444'
     Patient:
       type: object
       properties:
@@ -347,78 +351,74 @@ components:
           $ref: '#/components/schemas/Reference'
         links:
           $ref: '#/components/schemas/Links'
-  parameters:
-    Query:
-      name: q[]
-      in: query
-      required: false
-      description: Optional filter expression(s). Repeatable.
-      schema:
-        type: array
-        items:
+    PatientPhoneNumber:
+      type: object
+      properties:
+        phone_type:
           type: string
-    PerPage:
-      name: per_page
-      in: query
-      required: false
-      description: Items per page. Default 50, maximum 100.
-      schema:
-        type: integer
-        default: 50
-        maximum: 100
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The unique identifier of the resource.
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      required: false
-      description: Page number (pagination).
-      schema:
-        type: integer
-        default: 1
-    UserAgent:
-      name: User-Agent
-      in: header
-      required: true
-      description: Must be of the form `APP_VENDOR_NAME (APP_VENDOR_EMAIL)` and include a valid contact email. Requests without a compliant User-Agent may be automatically blocked.
-      schema:
-        type: string
-        example: MyClinicApp (dev@myclinic.example)
-  responses:
-    Unauthorized:
-      description: Missing or invalid credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Too many requests. The API is limited to 200 requests per minute per user. The X-RateLimit-Reset header carries a UNIX timestamp for when the window resets.
-      headers:
-        X-RateLimit-Reset:
-          description: UNIX timestamp when the rate-limit window resets.
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+          example: Mobile
+        number:
+          type: string
+          example: '61444444444'
+    PatientInput:
+      type: object
+      required:
+      - first_name
+      - last_name
+      properties:
+        title:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        preferred_first_name:
+          type: string
+        email:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        address_1:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        post_code:
+          type: string
+        country:
+          type: string
+        time_zone:
+          type: string
+          description: An IANA time zone identifier.
+        accepted_privacy_policy:
+          type:
+          - boolean
+          - 'null'
+    Links:
+      type: object
+      description: HAL-style pagination and self links.
+      properties:
+        self:
+          type: string
+          format: uri
+        next:
+          type: string
+          format: uri
+        previous:
+          type: string
+          format: uri
+    Reference:
+      type: object
+      description: A link to a related resource.
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
   securitySchemes:
     basicAuth:
       type: http
