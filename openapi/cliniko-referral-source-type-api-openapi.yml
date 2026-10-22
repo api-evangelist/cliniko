@@ -1,0 +1,235 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Referral Source Type API
+  version: v1
+  description: 'Operations tagged Referral Source Type across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Referral Source Type
+  description: Types of referrals for patients
+paths:
+  /referral_source_types:
+    get:
+      tags:
+      - Referral Source Type
+      summary: List referral source types
+      operationId: ListReferralSourceTypes-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  referral_source_types:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ReferralSourceType'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/referral_source_types?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/referral_source_types?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/referral_source_types?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /referral_source_types/{id}:
+    get:
+      tags:
+      - Referral Source Type
+      summary: Get referral source type
+      operationId: GetReferralSourceType-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralSourceType'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    ReferralSourceType:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/referral_source_types/1
+        name:
+          type: string
+          maxLength: 255
+        referrer_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Contact
+          - Patient
+        referrers:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/patients
+                  format: uri
+                  type: string
+              type: object
+        subcategories:
+          type:
+          - array
+          - 'null'
+          example:
+          - the google
+          - myspace
+          - friendster
+          - ask jeeves
+          items:
+            type: string
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Referral Source Type
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

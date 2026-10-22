@@ -1,0 +1,915 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Attendee API
+  version: v1
+  description: 'Operations tagged Attendee across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Attendee
+paths:
+  /attendees:
+    get:
+      tags:
+      - Attendee
+      summary: List attendees
+      operationId: ListAttendees-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attendees:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attendee'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | booking_id | [int64](/#numeric-filter-operators) |
+
+          | cancelled_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | invoice_status | [integer](/#numeric-filter-operators) |
+
+          | patient_case_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | sent_email_reminders_count | [integer](/#numeric-filter-operators) |
+
+          | sent_sms_reminders_count | [integer](/#numeric-filter-operators) |
+
+          | treatment_note_status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Attendee
+      summary: Create attendee
+      operationId: CreateAttendee-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/Attendee'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /attendees/{id}:
+    get:
+      tags:
+      - Attendee
+      summary: Get attendee
+      operationId: GetAttendee-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | cancelled_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Attendee
+      summary: Update attendee
+      operationId: UpdateAttendee-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attendee'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/AttendeeUpdate'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Attendee
+      summary: Archive attendee
+      operationId: DeleteAttendee-Delete
+      responses:
+        '204':
+          description: Resource was archived successfully
+      deprecated: true
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /attendees/{id}/archive:
+    post:
+      tags:
+      - Attendee
+      summary: Archive attendee
+      operationId: ArchiveAttendee-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /attendees/{id}/cancel:
+    patch:
+      tags:
+      - Attendee
+      summary: Cancel attendee
+      operationId: CancelAttendee-Patch
+      responses:
+        '204':
+          description: Resource was cancelled
+      requestBody:
+        $ref: '#/components/requestBodies/AttendeeCancel'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      description: Only attendees of group appointments can be cancelled via this endpoint. Cancelling an individual appointment should be done via the cancel endpoint for individual appointments
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /group_appointments/{group_appointment_id}/attendees:
+    get:
+      tags:
+      - Attendee
+      summary: List attendees for group appointment
+      operationId: ListAttendeesForGroupAppointment-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attendees:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attendee'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/group_appointments/1/attendees?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/group_appointments/1/attendees?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/group_appointments/1/attendees?page=3
+      deprecated: true
+      parameters:
+      - name: group_appointment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | booking_id | [int64](/#numeric-filter-operators) |
+
+          | cancelled_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | invoice_status | [integer](/#numeric-filter-operators) |
+
+          | patient_case_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | sent_email_reminders_count | [integer](/#numeric-filter-operators) |
+
+          | sent_sms_reminders_count | [integer](/#numeric-filter-operators) |
+
+          | treatment_note_status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /individual_appointments/{individual_appointment_id}/attendees:
+    get:
+      tags:
+      - Attendee
+      summary: List attendees for individual appointment
+      operationId: ListAttendeesForIndividualAppointment-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attendees:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attendee'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/individual_appointments/1/attendees?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/individual_appointments/1/attendees?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/individual_appointments/1/attendees?page=3
+      deprecated: true
+      parameters:
+      - name: individual_appointment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | booking_id | [int64](/#numeric-filter-operators) |
+
+          | cancelled_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | invoice_status | [integer](/#numeric-filter-operators) |
+
+          | patient_case_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | sent_email_reminders_count | [integer](/#numeric-filter-operators) |
+
+          | sent_sms_reminders_count | [integer](/#numeric-filter-operators) |
+
+          | treatment_note_status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_cases/{patient_case_id}/attendees:
+    get:
+      tags:
+      - Attendee
+      summary: List attendees for patient case
+      operationId: ListAttendeesForPatientCase-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attendees:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attendee'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/attendees?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/attendees?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/attendees?page=3
+      deprecated: true
+      parameters:
+      - name: patient_case_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | booking_id | [int64](/#numeric-filter-operators) |
+
+          | cancelled_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | invoice_status | [integer](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | sent_email_reminders_count | [integer](/#numeric-filter-operators) |
+
+          | sent_sms_reminders_count | [integer](/#numeric-filter-operators) |
+
+          | treatment_note_status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    Attendee:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              booking_id:
+                type: string
+                format: int64
+                description: booking id
+                example: '1'
+              arrived:
+                type:
+                - boolean
+                - 'null'
+              notes:
+                type:
+                - string
+                - 'null'
+              patient_id:
+                type: string
+                format: int64
+                description: patient id
+                example: '1'
+              patient_case_id:
+                type: string
+                format: int64
+                description: patient case id
+                example: '1'
+    AttendeeUpdate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              arrived:
+                type:
+                - boolean
+                - 'null'
+              notes:
+                type:
+                - string
+                - 'null'
+              patient_case_id:
+                type: string
+                format: int64
+                description: patient case id
+                example: '1'
+    AttendeeCancel:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              cancellation_note:
+                type:
+                - string
+                - 'null'
+              cancellation_reason:
+                type: integer
+                description: '| Enum Value | Description |
+
+                  |---|---|
+
+                  |10|Feeling better|
+
+                  |20|Condition worse|
+
+                  |30|Sick|
+
+                  |40|Away|
+
+                  |50|Other|
+
+                  |60|Work|
+
+                  '
+                enum:
+                - 10
+                - 20
+                - 30
+                - 40
+                - 50
+                - 60
+              apply_to_repeats:
+                type: boolean
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    Attendee:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        arrived:
+          type:
+          - boolean
+          - 'null'
+        booking:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/bookings/1
+        booking_ip_address:
+          type:
+          - string
+          - 'null'
+          format: ipv4
+          example: 10.0.0.43
+        cancellation_note:
+          type:
+          - string
+          - 'null'
+        cancellation_reason:
+          type:
+          - integer
+          - 'null'
+        cancellation_reason_description:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Feeling Better
+          - Condition Worse
+          - Sick
+          - COVID-19 related
+          - Away
+          - Other
+          - Work
+          - ''
+        cancellation_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        cancelled_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        email_reminder_sent:
+          type:
+          - boolean
+          - 'null'
+          deprecated: true
+          description: Please use the `sent_email_reminders_count` attribute instead.
+        id:
+          type: string
+          format: int64
+        invoice_status:
+          type:
+          - integer
+          - 'null'
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            |10|Open|
+
+            |20|Paid|
+
+            |30|Closed|
+
+            |40|Open credit|
+
+            '
+          enum:
+          - 10
+          - 20
+          - 30
+          - 40
+        invoices:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/attendees/1/invoices
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/attendees/1
+        notes:
+          type:
+          - string
+          - 'null'
+        online_booking_policy_accepted:
+          type:
+          - boolean
+          - 'null'
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        patient_case:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patient_cases/1
+        patient_forms:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/attendees/1/patient_forms
+        sent_email_follow_ups_count:
+          type:
+          - integer
+          - 'null'
+        sent_email_reminders_count:
+          type:
+          - integer
+          - 'null'
+        sent_sms_follow_ups_count:
+          type:
+          - integer
+          - 'null'
+        sent_sms_reminders_count:
+          type:
+          - integer
+          - 'null'
+        sms_reminder_sent:
+          type:
+          - boolean
+          - 'null'
+          deprecated: true
+          description: Please use the `sent_sms_reminders_count` attribute instead.
+        telehealth_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        treatment_note_status:
+          type:
+          - integer
+          - 'null'
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            |10|Draft|
+
+            |90|Final|
+
+            '
+          enum:
+          - 10
+          - 90
+        treatment_notes:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/treatment_notes?q%5B%5D=attendee_id%3A%3D1
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Attendee
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

@@ -1,0 +1,1237 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Communication API
+  version: v1
+  description: 'Operations tagged Communication across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Communication
+paths:
+  /communications:
+    get:
+      tags:
+      - Communication
+      summary: List communications
+      operationId: ListCommunications-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  communications:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Communication'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/communications?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/communications?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/communications?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | category_code | [integer](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | letter_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | type_code | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Communication
+      summary: Create memo communication
+      operationId: CreateMemoCommunication-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoCommunication'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemoCommunicationBody'
+      description: 'Creating a memo with SMS or email as communication type will not send a communication.
+
+
+        A memo just records that a communication has taken place.'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /communications/{id}:
+    get:
+      tags:
+      - Communication
+      summary: Get communication
+      operationId: GetCommunication-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Communication'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Communication
+      summary: Update memo communication
+      operationId: UpdateMemoCommunication-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoCommunication'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemoCommunicationBody'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /communications/{id}/archive:
+    post:
+      tags:
+      - Communication
+      summary: Archive memo communication
+      operationId: ArchiveMemoCommunication-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    EmailCommunication:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendee:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/attendees/1
+        booking:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/bookings/1
+        category:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Account Statement
+          - Account ownership information updated
+          - Appointment Cancellation
+          - Appointment Confirmation
+          - Appointment Follow Up Message
+          - Appointment Reminder
+          - Auth Code
+          - Bulk Email
+          - Cancelled appointment notification
+          - Card automatically updated notification
+          - Card expiring notification
+          - Completed Patient Form
+          - Data export complete notification
+          - Email OTP code
+          - Invoice
+          - Letter
+          - Mailchimp integration disconnected
+          - Memo
+          - New user
+          - Online payment request
+          - Password changed
+          - Patient Form
+          - Patient Reply Forwarded
+          - Patient form renewal
+          - Payment Receipt
+          - Practitioner Appointment Notification
+          - Referred user bonus notification
+          - Referred user signed up
+          - Referring user bonus notification
+          - Reply from Patient
+          - Reply from Practitioner
+          - Rescheduled Appointment Notification
+          - Reset password instructions
+          - SMS Message
+          - SMS credit purchase failed
+          - SMS credit purchase receipt
+          - SMS credit purchase reminder
+          - SMS credit purchase requires confirmation
+          - Stripe receipt
+          - Subscription initiation alert
+          - Subscription payment failure
+          - Today's appointments for practitioner
+          - Treatment note
+          - Trial ending reminder
+          - Trial payment failure
+          - Unlock instructions
+          - Upcoming appointments
+          - Upcoming yearly payment alert
+          - User email changed
+          - User email confirmation instructions
+          - Xero OAuth error
+          - Xero sync error notification
+        category_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+          - 26
+          - 27
+          - 28
+          - 29
+          - 30
+          - 31
+          - 32
+          - 33
+          - 34
+          - 35
+          - 36
+          - 37
+          - 38
+          - 39
+          - 40
+          - 41
+          - 42
+          - 43
+          - 44
+          - 45
+          - 46
+          - 47
+          - 48
+          - 49
+          - 50
+          - 51
+          - 52
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | Appointment Reminder |
+
+            | 2 | Patient Reply Forwarded |
+
+            | 3 | Invoice |
+
+            | 4 | Appointment Confirmation |
+
+            | 5 | Letter |
+
+            | 6 | Practitioner Appointment Notification |
+
+            | 7 | SMS Message |
+
+            | 8 | Reply from Patient |
+
+            | 9 | Account Statement |
+
+            | 10 | Cancelled appointment notification |
+
+            | 11 | Auth Code |
+
+            | 12 | Memo |
+
+            | 13 | Reply from Practitioner |
+
+            | 14 | Payment Receipt |
+
+            | 15 | Bulk Email |
+
+            | 16 | Appointment Cancellation |
+
+            | 17 | Patient Form |
+
+            | 18 | Upcoming appointments |
+
+            | 19 | Completed Patient Form |
+
+            | 20 | Online payment request |
+
+            | 21 | New user |
+
+            | 22 | Referred user signed up |
+
+            | 23 | Referring user bonus notification |
+
+            | 24 | Referred user bonus notification |
+
+            | 25 | Password changed |
+
+            | 26 | Data export complete notification |
+
+            | 27 | SMS credit purchase reminder |
+
+            | 28 | SMS credit purchase failed |
+
+            | 29 | SMS credit purchase requires confirmation |
+
+            | 30 | SMS credit purchase receipt |
+
+            | 31 | Xero sync error notification |
+
+            | 32 | Xero OAuth error |
+
+            | 33 | Mailchimp integration disconnected |
+
+            | 34 | Card automatically updated notification |
+
+            | 35 | Card expiring notification |
+
+            | 36 | Upcoming yearly payment alert |
+
+            | 37 | Trial payment failure |
+
+            | 38 | Subscription payment failure |
+
+            | 39 | Trial ending reminder |
+
+            | 40 | Stripe receipt |
+
+            | 41 | Today''s appointments for practitioner |
+
+            | 42 | User email confirmation instructions |
+
+            | 43 | User email changed |
+
+            | 44 | Unlock instructions |
+
+            | 45 | Reset password instructions |
+
+            | 46 | Account ownership information updated |
+
+            | 47 | Email OTP code |
+
+            | 48 | Appointment Follow Up Message |
+
+            | 49 | Subscription initiation alert |
+
+            | 50 | Patient form renewal |
+
+            | 51 | Rescheduled Appointment Notification |
+
+            | 52 | Treatment note |'
+        content:
+          type:
+          - string
+          - 'null'
+        content_subject:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        created_at:
+          type: string
+          format: date-time
+        direction_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | Sent |
+
+            | 2 | Received |'
+        direction_description:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Received
+          - Sent
+        from:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: int64
+        invoice:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/invoices/1
+        letter:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/letters/1
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/communications/1
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        payment:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/payments/1
+        to:
+          type:
+          - string
+          - 'null'
+        treatment_note:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/treatment_notes/1
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Email
+          - Other
+          - Phone call
+          - SMS
+        type_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | SMS |
+
+            | 2 | Email |
+
+            | 3 | Phone call |
+
+            | 4 | Other |'
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Email Communication
+    SmsCommunication:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendee:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/attendees/1
+        booking:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/bookings/1
+        category:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Account Statement
+          - Account ownership information updated
+          - Appointment Cancellation
+          - Appointment Confirmation
+          - Appointment Follow Up Message
+          - Appointment Reminder
+          - Auth Code
+          - Bulk Email
+          - Cancelled appointment notification
+          - Card automatically updated notification
+          - Card expiring notification
+          - Completed Patient Form
+          - Data export complete notification
+          - Email OTP code
+          - Invoice
+          - Letter
+          - Mailchimp integration disconnected
+          - Memo
+          - New user
+          - Online payment request
+          - Password changed
+          - Patient Form
+          - Patient Reply Forwarded
+          - Patient form renewal
+          - Payment Receipt
+          - Practitioner Appointment Notification
+          - Referred user bonus notification
+          - Referred user signed up
+          - Referring user bonus notification
+          - Reply from Patient
+          - Reply from Practitioner
+          - Rescheduled Appointment Notification
+          - Reset password instructions
+          - SMS Message
+          - SMS credit purchase failed
+          - SMS credit purchase receipt
+          - SMS credit purchase reminder
+          - SMS credit purchase requires confirmation
+          - Stripe receipt
+          - Subscription initiation alert
+          - Subscription payment failure
+          - Today's appointments for practitioner
+          - Treatment note
+          - Trial ending reminder
+          - Trial payment failure
+          - Unlock instructions
+          - Upcoming appointments
+          - Upcoming yearly payment alert
+          - User email changed
+          - User email confirmation instructions
+          - Xero OAuth error
+          - Xero sync error notification
+        category_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+          - 26
+          - 27
+          - 28
+          - 29
+          - 30
+          - 31
+          - 32
+          - 33
+          - 34
+          - 35
+          - 36
+          - 37
+          - 38
+          - 39
+          - 40
+          - 41
+          - 42
+          - 43
+          - 44
+          - 45
+          - 46
+          - 47
+          - 48
+          - 49
+          - 50
+          - 51
+          - 52
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | Appointment Reminder |
+
+            | 2 | Patient Reply Forwarded |
+
+            | 3 | Invoice |
+
+            | 4 | Appointment Confirmation |
+
+            | 5 | Letter |
+
+            | 6 | Practitioner Appointment Notification |
+
+            | 7 | SMS Message |
+
+            | 8 | Reply from Patient |
+
+            | 9 | Account Statement |
+
+            | 10 | Cancelled appointment notification |
+
+            | 11 | Auth Code |
+
+            | 12 | Memo |
+
+            | 13 | Reply from Practitioner |
+
+            | 14 | Payment Receipt |
+
+            | 15 | Bulk Email |
+
+            | 16 | Appointment Cancellation |
+
+            | 17 | Patient Form |
+
+            | 18 | Upcoming appointments |
+
+            | 19 | Completed Patient Form |
+
+            | 20 | Online payment request |
+
+            | 21 | New user |
+
+            | 22 | Referred user signed up |
+
+            | 23 | Referring user bonus notification |
+
+            | 24 | Referred user bonus notification |
+
+            | 25 | Password changed |
+
+            | 26 | Data export complete notification |
+
+            | 27 | SMS credit purchase reminder |
+
+            | 28 | SMS credit purchase failed |
+
+            | 29 | SMS credit purchase requires confirmation |
+
+            | 30 | SMS credit purchase receipt |
+
+            | 31 | Xero sync error notification |
+
+            | 32 | Xero OAuth error |
+
+            | 33 | Mailchimp integration disconnected |
+
+            | 34 | Card automatically updated notification |
+
+            | 35 | Card expiring notification |
+
+            | 36 | Upcoming yearly payment alert |
+
+            | 37 | Trial payment failure |
+
+            | 38 | Subscription payment failure |
+
+            | 39 | Trial ending reminder |
+
+            | 40 | Stripe receipt |
+
+            | 41 | Today''s appointments for practitioner |
+
+            | 42 | User email confirmation instructions |
+
+            | 43 | User email changed |
+
+            | 44 | Unlock instructions |
+
+            | 45 | Reset password instructions |
+
+            | 46 | Account ownership information updated |
+
+            | 47 | Email OTP code |
+
+            | 48 | Appointment Follow Up Message |
+
+            | 49 | Subscription initiation alert |
+
+            | 50 | Patient form renewal |
+
+            | 51 | Rescheduled Appointment Notification |
+
+            | 52 | Treatment note |'
+        content:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        direction_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | Sent |
+
+            | 2 | Received |'
+        direction_description:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Received
+          - Sent
+        from:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: int64
+        invoice:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/invoices/1
+        letter:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/letters/1
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/communications/1
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        payment:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/payments/1
+        to:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Email
+          - Other
+          - Phone call
+          - SMS
+        type_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | SMS |
+
+            | 2 | Email |
+
+            | 3 | Phone call |
+
+            | 4 | Other |'
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Sms Communication
+    Communication:
+      anyOf:
+      - $ref: '#/components/schemas/MemoCommunication'
+      - $ref: '#/components/schemas/EmailCommunication'
+      - $ref: '#/components/schemas/SmsCommunication'
+      x-tags:
+      - Communication
+    MemoCommunicationBody:
+      type: object
+      properties:
+        category_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 12
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            |12|Memo|
+
+            '
+        confidential:
+          type:
+          - boolean
+          - 'null'
+        content:
+          type:
+          - string
+          - 'null'
+        direction_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | Sent |
+
+            | 2 | Received |'
+        from:
+          type:
+          - string
+          - 'null'
+        patient_id:
+          type: string
+          format: int64
+          description: patient id
+          example: '1'
+        to:
+          type:
+          - string
+          - 'null'
+        type_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | SMS |
+
+            | 2 | Email |
+
+            | 3 | Phone call |
+
+            | 4 | Other |'
+    MemoCommunication:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        category:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Memo
+        category_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 12
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            |12|Memo|
+
+            '
+        confidential:
+          type:
+          - boolean
+          - 'null'
+        content:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        direction_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | Sent |
+
+            | 2 | Received |'
+        direction_description:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Received
+          - Sent
+        from:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/communications/1
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        to:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Email
+          - Other
+          - Phone call
+          - SMS
+        type_code:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | SMS |
+
+            | 2 | Email |
+
+            | 3 | Phone call |
+
+            | 4 | Other |'
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Memo Communication
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

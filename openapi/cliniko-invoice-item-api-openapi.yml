@@ -1,0 +1,393 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Invoice Item API
+  version: v1
+  description: 'Operations tagged Invoice Item across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Invoice Item
+paths:
+  /invoice_items:
+    get:
+      tags:
+      - Invoice Item
+      summary: List invoice items
+      operationId: ListInvoiceItems-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoice_items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InvoiceItem'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoice_items?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoice_items?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoice_items?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | invoice_id | [int64](/#numeric-filter-operators) |
+
+          | source_item_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /invoice_items/{id}:
+    get:
+      tags:
+      - Invoice Item
+      summary: Get invoice item
+      operationId: GetInvoiceItem-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceItem'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /invoices/{invoice_id}/invoice_items:
+    get:
+      tags:
+      - Invoice Item
+      summary: List invoice items for invoice
+      operationId: ListInvoiceItemsForInvoice-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoice_items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InvoiceItem'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoices/1/invoice_items?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoices/1/invoice_items?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoices/1/invoice_items?page=3
+      deprecated: true
+      parameters:
+      - name: invoice_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | source_item_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    InvoiceItem:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        billable_item:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/billable_items/1
+        code:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        concession_type_name:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        discount_percentage:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          minimum: 0
+          maximum: 100
+        discounted_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        id:
+          type: string
+          format: int64
+        invoice:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/invoices/1
+        is_monetary_discount:
+          type:
+          - boolean
+          - 'null'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/invoice_items/1
+        name:
+          type:
+          - string
+          - 'null'
+        net_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        product:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/products/1
+        quantity:
+          type: string
+          format: decimal
+          minimum: -4000000000
+          exclusiveMaximum: 4000000000
+        tax_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          deprecated: true
+        tax_name:
+          type:
+          - string
+          - 'null'
+        tax_rate:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        total_including_tax:
+          type:
+          - number
+          - 'null'
+        unit_price:
+          type: string
+          format: decimal
+          minimum: -4000000000
+          exclusiveMaximum: 4000000000
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Invoice Item
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

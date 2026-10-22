@@ -1,0 +1,253 @@
+openapi: 3.2.0
+info:
+  title: Cliniko User API
+  version: v1
+  description: 'Operations tagged User across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: User
+paths:
+  /user:
+    get:
+      tags:
+      - User
+      summary: Get authenticated user
+      operationId: GetAuthenticatedUser-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /users:
+    get:
+      tags:
+      - User
+      summary: List users
+      operationId: ListUsers-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/users?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/users?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/users?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /users/{id}:
+    get:
+      tags:
+      - User
+      summary: Get user
+      operationId: GetUser-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    User:
+      type: object
+      properties:
+        active:
+          type:
+          - boolean
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+          minLength: 5
+          pattern: ^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
+        first_name:
+          type: string
+          maxLength: 50
+        id:
+          type: string
+          format: int64
+        last_name:
+          type: string
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/users/1
+        phone_numbers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+        role:
+          type: string
+          enum:
+          - administrator
+          - bookkeeper
+          - power receptionist
+          - practitioner
+          - receptionist
+          - scheduler
+        time_zone:
+          type: string
+          description: 'See: [supported time zones](/guides/time_zone_support/#accepted-values-for-time_zone)'
+          example: Melbourne
+        time_zone_identifier:
+          type:
+          - string
+          - 'null'
+          description: 'See: [supported time zone identifiers](/guides/time_zone_support/#accepted-values-for-time_zone_identifier)'
+          example: Australia/Melbourne
+        title:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          type: string
+          format: date-time
+        user_active:
+          type:
+          - boolean
+          - 'null'
+      x-tags:
+      - User
+    PhoneNumber:
+      type: object
+      properties:
+        normalized_number:
+          type: string
+          format: phone
+          example: '39012345678'
+        number:
+          type: string
+          format: phone
+          example: 0-123-456-78
+        phone_type:
+          type: string
+          enum:
+          - Fax
+          - Home
+          - Mobile
+          - Other
+          - Work
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

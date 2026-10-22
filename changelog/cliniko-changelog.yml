@@ -1,0 +1,19 @@
+generated: '2026-10-21'
+method: searched
+source: https://docs.api.cliniko.com/changelog
+scheme: dated (timestamped OpenAPI-diff entries; no version numbers)
+current_version: v1
+entries:
+- {version: '2026-09-21 14:47:34', date: '2026-09-21', breaking: true, highlights: ["concession_types name maxLength decreased to 80 on POST and PATCH"]}
+- {version: '2026-09-16 06:39:41', date: '2026-09-16', breaking: false, highlights: ["GET body_charts and GET body_charts/{id} endpoints added", "body_charts added to treatment note responses"]}
+- {version: '2026-09-08 11:55:21', date: '2026-09-08', breaking: false, highlights: ["invoices/items/booking added", "invoices/items/appointment deprecated"]}
+- {version: '2026-08-26 18:34:05', date: '2026-08-26', breaking: true, highlights: ["deleted_at removed from patient responses"]}
+- {version: '2026-08-24 17:06:37', date: '2026-08-24', breaking: false, highlights: ["patient_cases max_sessions max increased from 200 to 300"]}
+- {version: '2026-08-24 08:23:01', date: '2026-08-24', breaking: false, highlights: ["document and image enum values added to patient_attachments category"]}
+- {version: '2026-08-11 13:02:54', date: '2026-08-11', breaking: false, highlights: ["patient_attachments category added", "TreatmentNoteHistoryExport attachment type added"]}
+- {version: '2026-08-10 07:16:52', date: '2026-08-10', breaking: true, highlights: ["POST /medical_alerts/{id}/archive removed with deprecation"]}
+- {version: '2026-08-10 04:19:43', date: '2026-08-10', breaking: false, highlights: ["products tax_id became nullable", "account invoice_calculation_method added to GET settings/public"]}
+- {version: '2026-08-07 15:13:46', date: '2026-08-07', breaking: false, highlights: ["Signature question type added to patient forms"]}
+- {version: '2026-08-06 23:23:12', date: '2026-08-06', breaking: true, highlights: ["patients first_name maxLength decreased to 50"]}
+- {version: '2026-07-23 21:29:51', date: '2026-07-23', breaking: false, highlights: ["patients deleted_at response property deprecated"]}
+- {version: '2026-07-23 06:19:50', date: '2026-07-23', breaking: true, highlights: ["contacts type_code and patients receives_confirmation_emails became not nullable"]}

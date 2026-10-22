@@ -1,0 +1,20 @@
+generated: '2026-10-21'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/cliniko-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: null
+coverage:
+  operations: 223
+  statuses_declared: 1
+problems:
+- status: 422
+  title: Unprocessable Content
+  description: Resource could not be saved due to validation errors
+  operations: 61
+  media_types:
+  - application/json
+  schema: null

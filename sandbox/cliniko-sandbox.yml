@@ -1,0 +1,16 @@
+generated: '2026-10-21'
+method: searched
+source: https://docs.api.cliniko.com/
+docs: https://docs.api.cliniko.com/index.html.md
+description: >-
+  Cliniko publishes no separate sandbox host or test-mode keys. The documented way to test is a
+  free-trial account: "To obtain an API key for testing, sign up for a free trial and go to the
+  "My Info" link in the bottom left corner of the navigation within Cliniko. Click the "Manage API
+  keys" button, you can create an API key from that page. If you need your trial extended just let us know."
+environments:
+- name: free trial account
+  url: https://www.cliniko.com/free-trial/
+  trial_length: free to try for the first 30 days (https://www.cliniko.com/pricing/)
+  base_url: https://api.{shard}.cliniko.com/v1 (same production hosts)
+test_key_prefixes: none published
+test_data: none published

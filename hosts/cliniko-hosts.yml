@@ -1,0 +1,136 @@
+generated: '2026-10-21'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 8
+  own: 6
+  other_domain: 0
+  platform: 2
+  roles:
+  - api
+  - docs
+  - other
+  - source
+  - status
+  - website
+hosts:
+- host: api.au1.cliniko.com
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: cliniko.com
+  role: api
+  relation: own
+- host: api.cliniko.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: cliniko.com
+  role: api
+  relation: own
+- host: docs.api.cliniko.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - spec-found
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Documentation
+  - APIReference
+  - ChangeLog
+  serves:
+  - docs
+  - spec
+  - cdn
+  - documentation
+  platform: auth.cloud.redocly.com
+  vendor: cloudfront
+  registrable_domain: cliniko.com
+  role: docs
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: help.cliniko.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - GettingStarted
+  - Support
+  serves:
+  - docs
+  - cdn
+  vendor: fastly
+  registrable_domain: cliniko.com
+  role: docs
+  relation: own
+- host: status.cliniko.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: cliniko.com
+  role: status
+  relation: own
+- host: www.cliniko.com
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Compliance
+  - Blog
+  - Website
+  - Pricing
+  - SignUp
+  - Login
+  - Security
+  - TermsOfService
+  - PrivacyPolicy
+  serves:
+  - docs
+  - hosting
+  vendor: netlify
+  registrable_domain: cliniko.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

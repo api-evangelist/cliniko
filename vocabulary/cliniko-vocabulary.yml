@@ -1,0 +1,450 @@
+generated: '2026-10-21'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/cliniko-openapi.yml
+vocabulary:
+  name: Cliniko Domain Vocabulary
+  description: 'Terms declared by Cliniko''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-21'
+  terms:
+  - term: Available Time
+    definition: 'Cliniko users can configure how available times are displayed in our online bookings module. The API endpoints that retrieve
+      available times will respect these settings. The settings are: Maximum number of appointments per day segment Day parts are morning (before
+      Midday), afternoon (Midday to 5pm) and evening (5pm onwards). Possible settings are: 1, 2, 3, 4, 5 or unlimited. Minimum advance time r'
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Business
+    definition: Businesses represent a business or location (e.g. a clinic). Each Cliniko account can have unlimited businesses. These are typically
+      used for each physical location if there is more than one. Most Cliniko accounts have just one business.
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Daily Availability
+    definition: The regularly scheduled availabilities of a practitioner at a business
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Patient
+    definition: 'Patients are the people that book in for appointments. There isn''t much in Cliniko that doesn''t revolve around patients. When
+      you''re working with patient information, make sure you abide by the relevant regulations for security and privacy. A couple of fields in
+      the patient record deserve special consideration: `accepted_privacy_policy` stores the patient''s consent to the business''s own privacy
+      po'
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Patient Form
+    definition: 'HTML is supported in answers to paragraph questions. We sanitize these answers to ensure the HTML is safe and our editor can
+      support the formatting. Currently, the following tags are supported: `p`, `div`, `br`, `ul`, `ol`, `li`, `blockquote`, `h1`, `h2`, `b`,
+      `i`, `u`, and `a`. The angle bracket characters (``) should be sent as html encodings (ex: `<` should be sent as `&lt;`). Content inside
+      un'
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Practitioner
+    definition: All practitioners have an associated user account. Not all users are practitioners (e.g. receptionists wouldn't be). You can only
+      create appointments for practitioners (not for users).
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Referral Source
+    definition: Referral source of a patient
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Referral Source Type
+    definition: Types of referrals for patients
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Treatment Note
+    definition: 'Notes taken about a patient visit. HTML is supported in answers to paragraph questions. We sanitize these answers to ensure the
+      HTML is safe and our editor can support the formatting. Currently, the following tags are supported: `p`, `div`, `br`, `ul`, `ol`, `li`,
+      `blockquote`, `h1`, `h2`, `b`, `i`, `u`, and `a`. The angle bracket characters (``) should be sent as html encodings (ex: `<` should be'
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: Treatment Note Template
+    definition: 'Templates that are the starting point for treatment notes. HTML is supported in answers to paragraph questions. We sanitize these
+      answers to ensure the HTML is safe and our editor can support the formatting. Currently, the following tags are supported: `p`, `div`, `br`,
+      `ul`, `ol`, `li`, `blockquote`, `h1`, `h2`, `b`, `i`, `u`, and `a`. The angle bracket characters (``) should be sent as html enco'
+    tags:
+    - Resource Group
+    source: openapi/cliniko-openapi.yml
+  - term: AppointmentType
+    definition: 'Object declared by the contract with fields: add_deposit_to_account_credit, appointment_confirmation_template_ids, appointment_follow_up_template_ids,
+      appointment_reminder_template_ids, appointment_type_billable_items, appointment_type_products, archived_at, billable_item, category, color,
+      created_at, deposit_price. (15 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/AppointmentType
+  - term: AppointmentTypeBillableItem
+    definition: 'Object declared by the contract with fields: appointment_type, billable_item, created_at, discount_percentage, discounted_amount,
+      id, is_monetary_discount, links, quantity, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/AppointmentTypeBillableItem
+  - term: AppointmentTypeProduct
+    definition: 'Object declared by the contract with fields: appointment_type, created_at, discount_percentage, discounted_amount, id, is_monetary_discount,
+      links, product, quantity, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/AppointmentTypeProduct
+  - term: AttachmentPresignedPost
+    definition: 'Object declared by the contract with fields: fields, url.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/AttachmentPresignedPost
+  - term: Attendee
+    definition: 'Object declared by the contract with fields: archived_at, arrived, booking, booking_ip_address, cancellation_note, cancellation_reason,
+      cancellation_reason_description, cancellation_url, cancelled_at, created_at, deleted_at, email_reminder_sent. (18 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/Attendee
+  - term: AvailabilityBlock
+    definition: 'Object declared by the contract with fields: business, created_at, ends_at, id, links, practitioner, repeat_rule, starts_at,
+      updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/AvailabilityBlock
+  - term: BillableItem
+    definition: 'Object declared by the contract with fields: archived_at, concession_prices, created_at, id, item_code, item_type, links, name,
+      price, tax, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/BillableItem
+  - term: BodyChart
+    definition: 'Object declared by the contract with fields: archived_at, created_at, id, images, links, treatment_note, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/BodyChart
+  - term: ConcessionPrice
+    definition: 'Object declared by the contract with fields: billable_item, concession_type, created_at, id, links, price, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/ConcessionPrice
+  - term: ConcessionType
+    definition: 'Object declared by the contract with fields: archived_at, concession_prices, created_at, id, links, name, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/ConcessionType
+  - term: Contact
+    definition: 'Object declared by the contract with fields: address_1, address_2, address_3, archived_at, city, company_name, country, country_code,
+      created_at, deleted_at, doctor_type, email. (15 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/Contact
+  - term: DailyAvailability
+    definition: 'Object declared by the contract with fields: availabilities, business, created_at, day_of_week, id, links, practitioner, time_zone,
+      time_zone_identifier, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/DailyAvailability
+  - term: EmailCommunication
+    definition: 'Object declared by the contract with fields: archived_at, attendee, booking, category, category_code, content, content_subject,
+      created_at, direction_code, direction_description, from, id. (10 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/EmailCommunication
+  - term: FullPatientExport
+    definition: 'Object declared by the contract with fields: archived_at, category, content, content_type, created_at, description, filename,
+      id, links, patient, pinned_at, processed_at. (4 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/FullPatientExport
+  - term: FullPatientExportBody
+    definition: 'Object declared by the contract with fields: description.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/FullPatientExportBody
+  - term: GroupAppointment
+    definition: 'Object declared by the contract with fields: appointment_type, archived_at, attendees, business, conflicts, created_at, deleted_at,
+      ends_at, id, links, max_attendees, notes. (8 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/GroupAppointment
+  - term: IndividualAppointment
+    definition: 'Object declared by the contract with fields: appointment_type, archived_at, attendees, booking_ip_address, business, cancellation_note,
+      cancellation_reason, cancellation_reason_description, cancelled_at, conflicts, created_at, deleted_at. (22 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/IndividualAppointment
+  - term: Invoice
+    definition: 'Object declared by the contract with fields: appointment, archived_at, attendee, booking, business, calculation_method, calculation_method_description,
+      closed_at, created_at, deleted_at, discounted_amount, id. (19 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/Invoice
+  - term: InvoiceItem
+    definition: 'Object declared by the contract with fields: archived_at, billable_item, code, concession_type_name, created_at, deleted_at,
+      discount_percentage, discounted_amount, id, invoice, is_monetary_discount, links. (10 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/InvoiceItem
+  - term: MedicalAlert
+    definition: 'Object declared by the contract with fields: archived_at, created_at, deleted_at, id, links, name, patient, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/MedicalAlert
+  - term: MemoCommunication
+    definition: 'Object declared by the contract with fields: archived_at, category, category_code, confidential, content, created_at, direction_code,
+      direction_description, from, id, links, patient. (4 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/MemoCommunication
+  - term: MemoCommunicationBody
+    definition: 'Object declared by the contract with fields: category_code, confidential, content, direction_code, from, patient_id, to, type_code.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/MemoCommunicationBody
+  - term: PatientCase
+    definition: 'Object declared by the contract with fields: archived_at, attendee_ids, attendees, bookings, closed, closed_at, contact, created_at,
+      expiry_date, id, include_cancelled_attendees, include_dna_attendees. (12 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCase
+  - term: Checkboxes
+    definition: 'Object declared by the contract with fields: options, other, archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldCheckboxes
+  - term: Date
+    definition: 'Object declared by the contract with fields: value, archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldDate
+  - term: Checkboxes
+    definition: 'Object declared by the contract with fields: options, other, archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldDefinitionCheckboxes
+  - term: Date
+    definition: 'Object declared by the contract with fields: archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldDefinitionDate
+  - term: Paragraph
+    definition: 'Object declared by the contract with fields: archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldDefinitionParagraph
+  - term: Radiobuttons
+    definition: 'Object declared by the contract with fields: options, other, archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldDefinitionRadiobuttons
+  - term: Text
+    definition: 'Object declared by the contract with fields: archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldDefinitionText
+  - term: Paragraph
+    definition: 'Object declared by the contract with fields: value, archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldParagraph
+  - term: Radiobuttons
+    definition: 'Object declared by the contract with fields: options, other, archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldRadiobuttons
+  - term: Text
+    definition: 'Object declared by the contract with fields: value, archived, name, token, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientCustomFieldText
+  - term: PatientForm
+    definition: 'Object declared by the contract with fields: archived_at, attendee, booking, business, completed_at, content, created_at, edited_at,
+      email_to_patient_on_completion, expired, expires_at, id. (8 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientForm
+  - term: Address
+    definition: 'Object declared by the contract with fields: answer, name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionAddress
+  - term: Checkboxes
+    definition: 'Object declared by the contract with fields: answers, other, name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionCheckboxes
+  - term: Date
+    definition: 'Object declared by the contract with fields: answer, name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionDate
+  - term: Email
+    definition: 'Object declared by the contract with fields: answer, name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionEmail
+  - term: FullName
+    definition: 'Object declared by the contract with fields: answer, options, name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionFullName
+  - term: Paragraph
+    definition: 'Object declared by the contract with fields: answer, name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionParagraph
+  - term: Phone
+    definition: 'Object declared by the contract with fields: answer, name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionPhone
+  - term: Pronouns
+    definition: 'Object declared by the contract with fields: answer, name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionPronouns
+  - term: Radiobuttons
+    definition: 'Object declared by the contract with fields: answers, other, name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionRadiobuttons
+  - term: Select
+    definition: 'Object declared by the contract with fields: answer, options, other, name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionSelect
+  - term: Signature
+    definition: 'Object declared by the contract with fields: signature_id, name, required, type, signature.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionSignature
+  - term: Text
+    definition: 'Object declared by the contract with fields: answer, name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormQuestionText
+  - term: PatientFormTemplate
+    definition: 'Object declared by the contract with fields: archived_at, content, created_at, email_to_patient_on_completion, id, links, name,
+      restricted_to_practitioner, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplate
+  - term: Address
+    definition: 'Object declared by the contract with fields: name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionAddress
+  - term: Checkboxes
+    definition: 'Object declared by the contract with fields: answers, other, name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionCheckboxes
+  - term: Date
+    definition: 'Object declared by the contract with fields: name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionDate
+  - term: Email
+    definition: 'Object declared by the contract with fields: name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionEmail
+  - term: FullName
+    definition: 'Object declared by the contract with fields: options, name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionFullName
+  - term: Paragraph
+    definition: 'Object declared by the contract with fields: answer, name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionParagraph
+  - term: Phone
+    definition: 'Object declared by the contract with fields: name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionPhone
+  - term: Pronouns
+    definition: 'Object declared by the contract with fields: name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionPronouns
+  - term: Radiobuttons
+    definition: 'Object declared by the contract with fields: answers, other, name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionRadiobuttons
+  - term: Select
+    definition: 'Object declared by the contract with fields: name, required, type, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionSelect
+  - term: Signature
+    definition: 'Object declared by the contract with fields: name, required, type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionSignature
+  - term: Text
+    definition: 'Object declared by the contract with fields: name, required, type, custom_field_token, patient_field_connection.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PatientFormTemplateQuestionText
+  - term: PhoneNumber
+    definition: 'Object declared by the contract with fields: normalized_number, number, phone_type.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PhoneNumber
+  - term: PractitionerReferenceNumber
+    definition: 'Object declared by the contract with fields: business, created_at, id, links, name, practitioner, reference_number, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PractitionerReferenceNumber
+  - term: Product
+    definition: 'Object declared by the contract with fields: archived_at, cost_price, created_at, id, item_code, links, name, notes, price_ex_tax,
+      price_including_tax, product_supplier, serial_number. (5 more)'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/Product
+  - term: ProductSupplier
+    definition: 'Object declared by the contract with fields: created_at, id, links, name, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/ProductSupplier
+  - term: PublicSettings
+    definition: 'Object declared by the contract with fields: account, calendar, documents_and_printing, integrations, online_bookings, online_payments,
+      patient_custom_fields_definition, patient_privacy, reminders, sms, terminology, wait_list.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/PublicSettings
+  - term: Recall
+    definition: 'Object declared by the contract with fields: archived_at, created_at, id, links, notes, patient, recall_at, recall_type, recalled,
+      recalled_at, recalled_by_user, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/Recall
+  - term: RecallType
+    definition: 'Object declared by the contract with fields: archived_at, created_at, default_duration, default_duration_type, default_duration_type_description,
+      id, links, name, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/RecallType
+  - term: ReferralSource
+    definition: 'Object declared by the contract with fields: archived_at, created_at, id, links, notes, patient, referral_source_type, referrer,
+      referrer_type, subcategory, updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/ReferralSource
+  - term: ReferralSourceType
+    definition: 'Object declared by the contract with fields: archived_at, created_at, id, links, name, referrer_type, referrers, subcategories,
+      updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/ReferralSourceType
+  - term: Relationship
+    definition: 'Object declared by the contract with fields: archived_at, created_at, id, links, patient, related_patient, relation, relation_description,
+      updated_at.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/Relationship
+  - term: Service
+    definition: 'Object declared by the contract with fields: appointment_type, business, practitioners.'
+    tags:
+    - Object
+    source: openapi/cliniko-openapi.yml#/components/schemas/Service

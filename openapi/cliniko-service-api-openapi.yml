@@ -1,0 +1,193 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Service API
+  version: v1
+  description: 'Operations tagged Service across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Service
+paths:
+  /services:
+    get:
+      tags:
+      - Service
+      summary: List services
+      operationId: ListServices-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/services?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/services?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/services?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /businesses/{business_id}/services:
+    get:
+      tags:
+      - Service
+      summary: List services for business
+      operationId: ListServicesForBusiness-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses/1/services?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses/1/services?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses/1/services?page=3
+      parameters:
+      - name: business_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    Service:
+      type: object
+      properties:
+        appointment_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_types/1
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        practitioners:
+          type:
+          - array
+          - 'null'
+          items:
+            properties:
+              links:
+                properties:
+                  self:
+                    example: https://api.au1.cliniko.com/v1/practitioners/1
+                    format: uri
+                    type: string
+                type: object
+            type: object
+      x-tags:
+      - Service
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

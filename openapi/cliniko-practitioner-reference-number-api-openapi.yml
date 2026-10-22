@@ -1,0 +1,387 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Practitioner Reference Number API
+  version: v1
+  description: 'Operations tagged Practitioner Reference Number across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Practitioner Reference Number
+paths:
+  /practitioner_reference_numbers:
+    get:
+      tags:
+      - Practitioner Reference Number
+      summary: List practitioner reference numbers
+      operationId: ListPractitionerReferenceNumbers-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  practitioner_reference_numbers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PractitionerReferenceNumber'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioner_reference_numbers?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioner_reference_numbers?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioner_reference_numbers?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | reference_number | [string](/#string-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Practitioner Reference Number
+      summary: Create practitioner reference number
+      operationId: CreatePractitionerReferenceNumber-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PractitionerReferenceNumber'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/PractitionerReferenceNumber'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /practitioner_reference_numbers/{id}:
+    get:
+      tags:
+      - Practitioner Reference Number
+      summary: Get practitioner reference number
+      operationId: GetPractitionerReferenceNumber-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PractitionerReferenceNumber'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    patch:
+      tags:
+      - Practitioner Reference Number
+      summary: Update practitioner reference number
+      operationId: UpdatePractitionerReferenceNumber-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PractitionerReferenceNumber'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/PractitionerReferenceNumber'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Practitioner Reference Number
+      summary: Delete practitioner reference number
+      operationId: DeletePractitionerReferenceNumber-Delete
+      responses:
+        '204':
+          description: Resource was deleted successfully
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /practitioners/{practitioner_id}/practitioner_reference_numbers:
+    get:
+      tags:
+      - Practitioner Reference Number
+      summary: List practitioner reference numbers for practitioner
+      operationId: ListPractitionerReferenceNumbersForPractitioner-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  practitioner_reference_numbers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PractitionerReferenceNumber'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/practitioner_reference_numbers?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/practitioner_reference_numbers?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/practitioner_reference_numbers?page=3
+      deprecated: true
+      parameters:
+      - name: practitioner_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | reference_number | [string](/#string-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    PractitionerReferenceNumber:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type:
+                - string
+                - 'null'
+              reference_number:
+                type:
+                - string
+                - 'null'
+              business_id:
+                type: string
+                format: int64
+                description: business id
+                example: '1'
+              practitioner_id:
+                type: string
+                format: int64
+                description: practitioner id
+                example: '1'
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    PractitionerReferenceNumber:
+      type: object
+      properties:
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/practitioner_reference_numbers/1
+        name:
+          type:
+          - string
+          - 'null'
+        practitioner:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/practitioners/1
+        reference_number:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Practitioner Reference Number
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

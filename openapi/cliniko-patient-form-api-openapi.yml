@@ -1,0 +1,1085 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Patient Form API
+  version: v1
+  description: 'Operations tagged Patient Form across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Patient Form
+  description: 'HTML is supported in answers to paragraph questions. We sanitize these answers to ensure the HTML is safe
+
+    and our editor can support the formatting.
+
+
+    Currently, the following tags are supported: `p`, `div`, `br`, `ul`, `ol`, `li`, `blockquote`, `h1`, `h2`, `b`, `i`, `u`, and `a`.
+
+
+    The angle bracket characters (``) should be sent as html encodings (ex: `<` should be sent as `<`).
+
+
+    Content inside unescaped angle brackets could be identified as unsupported HTML and will be stripped.'
+paths:
+  /patient_forms:
+    get:
+      tags:
+      - Patient Form
+      summary: List patient forms
+      operationId: ListPatientForms-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patient_forms:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PatientForm'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_forms?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_forms?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_forms?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | attendee_id | [int64](/#numeric-filter-operators) |
+
+          | completed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | patient_form_template_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Patient Form
+      summary: Create patient form
+      operationId: CreatePatientForm-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientForm'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/PatientForm'
+      description: When creating a patient form with a `patient_form_template_id`, the values for `name`, `content`, and `restricted_to_practitioner` will be pulled from the template. However, you may provide any of those values to override the template, or even provide all of your own values and exclude the `patient_form_template_id` altogether.
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_forms/{id}:
+    get:
+      tags:
+      - Patient Form
+      summary: Get patient form
+      operationId: GetPatientForm-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientForm'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Patient Form
+      summary: Update patient form
+      operationId: UpdatePatientForm-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientForm'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/PatientForm'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /attendees/{attendee_id}/patient_forms:
+    get:
+      tags:
+      - Patient Form
+      summary: List patient forms for attendee
+      operationId: ListPatientFormsForAttendee-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patient_forms:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PatientForm'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees/1/patient_forms?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees/1/patient_forms?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees/1/patient_forms?page=3
+      deprecated: true
+      parameters:
+      - name: attendee_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | completed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | patient_form_template_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_forms/{id}/archive:
+    post:
+      tags:
+      - Patient Form
+      summary: Archive patient form
+      operationId: ArchivePatientForm-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    PatientFormQuestionAddress:
+      type: object
+      properties:
+        answer:
+          type: object
+          properties:
+            address_1:
+              type: string
+              maxLength: 255
+            address_2:
+              type: string
+              maxLength: 255
+            address_3:
+              type: string
+              maxLength: 255
+            city:
+              type: string
+              maxLength: 255
+            state:
+              type: string
+              maxLength: 255
+            post_code:
+              type: string
+              maxLength: 255
+            country_code:
+              type: string
+              maxLength: 2
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - address
+        patient_field_connection:
+          type: string
+          enum:
+          - address
+      required:
+      - name
+      - type
+      - patient_field_connection
+      title: Address
+    PatientFormQuestionPhone:
+      type: object
+      properties:
+        answer:
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                type: string
+                maxLength: 100
+              phone_type:
+                type: string
+                enum:
+                - Fax
+                - Home
+                - Mobile
+                - Other
+                - Work
+            required:
+            - number
+            - phone_type
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - phone
+        patient_field_connection:
+          type: string
+          enum:
+          - phone
+      required:
+      - name
+      - type
+      - patient_field_connection
+      title: Phone
+    PatientFormQuestionParagraph:
+      type: object
+      properties:
+        answer:
+          type: string
+          maxLength: 10000
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - paragraph
+        custom_field_token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+          description: Required if `patient_field_connection` is `"custom_field"`
+        patient_field_connection:
+          type: string
+          enum:
+          - custom_field
+      required:
+      - name
+      - type
+      title: Paragraph
+    PatientFormQuestionPronouns:
+      type: object
+      properties:
+        answer:
+          type: object
+          properties:
+            accusative:
+              type: string
+              maxLength: 50
+            nominative:
+              type: string
+              maxLength: 50
+            predicative_possessive:
+              type: string
+              maxLength: 50
+            pronominal_possessive:
+              type: string
+              maxLength: 50
+            reflexive:
+              type: string
+              maxLength: 50
+          required:
+          - accusative
+          - nominative
+          - predicative_possessive
+          - pronominal_possessive
+          - reflexive
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - pronouns
+        patient_field_connection:
+          type: string
+          enum:
+          - pronouns
+      required:
+      - name
+      - type
+      - patient_field_connection
+      title: Pronouns
+    PatientFormQuestionFullName:
+      type: object
+      properties:
+        answer:
+          type: object
+          properties:
+            title:
+              type: string
+              maxLength: 255
+            first_name:
+              type: string
+              maxLength: 255
+            last_name:
+              type: string
+              maxLength: 255
+            preferred_first_name:
+              type: string
+              maxLength: 255
+          required:
+          - first_name
+          - last_name
+        options:
+          type: object
+          properties:
+            title_enabled:
+              type: boolean
+            preferred_first_name_enabled:
+              type: boolean
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - full_name
+        patient_field_connection:
+          type: string
+          enum:
+          - full_name
+      required:
+      - name
+      - type
+      - patient_field_connection
+      title: FullName
+    PatientForm:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendee:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/attendees/1
+        booking:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/bookings/1
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        completed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        content:
+          type:
+          - object
+          - 'null'
+          properties:
+            sections:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type:
+                    - string
+                    - 'null'
+                    maxLength: 255
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                  questions:
+                    type: array
+                    items:
+                      oneOf:
+                      - $ref: '#/components/schemas/PatientFormQuestionText'
+                      - $ref: '#/components/schemas/PatientFormQuestionParagraph'
+                      - $ref: '#/components/schemas/PatientFormQuestionAddress'
+                      - $ref: '#/components/schemas/PatientFormQuestionDate'
+                      - $ref: '#/components/schemas/PatientFormQuestionEmail'
+                      - $ref: '#/components/schemas/PatientFormQuestionPhone'
+                      - $ref: '#/components/schemas/PatientFormQuestionPronouns'
+                      - $ref: '#/components/schemas/PatientFormQuestionSignature'
+                      - $ref: '#/components/schemas/PatientFormQuestionCheckboxes'
+                      - $ref: '#/components/schemas/PatientFormQuestionRadiobuttons'
+                      - $ref: '#/components/schemas/PatientFormQuestionSelect'
+                      - $ref: '#/components/schemas/PatientFormQuestionFullName'
+        created_at:
+          type: string
+          format: date-time
+        edited_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        email_to_patient_on_completion:
+          type:
+          - boolean
+          - 'null'
+        expired:
+          type:
+          - boolean
+          - 'null'
+          example: false
+        expires_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/patient_forms/1
+        name:
+          type: string
+          maxLength: 255
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        patient_form_template:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patient_form_templates/1
+        restricted_to_practitioner:
+          type:
+          - boolean
+          - 'null'
+        signatures:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/patient_forms/1/signatures/112233
+                  format: uri
+                  type: string
+              type: object
+        updated_at:
+          type: string
+          format: date-time
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+      x-tags:
+      - Patient Form
+    PatientFormQuestionCheckboxes:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              selected:
+                type:
+                - boolean
+                - 'null'
+              custom_field_option_token:
+                type: string
+                format: uuid
+                example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+                description: Required if `patient_field_connection` on the parent question is `"custom_field"`
+        other:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            selected:
+              type: boolean
+            value:
+              type: string
+              maxLength: 255
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - checkboxes
+        custom_field_token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+          description: Required if `patient_field_connection` is `"custom_field"`
+        patient_field_connection:
+          type: string
+          enum:
+          - custom_field
+      required:
+      - name
+      - type
+      title: Checkboxes
+    PatientFormQuestionRadiobuttons:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              selected:
+                type:
+                - boolean
+                - 'null'
+              custom_field_option_token:
+                type: string
+                format: uuid
+                example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+                description: Required if `patient_field_connection` on the parent question is `"custom_field"`
+        other:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            selected:
+              type: boolean
+            value:
+              type: string
+              maxLength: 255
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - radiobuttons
+        custom_field_token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+          description: Required if `patient_field_connection` is `"custom_field"`
+        patient_field_connection:
+          type: string
+          enum:
+          - custom_field
+      required:
+      - name
+      - type
+      title: Radiobuttons
+    PatientFormQuestionSignature:
+      type: object
+      properties:
+        signature_id:
+          type: string
+          format: int64
+          example: '1'
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - signature
+        signature:
+          type: string
+          description: A data URI representing an SVG image, with a maximum dimension of 500x500px.
+      required:
+      - name
+      - type
+      title: Signature
+    PatientFormQuestionDate:
+      type: object
+      properties:
+        answer:
+          type: string
+          format: date
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - date
+        custom_field_token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+          description: Required if `patient_field_connection` is `"custom_field"`
+        patient_field_connection:
+          type: string
+          enum:
+          - custom_field
+          - date_of_birth
+      required:
+      - name
+      - type
+      title: Date
+    PatientFormQuestionText:
+      type: object
+      properties:
+        answer:
+          type: string
+          maxLength: 10000
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - text
+        custom_field_token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+          description: Required if `patient_field_connection` is `"custom_field"`
+        patient_field_connection:
+          type: string
+          enum:
+          - custom_field
+          - emergency_contact
+          - medicare_number
+          - medicare_reference_number
+          - occupation
+      required:
+      - name
+      - type
+      title: Text
+    PatientFormQuestionEmail:
+      type: object
+      properties:
+        answer:
+          type: string
+          maxLength: 255
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - email
+        patient_field_connection:
+          type: string
+          enum:
+          - email
+      required:
+      - name
+      - type
+      - patient_field_connection
+      title: Email
+    PatientFormQuestionSelect:
+      type: object
+      properties:
+        answer:
+          type: string
+          maxLength: 255
+        options:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        other:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            label:
+              type: string
+              maxLength: 50
+        name:
+          type: string
+          maxLength: 255
+        required:
+          type: boolean
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - select
+        patient_field_connection:
+          type: string
+          enum:
+          - gender_identity
+          - sex
+      required:
+      - options
+      - name
+      - type
+      - patient_field_connection
+      title: Select
+  parameters:
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  requestBodies:
+    PatientForm:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              attendee_id:
+                type: string
+                format: int64
+                description: attendee id
+                example: '1'
+              business_id:
+                type: string
+                format: int64
+                description: business id
+                example: '1'
+              completed:
+                type: boolean
+              email_to_patient_on_completion:
+                type:
+                - boolean
+                - 'null'
+              expired:
+                type:
+                - boolean
+                - 'null'
+                example: false
+              patient_id:
+                type: string
+                format: int64
+                description: patient id
+                example: '1'
+              patient_form_template_id:
+                type: string
+                format: int64
+                description: patient form template id
+                example: '1'
+              content:
+                type:
+                - object
+                - 'null'
+                properties:
+                  sections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type:
+                          - string
+                          - 'null'
+                          maxLength: 255
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        questions:
+                          type: array
+                          items:
+                            oneOf:
+                            - $ref: '#/components/schemas/PatientFormQuestionText'
+                            - $ref: '#/components/schemas/PatientFormQuestionParagraph'
+                            - $ref: '#/components/schemas/PatientFormQuestionAddress'
+                            - $ref: '#/components/schemas/PatientFormQuestionDate'
+                            - $ref: '#/components/schemas/PatientFormQuestionEmail'
+                            - $ref: '#/components/schemas/PatientFormQuestionPhone'
+                            - $ref: '#/components/schemas/PatientFormQuestionPronouns'
+                            - $ref: '#/components/schemas/PatientFormQuestionSignature'
+                            - $ref: '#/components/schemas/PatientFormQuestionCheckboxes'
+                            - $ref: '#/components/schemas/PatientFormQuestionRadiobuttons'
+                            - $ref: '#/components/schemas/PatientFormQuestionSelect'
+                            - $ref: '#/components/schemas/PatientFormQuestionFullName'
+              name:
+                type: string
+                maxLength: 255
+              restricted_to_practitioner:
+                type:
+                - boolean
+                - 'null'
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

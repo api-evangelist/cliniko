@@ -1,0 +1,2035 @@
+apiVersion: v1
+kind: MCPServer
+type: MCPServer
+name: Cliniko MCP (candidate)
+generated: '2026-10-21'
+method: derived
+source: openapi/cliniko-openapi.yml
+status: candidate
+description: No official Cliniko MCP server was found (docs.api.cliniko.com/llms.txt and help.cliniko.com/llms.txt name no MCP; web search 2026-10-21 found none). This is a candidate tool list derived one-to-one
+  from the 223 operations in the Cliniko OpenAPI 3.0.3 contract.
+deployment:
+  mode: none
+  auth: api-key
+  verified: derived
+evidence:
+- url: https://docs.api.cliniko.com/llms.txt
+  status: 200
+  finding: 75-page docs index; no MCP page
+- url: https://help.cliniko.com/llms.txt
+  status: 200
+  finding: 499-page help index; no MCP mention
+backing_api:
+  openapi: openapi/cliniko-openapi.yml
+  base_url: https://api.au1.cliniko.com/v1
+  auth: 'HTTP Basic: API key as username, blank password'
+  notes: Base URL shard (au1, uk1, ...) is taken from the suffix of the API key. A User-Agent with app name and contact email is required.
+tool_count: 223
+tools:
+- name: list_appointment_types
+  operationId: ListAppointmentTypes-Get
+  method: GET
+  path: /appointment_types
+  description: List appointment types
+  category: Appointment Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_appointment_type
+  operationId: CreateAppointmentType-Post
+  method: POST
+  path: /appointment_types
+  description: Create appointment type
+  category: Appointment Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_appointment_type
+  operationId: GetAppointmentType-Get
+  method: GET
+  path: /appointment_types/{id}
+  description: Get appointment type
+  category: Appointment Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_appointment_type
+  operationId: UpdateAppointmentType-Patch
+  method: PATCH
+  path: /appointment_types/{id}
+  description: Update appointment type
+  category: Appointment Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_appointment_type
+  operationId: DeleteAppointmentType-Delete
+  method: DELETE
+  path: /appointment_types/{id}
+  description: Archive appointment type
+  category: Appointment Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_appointment_type
+  operationId: ArchiveAppointmentType-Post
+  method: POST
+  path: /appointment_types/{id}/archive
+  description: Archive appointment type
+  category: Appointment Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_appointment_types_for_practitioner
+  operationId: ListAppointmentTypesForPractitioner-Get
+  method: GET
+  path: /practitioners/{practitioner_id}/appointment_types
+  description: List appointment types for practitioner
+  category: Appointment Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_appointment_type_billable_items
+  operationId: ListAppointmentTypeBillableItems-Get
+  method: GET
+  path: /appointment_type_billable_items
+  description: List appointment type billable items
+  category: Appointment Type Billable Item
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_appointment_type_billable_item
+  operationId: CreateAppointmentTypeBillableItem-Post
+  method: POST
+  path: /appointment_type_billable_items
+  description: Create appointment type billable item
+  category: Appointment Type Billable Item
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_appointment_type_billable_item
+  operationId: GetAppointmentTypeBillableItem-Get
+  method: GET
+  path: /appointment_type_billable_items/{id}
+  description: Get appointment type billable item
+  category: Appointment Type Billable Item
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_appointment_type_billable_item
+  operationId: UpdateAppointmentTypeBillableItem-Patch
+  method: PATCH
+  path: /appointment_type_billable_items/{id}
+  description: Update appointment type billable item
+  category: Appointment Type Billable Item
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_appointment_type_billable_item
+  operationId: DeleteAppointmentTypeBillableItem-Delete
+  method: DELETE
+  path: /appointment_type_billable_items/{id}
+  description: Delete appointment type billable item
+  category: Appointment Type Billable Item
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: list_appointment_type_products
+  operationId: ListAppointmentTypeProducts-Get
+  method: GET
+  path: /appointment_type_products
+  description: List appointment type products
+  category: Appointment Type Product
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_appointment_type_product
+  operationId: CreateAppointmentTypeProduct-Post
+  method: POST
+  path: /appointment_type_products
+  description: Create appointment type product
+  category: Appointment Type Product
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_appointment_type_product
+  operationId: GetAppointmentTypeProduct-Get
+  method: GET
+  path: /appointment_type_products/{id}
+  description: Get appointment type product
+  category: Appointment Type Product
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_appointment_type_product
+  operationId: UpdateAppointmentTypeProduct-Patch
+  method: PATCH
+  path: /appointment_type_products/{id}
+  description: Update appointment type product
+  category: Appointment Type Product
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_appointment_type_product
+  operationId: DeleteAppointmentTypeProduct-Delete
+  method: DELETE
+  path: /appointment_type_products/{id}
+  description: Delete appointment type product
+  category: Appointment Type Product
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: list_attendees
+  operationId: ListAttendees-Get
+  method: GET
+  path: /attendees
+  description: List attendees
+  category: Attendee
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_attendee
+  operationId: CreateAttendee-Post
+  method: POST
+  path: /attendees
+  description: Create attendee
+  category: Attendee
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_attendee
+  operationId: GetAttendee-Get
+  method: GET
+  path: /attendees/{id}
+  description: Get attendee
+  category: Attendee
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_attendee
+  operationId: UpdateAttendee-Patch
+  method: PATCH
+  path: /attendees/{id}
+  description: Update attendee
+  category: Attendee
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_attendee
+  operationId: DeleteAttendee-Delete
+  method: DELETE
+  path: /attendees/{id}
+  description: Archive attendee
+  category: Attendee
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_attendee
+  operationId: ArchiveAttendee-Post
+  method: POST
+  path: /attendees/{id}/archive
+  description: Archive attendee
+  category: Attendee
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: cancel_attendee
+  operationId: CancelAttendee-Patch
+  method: PATCH
+  path: /attendees/{id}/cancel
+  description: Cancel attendee
+  category: Attendee
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_attendees_for_group_appointment
+  operationId: ListAttendeesForGroupAppointment-Get
+  method: GET
+  path: /group_appointments/{group_appointment_id}/attendees
+  description: List attendees for group appointment
+  category: Attendee
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_attendees_for_individual_appointment
+  operationId: ListAttendeesForIndividualAppointment-Get
+  method: GET
+  path: /individual_appointments/{individual_appointment_id}/attendees
+  description: List attendees for individual appointment
+  category: Attendee
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_attendees_for_patient_case
+  operationId: ListAttendeesForPatientCase-Get
+  method: GET
+  path: /patient_cases/{patient_case_id}/attendees
+  description: List attendees for patient case
+  category: Attendee
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_availability_blocks
+  operationId: ListAvailabilityBlocks-Get
+  method: GET
+  path: /availability_blocks
+  description: List availability blocks
+  category: Availability Block
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_availability_block
+  operationId: CreateAvailabilityBlock-Post
+  method: POST
+  path: /availability_blocks
+  description: Create availability block
+  category: Availability Block
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_availability_block
+  operationId: GetAvailabilityBlock-Get
+  method: GET
+  path: /availability_blocks/{id}
+  description: Get availability block
+  category: Availability Block
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_all_available_times
+  operationId: GetAllAvailableTimes-Get
+  method: GET
+  path: /businesses/{business_id}/practitioners/{practitioner_id}/appointment_types/{appointment_type_id}/available_times
+  description: Get all available times
+  category: Available Time
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_next_available_time
+  operationId: GetNextAvailableTime-Get
+  method: GET
+  path: /businesses/{business_id}/practitioners/{practitioner_id}/appointment_types/{appointment_type_id}/next_available_time
+  description: Get next available time
+  category: Available Time
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_billable_items
+  operationId: ListBillableItems-Get
+  method: GET
+  path: /billable_items
+  description: List billable items
+  category: Billable Item
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_billable_item
+  operationId: CreateBillableItem-Post
+  method: POST
+  path: /billable_items
+  description: Create billable item
+  category: Billable Item
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_billable_item
+  operationId: GetBillableItem-Get
+  method: GET
+  path: /billable_items/{id}
+  description: Get billable item
+  category: Billable Item
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_billable_item
+  operationId: UpdateBillableItem-Patch
+  method: PATCH
+  path: /billable_items/{id}
+  description: Update billable item
+  category: Billable Item
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_billable_item
+  operationId: DeleteBillableItem-Delete
+  method: DELETE
+  path: /billable_items/{id}
+  description: Archive billable item
+  category: Billable Item
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_billable_item
+  operationId: ArchiveBillableItem-Post
+  method: POST
+  path: /billable_items/{id}/archive
+  description: Archive billable item
+  category: Billable Item
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_body_charts
+  operationId: ListBodyCharts-Get
+  method: GET
+  path: /body_charts
+  description: List body charts
+  category: Body Chart
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_body_chart
+  operationId: GetBodyChart-Get
+  method: GET
+  path: /body_charts/{id}
+  description: Get body chart
+  category: Body Chart
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_bookings
+  operationId: ListBookings-Get
+  method: GET
+  path: /bookings
+  description: List bookings
+  category: Booking
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_booking
+  operationId: GetBooking-Get
+  method: GET
+  path: /bookings/{id}
+  description: Get booking
+  category: Booking
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_bookings_for_patient_case
+  operationId: ListBookingsForPatientCase-Get
+  method: GET
+  path: /patient_cases/{patient_case_id}/bookings
+  description: List bookings for patient case
+  category: Booking
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_businesses
+  operationId: ListBusinesses-Get
+  method: GET
+  path: /businesses
+  description: List businesses
+  category: Business
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_business
+  operationId: CreateBusiness-Post
+  method: POST
+  path: /businesses
+  description: Create business
+  category: Business
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_business
+  operationId: GetBusiness-Get
+  method: GET
+  path: /businesses/{id}
+  description: Get business
+  category: Business
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_business
+  operationId: UpdateBusiness-Patch
+  method: PATCH
+  path: /businesses/{id}
+  description: Update business
+  category: Business
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_business
+  operationId: DeleteBusiness-Delete
+  method: DELETE
+  path: /businesses/{id}
+  description: Archive business
+  category: Business
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_business
+  operationId: ArchiveBusiness-Post
+  method: POST
+  path: /businesses/{id}/archive
+  description: Archive business
+  category: Business
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: unarchive_business
+  operationId: UnarchiveBusiness-Post
+  method: POST
+  path: /businesses/{id}/unarchive
+  description: Unarchive business
+  category: Business
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_communications
+  operationId: ListCommunications-Get
+  method: GET
+  path: /communications
+  description: List communications
+  category: Communication
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_memo_communication
+  operationId: CreateMemoCommunication-Post
+  method: POST
+  path: /communications
+  description: Create memo communication
+  category: Communication
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_communication
+  operationId: GetCommunication-Get
+  method: GET
+  path: /communications/{id}
+  description: Get communication
+  category: Communication
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_memo_communication
+  operationId: UpdateMemoCommunication-Patch
+  method: PATCH
+  path: /communications/{id}
+  description: Update memo communication
+  category: Communication
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: archive_memo_communication
+  operationId: ArchiveMemoCommunication-Post
+  method: POST
+  path: /communications/{id}/archive
+  description: Archive memo communication
+  category: Communication
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_concession_prices
+  operationId: ListConcessionPrices-Get
+  method: GET
+  path: /concession_prices
+  description: List concession prices
+  category: Concession Price
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_concession_price
+  operationId: CreateConcessionPrice-Post
+  method: POST
+  path: /concession_prices
+  description: Create concession price
+  category: Concession Price
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_concession_price
+  operationId: GetConcessionPrice-Get
+  method: GET
+  path: /concession_prices/{id}
+  description: Get concession price
+  category: Concession Price
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_concession_price
+  operationId: UpdateConcessionPrice-Patch
+  method: PATCH
+  path: /concession_prices/{id}
+  description: Update concession price
+  category: Concession Price
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_concession_types
+  operationId: ListConcessionTypes-Get
+  method: GET
+  path: /concession_types
+  description: List concession types
+  category: Concession Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_concession_type
+  operationId: CreateConcessionType-Post
+  method: POST
+  path: /concession_types
+  description: Create concession type
+  category: Concession Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_concession_type
+  operationId: GetConcessionType-Get
+  method: GET
+  path: /concession_types/{id}
+  description: Get concession type
+  category: Concession Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_concession_type
+  operationId: UpdateConcessionType-Patch
+  method: PATCH
+  path: /concession_types/{id}
+  description: Update concession type
+  category: Concession Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_contacts
+  operationId: ListContacts-Get
+  method: GET
+  path: /contacts
+  description: List contacts
+  category: Contact
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_contact
+  operationId: CreateContact-Post
+  method: POST
+  path: /contacts
+  description: Create contact
+  category: Contact
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_contact
+  operationId: GetContact-Get
+  method: GET
+  path: /contacts/{id}
+  description: Get contact
+  category: Contact
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_contact
+  operationId: UpdateContact-Patch
+  method: PATCH
+  path: /contacts/{id}
+  description: Update contact
+  category: Contact
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_contact
+  operationId: DeleteContact-Delete
+  method: DELETE
+  path: /contacts/{id}
+  description: Archive contact
+  category: Contact
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_contact
+  operationId: ArchiveContact-Post
+  method: POST
+  path: /contacts/{id}/archive
+  description: Archive contact
+  category: Contact
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_daily_availabilities
+  operationId: ListDailyAvailabilities-Get
+  method: GET
+  path: /daily_availabilities
+  description: List daily availabilities
+  category: Daily Availability
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_daily_availability
+  operationId: GetDailyAvailability-Get
+  method: GET
+  path: /daily_availabilities/{id}
+  description: Get daily availability
+  category: Daily Availability
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_daily_availabilities_for_business
+  operationId: ListDailyAvailabilitiesForBusiness-Get
+  method: GET
+  path: /businesses/{business_id}/daily_availabilities
+  description: List daily availabilities for business
+  category: Daily Availability
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_daily_availabilities_for_practitioner
+  operationId: ListDailyAvailabilitiesForPractitioner-Get
+  method: GET
+  path: /practitioners/{practitioner_id}/daily_availabilities
+  description: List daily availabilities for practitioner
+  category: Daily Availability
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_group_appointments
+  operationId: ListGroupAppointments-Get
+  method: GET
+  path: /group_appointments
+  description: List group appointments
+  category: Group Appointment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_group_appointment
+  operationId: CreateGroupAppointment-Post
+  method: POST
+  path: /group_appointments
+  description: Create group appointment
+  category: Group Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_group_appointment
+  operationId: GetGroupAppointment-Get
+  method: GET
+  path: /group_appointments/{id}
+  description: Get group appointment
+  category: Group Appointment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_group_appointment
+  operationId: UpdateGroupAppointment-Patch
+  method: PATCH
+  path: /group_appointments/{id}
+  description: Update group appointment
+  category: Group Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_group_appointment
+  operationId: DeleteGroupAppointment-Delete
+  method: DELETE
+  path: /group_appointments/{id}
+  description: Archive group appointment
+  category: Group Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_group_appointment
+  operationId: ArchiveGroupAppointment-Post
+  method: POST
+  path: /group_appointments/{id}/archive
+  description: Archive group appointment
+  category: Group Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_group_appointment_conflicts
+  operationId: GetGroupAppointmentConflicts-Get
+  method: GET
+  path: /group_appointments/{id}/conflicts
+  description: Get conflicts for a group appointment
+  category: Group Appointment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_individual_appointments
+  operationId: ListIndividualAppointments-Get
+  method: GET
+  path: /individual_appointments
+  description: List individual appointments
+  category: Individual Appointment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_individual_appointment
+  operationId: CreateIndividualAppointment-Post
+  method: POST
+  path: /individual_appointments
+  description: Create individual appointment
+  category: Individual Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_individual_appointment
+  operationId: GetIndividualAppointment-Get
+  method: GET
+  path: /individual_appointments/{id}
+  description: Get individual appointment
+  category: Individual Appointment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_individual_appointment
+  operationId: UpdateIndividualAppointment-Patch
+  method: PATCH
+  path: /individual_appointments/{id}
+  description: Update individual appointment
+  category: Individual Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_individual_appointment
+  operationId: DeleteIndividualAppointment-Delete
+  method: DELETE
+  path: /individual_appointments/{id}
+  description: Archive individual appointment
+  category: Individual Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_individual_appointment
+  operationId: ArchiveIndividualAppointment-Post
+  method: POST
+  path: /individual_appointments/{id}/archive
+  description: Archive individual appointment
+  category: Individual Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: cancel_individual_appointment
+  operationId: CancelIndividualAppointment-Patch
+  method: PATCH
+  path: /individual_appointments/{id}/cancel
+  description: Cancel individual appointment
+  category: Individual Appointment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_individual_appointment_conflicts
+  operationId: GetIndividualAppointmentConflicts-Get
+  method: GET
+  path: /individual_appointments/{id}/conflicts
+  description: Get conflicts for an individual appointment
+  category: Individual Appointment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_invoices
+  operationId: ListInvoices-Get
+  method: GET
+  path: /invoices
+  description: List invoices
+  category: Invoice
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_invoice
+  operationId: GetInvoice-Get
+  method: GET
+  path: /invoices/{id}
+  description: Get invoice
+  category: Invoice
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_invoices_for_appointment
+  operationId: ListInvoicesForAppointment-Get
+  method: GET
+  path: /appointments/{appointment_id}/invoices
+  description: List invoices for appointment
+  category: Invoice
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_invoices_for_attendee
+  operationId: ListInvoicesForAttendee-Get
+  method: GET
+  path: /attendees/{attendee_id}/invoices
+  description: List invoices for attendee
+  category: Invoice
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_invoices_for_patient_case
+  operationId: ListInvoicesForPatientCase-Get
+  method: GET
+  path: /patient_cases/{patient_case_id}/invoices
+  description: List invoices for patient case
+  category: Invoice
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_invoices_for_patient
+  operationId: ListInvoicesForPatient-Get
+  method: GET
+  path: /patients/{patient_id}/invoices
+  description: List invoices for patient
+  category: Invoice
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_invoices_for_practitioner
+  operationId: ListInvoicesForPractitioner-Get
+  method: GET
+  path: /practitioners/{practitioner_id}/invoices
+  description: List invoices for practitioner
+  category: Invoice
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_invoice_items
+  operationId: ListInvoiceItems-Get
+  method: GET
+  path: /invoice_items
+  description: List invoice items
+  category: Invoice Item
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_invoice_item
+  operationId: GetInvoiceItem-Get
+  method: GET
+  path: /invoice_items/{id}
+  description: Get invoice item
+  category: Invoice Item
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_invoice_items_for_invoice
+  operationId: ListInvoiceItemsForInvoice-Get
+  method: GET
+  path: /invoices/{invoice_id}/invoice_items
+  description: List invoice items for invoice
+  category: Invoice Item
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_medical_alerts
+  operationId: ListMedicalAlerts-Get
+  method: GET
+  path: /medical_alerts
+  description: List medical alerts
+  category: Medical Alert
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_medical_alert
+  operationId: CreateMedicalAlert-Post
+  method: POST
+  path: /medical_alerts
+  description: Create medical alert
+  category: Medical Alert
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_medical_alert
+  operationId: GetMedicalAlert-Get
+  method: GET
+  path: /medical_alerts/{id}
+  description: Get medical alert
+  category: Medical Alert
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_medical_alert
+  operationId: UpdateMedicalAlert-Patch
+  method: PATCH
+  path: /medical_alerts/{id}
+  description: Update medical alert
+  category: Medical Alert
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_medical_alert
+  operationId: DeleteMedicalAlert-Delete
+  method: DELETE
+  path: /medical_alerts/{id}
+  description: Delete medical alert
+  category: Medical Alert
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: list_medical_alerts_for_patient
+  operationId: ListMedicalAlertsForPatient-Get
+  method: GET
+  path: /patients/{patient_id}/medical_alerts
+  description: List medical alerts for patient
+  category: Medical Alert
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_patients
+  operationId: ListPatients-Get
+  method: GET
+  path: /patients
+  description: List patients
+  category: Patient
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_patient
+  operationId: CreatePatient-Post
+  method: POST
+  path: /patients
+  description: Create patient
+  category: Patient
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_patient
+  operationId: GetPatient-Get
+  method: GET
+  path: /patients/{id}
+  description: Get patient
+  category: Patient
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_patient
+  operationId: UpdatePatient-Patch
+  method: PATCH
+  path: /patients/{id}
+  description: Update patient
+  category: Patient
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: archive_patient
+  operationId: ArchivePatient-Delete
+  method: DELETE
+  path: /patients/{id}
+  description: Archive patient
+  category: Patient
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_patient
+  operationId: ArchivePatient-Post
+  method: POST
+  path: /patients/{id}/archive
+  description: Archive patient
+  category: Patient
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: unarchive_patient
+  operationId: UnarchivePatient-Post
+  method: POST
+  path: /patients/{id}/unarchive
+  description: Unarchive patient
+  category: Patient
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_patient_attachments
+  operationId: ListPatientAttachments-Get
+  method: GET
+  path: /patient_attachments
+  description: List patient attachments
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_uploaded_patient_attachment
+  operationId: CreateUploadedPatientAttachment-Post
+  method: POST
+  path: /patient_attachments
+  description: Create uploaded patient attachment
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_patient_attachment
+  operationId: GetPatientAttachment-Get
+  method: GET
+  path: /patient_attachments/{id}
+  description: Get patient attachment
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_patient_attachment
+  operationId: UpdatePatientAttachment-Patch
+  method: PATCH
+  path: /patient_attachments/{id}
+  description: Update patient attachment
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_patient_attachment
+  operationId: DeletePatientAttachment-Delete
+  method: DELETE
+  path: /patient_attachments/{id}
+  description: Archive patient attachment
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_patient_attachment
+  operationId: ArchivePatientAttachment-Post
+  method: POST
+  path: /patient_attachments/{id}/archive
+  description: Archive patient attachment
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_patient_attachments_for_patient_case
+  operationId: ListPatientAttachmentsForPatientCase-Get
+  method: GET
+  path: /patient_cases/{patient_case_id}/patient_attachments
+  description: List patient attachments for patient case
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: presigned_post
+  operationId: PresignedPost-Get
+  method: GET
+  path: /patients/{patient_id}/attachment_presigned_post
+  description: Get a presigned URL to upload your file to S3
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_patient_attachments_for_patient
+  operationId: ListPatientAttachmentsForPatient-Get
+  method: GET
+  path: /patients/{patient_id}/patient_attachments
+  description: List patient attachments for patient
+  category: Patient Attachment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_patient_cases
+  operationId: ListPatientCases-Get
+  method: GET
+  path: /patient_cases
+  description: List patient cases
+  category: Patient Case
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_patient_case
+  operationId: CreatePatientCase-Post
+  method: POST
+  path: /patient_cases
+  description: Create patient case
+  category: Patient Case
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_active_patient_cases
+  operationId: ListActivePatientCases-Get
+  method: GET
+  path: /patient_cases/active
+  description: List active patient cases
+  category: Patient Case
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_patient_case
+  operationId: GetPatientCase-Get
+  method: GET
+  path: /patient_cases/{id}
+  description: Get patient case
+  category: Patient Case
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_patient_case
+  operationId: UpdatePatientCase-Patch
+  method: PATCH
+  path: /patient_cases/{id}
+  description: Update patient case
+  category: Patient Case
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: archive_patient_case
+  operationId: ArchivePatientCase-Post
+  method: POST
+  path: /patient_cases/{id}/archive
+  description: Archive patient case
+  category: Patient Case
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_patient_forms
+  operationId: ListPatientForms-Get
+  method: GET
+  path: /patient_forms
+  description: List patient forms
+  category: Patient Form
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_patient_form
+  operationId: CreatePatientForm-Post
+  method: POST
+  path: /patient_forms
+  description: Create patient form
+  category: Patient Form
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_patient_form
+  operationId: GetPatientForm-Get
+  method: GET
+  path: /patient_forms/{id}
+  description: Get patient form
+  category: Patient Form
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_patient_form
+  operationId: UpdatePatientForm-Patch
+  method: PATCH
+  path: /patient_forms/{id}
+  description: Update patient form
+  category: Patient Form
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_patient_forms_for_attendee
+  operationId: ListPatientFormsForAttendee-Get
+  method: GET
+  path: /attendees/{attendee_id}/patient_forms
+  description: List patient forms for attendee
+  category: Patient Form
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: archive_patient_form
+  operationId: ArchivePatientForm-Post
+  method: POST
+  path: /patient_forms/{id}/archive
+  description: Archive patient form
+  category: Patient Form
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_patient_form_templates
+  operationId: ListPatientFormTemplates-Get
+  method: GET
+  path: /patient_form_templates
+  description: List patient form templates
+  category: Patient Form Template
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_patient_form_template
+  operationId: CreatePatientFormTemplate-Post
+  method: POST
+  path: /patient_form_templates
+  description: Create patient form template
+  category: Patient Form Template
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_patient_form_template
+  operationId: GetPatientFormTemplate-Get
+  method: GET
+  path: /patient_form_templates/{id}
+  description: Get patient form template
+  category: Patient Form Template
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_patient_form_template
+  operationId: UpdatePatientFormTemplate-Patch
+  method: PATCH
+  path: /patient_form_templates/{id}
+  description: Update patient form template
+  category: Patient Form Template
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: archive_patient_form_template
+  operationId: ArchivePatientFormTemplate-Post
+  method: POST
+  path: /patient_form_templates/{id}/archive
+  description: Archive patient form template
+  category: Patient Form Template
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_practitioners
+  operationId: ListPractitioners-Get
+  method: GET
+  path: /practitioners
+  description: List practitioners
+  category: Practitioner
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_inactive_practitioners
+  operationId: ListInactivePractitioners-Get
+  method: GET
+  path: /practitioners/inactive
+  description: List inactive practitioners
+  category: Practitioner
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_practitioner
+  operationId: GetPractitioner-Get
+  method: GET
+  path: /practitioners/{id}
+  description: Get practitioner
+  category: Practitioner
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_practitioners_for_appointment_type
+  operationId: ListPractitionersForAppointmentType-Get
+  method: GET
+  path: /appointment_types/{appointment_type_id}/practitioners
+  description: List practitioners for appointment type
+  category: Practitioner
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_practitioners_for_business
+  operationId: ListPractitionersForBusiness-Get
+  method: GET
+  path: /businesses/{business_id}/practitioners
+  description: List practitioners for business
+  category: Practitioner
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_inactive_practitioners_for_appointment_type
+  operationId: ListInactivePractitionersForAppointmentType-Get
+  method: GET
+  path: /appointment_types/{appointment_type_id}/practitioners/inactive
+  description: List inactive practitioners for appointment type
+  category: Practitioner
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_inactive_practitioners_for_business
+  operationId: ListInactivePractitionersForBusiness-Get
+  method: GET
+  path: /businesses/{business_id}/practitioners/inactive
+  description: List inactive practitioners for business
+  category: Practitioner
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_practitioner_reference_numbers
+  operationId: ListPractitionerReferenceNumbers-Get
+  method: GET
+  path: /practitioner_reference_numbers
+  description: List practitioner reference numbers
+  category: Practitioner Reference Number
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_practitioner_reference_number
+  operationId: CreatePractitionerReferenceNumber-Post
+  method: POST
+  path: /practitioner_reference_numbers
+  description: Create practitioner reference number
+  category: Practitioner Reference Number
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_practitioner_reference_number
+  operationId: GetPractitionerReferenceNumber-Get
+  method: GET
+  path: /practitioner_reference_numbers/{id}
+  description: Get practitioner reference number
+  category: Practitioner Reference Number
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_practitioner_reference_number
+  operationId: UpdatePractitionerReferenceNumber-Patch
+  method: PATCH
+  path: /practitioner_reference_numbers/{id}
+  description: Update practitioner reference number
+  category: Practitioner Reference Number
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_practitioner_reference_number
+  operationId: DeletePractitionerReferenceNumber-Delete
+  method: DELETE
+  path: /practitioner_reference_numbers/{id}
+  description: Delete practitioner reference number
+  category: Practitioner Reference Number
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: list_practitioner_reference_numbers_for_practitioner
+  operationId: ListPractitionerReferenceNumbersForPractitioner-Get
+  method: GET
+  path: /practitioners/{practitioner_id}/practitioner_reference_numbers
+  description: List practitioner reference numbers for practitioner
+  category: Practitioner Reference Number
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_products
+  operationId: ListProducts-Get
+  method: GET
+  path: /products
+  description: List products
+  category: Product
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_product
+  operationId: CreateProduct-Post
+  method: POST
+  path: /products
+  description: Create product
+  category: Product
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_product
+  operationId: GetProduct-Get
+  method: GET
+  path: /products/{id}
+  description: Get product
+  category: Product
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_product
+  operationId: UpdateProduct-Patch
+  method: PATCH
+  path: /products/{id}
+  description: Update product
+  category: Product
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_product
+  operationId: DeleteProduct-Delete
+  method: DELETE
+  path: /products/{id}
+  description: Archive product
+  category: Product
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_product
+  operationId: ArchiveProduct-Post
+  method: POST
+  path: /products/{id}/archive
+  description: Archive product
+  category: Product
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_product_suppliers
+  operationId: ListProductSuppliers-Get
+  method: GET
+  path: /product_suppliers
+  description: List product suppliers
+  category: Product Supplier
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_product_supplier
+  operationId: CreateProductSupplier-Post
+  method: POST
+  path: /product_suppliers
+  description: Create product supplier
+  category: Product Supplier
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_product_supplier
+  operationId: GetProductSupplier-Get
+  method: GET
+  path: /product_suppliers/{id}
+  description: Get product supplier
+  category: Product Supplier
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_product_supplier
+  operationId: UpdateProductSupplier-Patch
+  method: PATCH
+  path: /product_suppliers/{id}
+  description: Update product supplier
+  category: Product Supplier
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_product_supplier
+  operationId: DeleteProductSupplier-Delete
+  method: DELETE
+  path: /product_suppliers/{id}
+  description: Delete product supplier
+  category: Product Supplier
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: get_public_settings
+  operationId: GetPublicSettings-Get
+  method: GET
+  path: /settings/public
+  description: Get public settings
+  category: Public Settings
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_recalls
+  operationId: ListRecalls-Get
+  method: GET
+  path: /recalls
+  description: List recalls
+  category: Recall
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_recall
+  operationId: CreateRecall-Post
+  method: POST
+  path: /recalls
+  description: Create recall
+  category: Recall
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_recall
+  operationId: GetRecall-Get
+  method: GET
+  path: /recalls/{id}
+  description: Get recall
+  category: Recall
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_recall
+  operationId: UpdateRecall-Patch
+  method: PATCH
+  path: /recalls/{id}
+  description: Update recall
+  category: Recall
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: archive_recall
+  operationId: ArchiveRecall-Post
+  method: POST
+  path: /recalls/{id}/archive
+  description: Archive recall
+  category: Recall
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_recall_types
+  operationId: ListRecallTypes-Get
+  method: GET
+  path: /recall_types
+  description: List recall types
+  category: Recall Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_recall_type
+  operationId: CreateRecallType-Post
+  method: POST
+  path: /recall_types
+  description: Create recall type
+  category: Recall Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_recall_type
+  operationId: GetRecallType-Get
+  method: GET
+  path: /recall_types/{id}
+  description: Get recall type
+  category: Recall Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_recall_type
+  operationId: UpdateRecallType-Patch
+  method: PATCH
+  path: /recall_types/{id}
+  description: Update recall type
+  category: Recall Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: archive_recall_type
+  operationId: ArchiveRecallType-Post
+  method: POST
+  path: /recall_types/{id}/archive
+  description: Archive recall type
+  category: Recall Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_referral_sources
+  operationId: ListReferralSources-Get
+  method: GET
+  path: /referral_sources
+  description: List referral sources
+  category: Referral Source
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_referral_source
+  operationId: GetReferralSource-Get
+  method: GET
+  path: /patients/{patient_id}/referral_source
+  description: Get referral source
+  category: Referral Source
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_referral_source
+  operationId: UpdateReferralSource-Patch
+  method: PATCH
+  path: /patients/{patient_id}/referral_source
+  description: Update referral source
+  category: Referral Source
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_referral_source_types
+  operationId: ListReferralSourceTypes-Get
+  method: GET
+  path: /referral_source_types
+  description: List referral source types
+  category: Referral Source Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_referral_source_type
+  operationId: GetReferralSourceType-Get
+  method: GET
+  path: /referral_source_types/{id}
+  description: Get referral source type
+  category: Referral Source Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_relationships
+  operationId: ListRelationships-Get
+  method: GET
+  path: /relationships
+  description: List relationships
+  category: Relationship
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_relationship
+  operationId: CreateRelationship-Post
+  method: POST
+  path: /relationships
+  description: Create relationship
+  category: Relationship
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_relationship
+  operationId: GetRelationship-Get
+  method: GET
+  path: /relationships/{id}
+  description: Get relationship
+  category: Relationship
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_relationship
+  operationId: UpdateRelationship-Patch
+  method: PATCH
+  path: /relationships/{id}
+  description: Update relationship
+  category: Relationship
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: archive_relationship
+  operationId: ArchiveRelationship-Post
+  method: POST
+  path: /relationships/{id}/archive
+  description: Archive relationship
+  category: Relationship
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_services
+  operationId: ListServices-Get
+  method: GET
+  path: /services
+  description: List services
+  category: Service
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_services_for_business
+  operationId: ListServicesForBusiness-Get
+  method: GET
+  path: /businesses/{business_id}/services
+  description: List services for business
+  category: Service
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_settings
+  operationId: GetSettings-Get
+  method: GET
+  path: /settings
+  description: Get settings
+  category: Settings
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_signature
+  operationId: GetSignature-Get
+  method: GET
+  path: /patient_forms/{patient_form_id}/signatures/{id}
+  description: Get signature
+  category: Signature
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_stock_adjustments
+  operationId: ListStockAdjustments-Get
+  method: GET
+  path: /stock_adjustments
+  description: List stock adjustments
+  category: Stock Adjustment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_stock_adjustment
+  operationId: CreateStockAdjustment-Post
+  method: POST
+  path: /stock_adjustments
+  description: Create stock adjustment
+  category: Stock Adjustment
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_stock_adjustment
+  operationId: GetStockAdjustment-Get
+  method: GET
+  path: /stock_adjustments/{id}
+  description: Get stock adjustment
+  category: Stock Adjustment
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_taxes
+  operationId: ListTaxes-Get
+  method: GET
+  path: /taxes
+  description: List taxes
+  category: Tax
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_tax
+  operationId: CreateTax-Post
+  method: POST
+  path: /taxes
+  description: Create tax
+  category: Tax
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_tax
+  operationId: GetTax-Get
+  method: GET
+  path: /taxes/{id}
+  description: Get tax
+  category: Tax
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_tax
+  operationId: UpdateTax-Patch
+  method: PATCH
+  path: /taxes/{id}
+  description: Update tax
+  category: Tax
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_tax
+  operationId: DeleteTax-Delete
+  method: DELETE
+  path: /taxes/{id}
+  description: Delete tax
+  category: Tax
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: list_treatment_notes
+  operationId: ListTreatmentNotes-Get
+  method: GET
+  path: /treatment_notes
+  description: List treatment notes
+  category: Treatment Note
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_treatment_note
+  operationId: CreateTreatmentNote-Post
+  method: POST
+  path: /treatment_notes
+  description: Create treatment note
+  category: Treatment Note
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_treatment_note
+  operationId: GetTreatmentNote-Get
+  method: GET
+  path: /treatment_notes/{id}
+  description: Get treatment note
+  category: Treatment Note
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_treatment_note
+  operationId: UpdateTreatmentNote-Patch
+  method: PATCH
+  path: /treatment_notes/{id}
+  description: Update treatment note
+  category: Treatment Note
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_treatment_note
+  operationId: DeleteTreatmentNote-Delete
+  method: DELETE
+  path: /treatment_notes/{id}
+  description: Archive treatment note
+  category: Treatment Note
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: list_treatment_notes_for_patient
+  operationId: ListTreatmentNotesForPatient-Get
+  method: GET
+  path: /patients/{patient_id}/treatment_notes
+  description: List treatment notes for patient
+  category: Treatment Note
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: archive_treatment_note
+  operationId: ArchiveTreatmentNote-Post
+  method: POST
+  path: /treatment_notes/{id}/archive
+  description: Archive treatment note
+  category: Treatment Note
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: unarchive_treatment_note
+  operationId: UnarchiveTreatmentNote-Post
+  method: POST
+  path: /treatment_notes/{id}/unarchive
+  description: Unarchive treatment note
+  category: Treatment Note
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_treatment_note_templates
+  operationId: ListTreatmentNoteTemplates-Get
+  method: GET
+  path: /treatment_note_templates
+  description: List treatment note templates
+  category: Treatment Note Template
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_treatment_note_template
+  operationId: CreateTreatmentNoteTemplate-Post
+  method: POST
+  path: /treatment_note_templates
+  description: Create treatment note template
+  category: Treatment Note Template
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_treatment_note_template
+  operationId: GetTreatmentNoteTemplate-Get
+  method: GET
+  path: /treatment_note_templates/{id}
+  description: Get treatment note template
+  category: Treatment Note Template
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_treatment_note_template
+  operationId: UpdateTreatmentNoteTemplate-Patch
+  method: PATCH
+  path: /treatment_note_templates/{id}
+  description: Update treatment note template
+  category: Treatment Note Template
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_treatment_note_template
+  operationId: DeleteTreatmentNoteTemplate-Delete
+  method: DELETE
+  path: /treatment_note_templates/{id}
+  description: Archive treatment note template
+  category: Treatment Note Template
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_treatment_note_template
+  operationId: ArchiveTreatmentNoteTemplate-Post
+  method: POST
+  path: /treatment_note_templates/{id}/archive
+  description: Archive treatment note template
+  category: Treatment Note Template
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: list_unavailable_blocks
+  operationId: ListUnavailableBlocks-Get
+  method: GET
+  path: /unavailable_blocks
+  description: List unavailable blocks
+  category: Unavailable Block
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_unavailable_block
+  operationId: CreateUnavailableBlock-Post
+  method: POST
+  path: /unavailable_blocks
+  description: Create unavailable block
+  category: Unavailable Block
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_unavailable_block
+  operationId: GetUnavailableBlock-Get
+  method: GET
+  path: /unavailable_blocks/{id}
+  description: Get unavailable block
+  category: Unavailable Block
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_unavailable_block
+  operationId: UpdateUnavailableBlock-Patch
+  method: PATCH
+  path: /unavailable_blocks/{id}
+  description: Update unavailable block
+  category: Unavailable Block
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: delete_unavailable_block
+  operationId: DeleteUnavailableBlock-Delete
+  method: DELETE
+  path: /unavailable_blocks/{id}
+  description: Archive unavailable block
+  category: Unavailable Block
+  annotations:
+    readOnlyHint: false
+    destructiveHint: true
+- name: archive_unavailable_block
+  operationId: ArchiveUnavailableBlock-Post
+  method: POST
+  path: /unavailable_blocks/{id}/archive
+  description: Archive unavailable block
+  category: Unavailable Block
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_unavailable_block_conflicts
+  operationId: GetUnavailableBlockConflicts-Get
+  method: GET
+  path: /unavailable_blocks/{id}/conflicts
+  description: Get conflicts for an unavailable block
+  category: Unavailable Block
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_unavailable_block_types
+  operationId: ListUnavailableBlockTypes-Get
+  method: GET
+  path: /unavailable_block_types
+  description: List unavailable block types
+  category: Unavailable Block Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: create_unavailable_block_type
+  operationId: CreateUnavailableBlockType-Post
+  method: POST
+  path: /unavailable_block_types
+  description: Create unavailable block type
+  category: Unavailable Block Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_unavailable_block_type
+  operationId: GetUnavailableBlockType-Get
+  method: GET
+  path: /unavailable_block_types/{id}
+  description: Get unavailable block type
+  category: Unavailable Block Type
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: update_unavailable_block_type
+  operationId: UpdateUnavailableBlockType-Patch
+  method: PATCH
+  path: /unavailable_block_types/{id}
+  description: Update unavailable block type
+  category: Unavailable Block Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: archive_unavailable_block_type
+  operationId: ArchiveUnavailableBlockType-Post
+  method: POST
+  path: /unavailable_block_types/{id}/archive
+  description: Archive unavailable block type
+  category: Unavailable Block Type
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+- name: get_authenticated_user
+  operationId: GetAuthenticatedUser-Get
+  method: GET
+  path: /user
+  description: Get authenticated user
+  category: User
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: list_users
+  operationId: ListUsers-Get
+  method: GET
+  path: /users
+  description: List users
+  category: User
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+- name: get_user
+  operationId: GetUser-Get
+  method: GET
+  path: /users/{id}
+  description: Get user
+  category: User
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false

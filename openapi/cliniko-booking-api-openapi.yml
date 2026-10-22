@@ -1,0 +1,853 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Booking API
+  version: v1
+  description: 'Operations tagged Booking across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Booking
+paths:
+  /bookings:
+    get:
+      tags:
+      - Booking
+      summary: List bookings
+      operationId: ListBookings-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bookings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Booking'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/bookings?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/bookings?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/bookings?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_type_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | cancelled_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | did_not_arrive | [boolean](/#boolean-filter-operators) |
+
+          | email_reminder_sent | [boolean](/#boolean-filter-operators) |
+
+          | ends_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | invoice_status | [integer](/#numeric-filter-operators) |
+
+          | patient_ids | [array](/#array-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | repeated_from_id | [int64](/#numeric-filter-operators) |
+
+          | sms_reminder_sent | [boolean](/#boolean-filter-operators) |
+
+          | starts_at | [date-time](/#datetime-filter-operators) |
+
+          | treatment_note_status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /bookings/{id}:
+    get:
+      tags:
+      - Booking
+      summary: Get booking
+      operationId: GetBooking-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | cancelled_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_cases/{patient_case_id}/bookings:
+    get:
+      tags:
+      - Booking
+      summary: List bookings for patient case
+      operationId: ListBookingsForPatientCase-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bookings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Booking'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/bookings?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/bookings?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/bookings?page=3
+      deprecated: true
+      parameters:
+      - name: patient_case_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_type_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | cancelled_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | did_not_arrive | [boolean](/#boolean-filter-operators) |
+
+          | email_reminder_sent | [boolean](/#boolean-filter-operators) |
+
+          | ends_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | invoice_status | [integer](/#numeric-filter-operators) |
+
+          | patient_ids | [array](/#array-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | repeated_from_id | [int64](/#numeric-filter-operators) |
+
+          | sms_reminder_sent | [boolean](/#boolean-filter-operators) |
+
+          | starts_at | [date-time](/#datetime-filter-operators) |
+
+          | treatment_note_status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    GroupAppointment:
+      type: object
+      properties:
+        appointment_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_types/1
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendees:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/group_appointments/1/attendees
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        conflicts:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/group_appointments/1/conflicts
+                  format: uri
+                  type: string
+              type: object
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/group_appointments/1
+        max_attendees:
+          type: integer
+          exclusiveMinimum: 1
+          exclusiveMaximum: 100
+        notes:
+          type:
+          - string
+          - 'null'
+        patient_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: int64
+            example: '1'
+        practitioner:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/practitioners/1
+        repeat_rule:
+          type:
+          - object
+          - 'null'
+          properties:
+            number_of_repeats:
+              type:
+              - integer
+              - 'null'
+              exclusiveMinimum: 0
+            repeat_type:
+              type:
+              - string
+              - 'null'
+              enum:
+              - Daily
+              - Monthly
+              - Weekly
+            repeating_interval:
+              type:
+              - integer
+              - 'null'
+              maximum: 100
+              exclusiveMinimum: 0
+        repeated_from:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/group_appointments/1
+        repeats:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/group_appointments?q[]=repeated_from_id:=1
+                  format: uri
+                  type: string
+              type: object
+        starts_at:
+          type: string
+          format: date-time
+        telehealth_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Group Appointment
+    UnavailableBlock:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        conflicts:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/unavailable_blocks/1/conflicts
+                  format: uri
+                  type: string
+              type: object
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/unavailable_blocks/1
+        notes:
+          type:
+          - string
+          - 'null'
+        practitioner:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/practitioners/1
+        repeat_rule:
+          type:
+          - object
+          - 'null'
+          properties:
+            number_of_repeats:
+              type:
+              - integer
+              - 'null'
+              exclusiveMinimum: 0
+            repeat_type:
+              type:
+              - string
+              - 'null'
+              enum:
+              - Daily
+              - Monthly
+              - Weekly
+            repeating_interval:
+              type:
+              - integer
+              - 'null'
+              maximum: 100
+              exclusiveMinimum: 0
+        repeated_from:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/unavailable_blocks/1
+        repeats:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/unavailable_blocks?q[]=repeated_from_id:=1
+                  format: uri
+                  type: string
+              type: object
+        starts_at:
+          type: string
+          format: date-time
+        unavailable_block_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/unavailable_block_types/1
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Unavailable Block
+    Booking:
+      anyOf:
+      - $ref: '#/components/schemas/GroupAppointment'
+      - $ref: '#/components/schemas/IndividualAppointment'
+      - $ref: '#/components/schemas/UnavailableBlock'
+      x-tags:
+      - Booking
+    IndividualAppointment:
+      type: object
+      properties:
+        appointment_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_types/1
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendees:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/individual_appointments/1/attendees
+        booking_ip_address:
+          type:
+          - string
+          - 'null'
+          format: ipv4
+          example: 10.0.0.43
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        cancellation_note:
+          type:
+          - string
+          - 'null'
+        cancellation_reason:
+          type:
+          - integer
+          - 'null'
+        cancellation_reason_description:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Feeling Better
+          - Condition Worse
+          - Sick
+          - COVID-19 related
+          - Away
+          - Other
+          - Work
+        cancelled_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        conflicts:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/individual_appointments/1/conflicts
+                  format: uri
+                  type: string
+              type: object
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        did_not_arrive:
+          type:
+          - boolean
+          - 'null'
+        email_reminder_sent:
+          type:
+          - boolean
+          - 'null'
+        ends_at:
+          type: string
+          format: date-time
+        has_patient_appointment_notes:
+          type:
+          - boolean
+          - 'null'
+        id:
+          type: string
+          format: int64
+        invoice_status:
+          type:
+          - integer
+          - 'null'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/individual_appointments/1
+        notes:
+          type:
+          - string
+          - 'null'
+        online_booking_policy_accepted:
+          type:
+          - boolean
+          - 'null'
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        patient_arrived:
+          type:
+          - boolean
+          - 'null'
+        patient_case:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patient_cases/1
+        patient_name:
+          type:
+          - string
+          - 'null'
+        practitioner:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/practitioners/1
+        repeat_rule:
+          type:
+          - object
+          - 'null'
+          properties:
+            number_of_repeats:
+              type:
+              - integer
+              - 'null'
+              exclusiveMinimum: 0
+            repeat_type:
+              type:
+              - string
+              - 'null'
+              enum:
+              - Daily
+              - Monthly
+              - Weekly
+            repeating_interval:
+              type:
+              - integer
+              - 'null'
+              maximum: 100
+              exclusiveMinimum: 0
+        repeated_from:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/individual_appointments/1
+        repeats:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/individual_appointments?q[]=repeated_from_id:=1
+                  format: uri
+                  type: string
+              type: object
+        sms_reminder_sent:
+          type:
+          - boolean
+          - 'null'
+        starts_at:
+          type: string
+          format: date-time
+        telehealth_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        treatment_note_status:
+          type:
+          - integer
+          - 'null'
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Individual Appointment
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

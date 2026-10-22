@@ -1,0 +1,15 @@
+generated: '2026-10-21'
+method: none
+source: https://registry.npmjs.org/cliniko
+note: 'no first-party package: every candidate a model listed was unowned (harvest-packages.py --audit)'
+packages: []
+checked:
+- https://registry.npmjs.org/cliniko (200)
+- https://registry.npmjs.org/cliniko-api (404)
+- https://pypi.org/pypi/cliniko/json (404)
+- https://rubygems.org/api/v1/gems/cliniko.json (404)
+- https://github.com/redguava/cliniko-api (archived)
+rejected:
+- name: cliniko
+  registry: npm
+  reason: 'official: false as written'

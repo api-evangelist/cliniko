@@ -1,0 +1,936 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Invoice API
+  version: v1
+  description: 'Operations tagged Invoice across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Invoice
+paths:
+  /invoices:
+    get:
+      tags:
+      - Invoice
+      summary: List invoices
+      operationId: ListInvoices-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoices?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoices?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/invoices?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | attendee_id | [int64](/#numeric-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | closed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | issue_date | [date](/#date-filter-operators) |
+
+          | number | [integer](/#numeric-filter-operators) |
+
+          | original_invoice_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /invoices/{id}:
+    get:
+      tags:
+      - Invoice
+      summary: Get invoice
+      operationId: GetInvoice-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /appointments/{appointment_id}/invoices:
+    get:
+      tags:
+      - Invoice
+      summary: List invoices for appointment
+      operationId: ListInvoicesForAppointment-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointments/1/invoices?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointments/1/invoices?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointments/1/invoices?page=3
+      parameters:
+      - name: appointment_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | attendee_id | [int64](/#numeric-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | closed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | issue_date | [date](/#date-filter-operators) |
+
+          | number | [integer](/#numeric-filter-operators) |
+
+          | original_invoice_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /attendees/{attendee_id}/invoices:
+    get:
+      tags:
+      - Invoice
+      summary: List invoices for attendee
+      operationId: ListInvoicesForAttendee-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees/1/invoices?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees/1/invoices?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/attendees/1/invoices?page=3
+      deprecated: true
+      parameters:
+      - name: attendee_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | closed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | issue_date | [date](/#date-filter-operators) |
+
+          | number | [integer](/#numeric-filter-operators) |
+
+          | original_invoice_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_cases/{patient_case_id}/invoices:
+    get:
+      tags:
+      - Invoice
+      summary: List invoices for patient case
+      operationId: ListInvoicesForPatientCase-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/invoices?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/invoices?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/invoices?page=3
+      parameters:
+      - name: patient_case_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | attendee_id | [int64](/#numeric-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | closed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | issue_date | [date](/#date-filter-operators) |
+
+          | number | [integer](/#numeric-filter-operators) |
+
+          | original_invoice_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patients/{patient_id}/invoices:
+    get:
+      tags:
+      - Invoice
+      summary: List invoices for patient
+      operationId: ListInvoicesForPatient-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/invoices?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/invoices?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/invoices?page=3
+      deprecated: true
+      parameters:
+      - name: patient_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | attendee_id | [int64](/#numeric-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | closed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | issue_date | [date](/#date-filter-operators) |
+
+          | number | [integer](/#numeric-filter-operators) |
+
+          | original_invoice_id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /practitioners/{practitioner_id}/invoices:
+    get:
+      tags:
+      - Invoice
+      summary: List invoices for practitioner
+      operationId: ListInvoicesForPractitioner-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/invoices?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/invoices?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/invoices?page=3
+      deprecated: true
+      parameters:
+      - name: practitioner_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | attendee_id | [int64](/#numeric-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | closed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | issue_date | [date](/#date-filter-operators) |
+
+          | number | [integer](/#numeric-filter-operators) |
+
+          | original_invoice_id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | status | [integer](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    Invoice:
+      type: object
+      properties:
+        appointment:
+          deprecated: true
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointments/1
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendee:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/attendees/1
+        booking:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/bookings/1
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        calculation_method:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 1
+          - 2
+          - 3
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 1 | Legacy |
+
+            | 2 | Tax exclusive |
+
+            | 3 | Tax inclusive |'
+        calculation_method_description:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Legacy
+          - Tax exclusive
+          - Tax inclusive
+        closed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        discounted_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        id:
+          type: string
+          format: int64
+        invoice_items:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/invoices/1/invoice_items
+        invoice_to:
+          type:
+          - string
+          - 'null'
+        issue_date:
+          type: string
+          format: date
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/invoices/1
+        net_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        notes:
+          type:
+          - string
+          - 'null'
+        number:
+          type: integer
+        online_payment_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        original_invoice:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/invoices/1
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        patient_extra_information:
+          type:
+          - string
+          - 'null'
+        practitioner:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/practitioners/1
+        reversed_invoices:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/invoices?q%5B%5D=invoice_id%3A%3D1
+        signature:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/signatures/1
+        status:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 10
+          - 20
+          - 30
+          - 40
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 10 | Open |
+
+            | 20 | Paid |
+
+            | 30 | Closed |
+
+            | 40 | Open credit |'
+        status_description:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Open
+          - Paid
+          - Closed
+          - Open credit
+        tax_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        total_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Invoice
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

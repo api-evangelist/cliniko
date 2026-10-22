@@ -1,0 +1,320 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Stock Adjustment API
+  version: v1
+  description: 'Operations tagged Stock Adjustment across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Stock Adjustment
+paths:
+  /stock_adjustments:
+    get:
+      tags:
+      - Stock Adjustment
+      summary: List stock adjustments
+      operationId: ListStockAdjustments-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stock_adjustments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StockAdjustment'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/stock_adjustments?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/stock_adjustments?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/stock_adjustments?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | product_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Stock Adjustment
+      summary: Create stock adjustment
+      operationId: CreateStockAdjustment-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockAdjustment'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/StockAdjustment'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /stock_adjustments/{id}:
+    get:
+      tags:
+      - Stock Adjustment
+      summary: Get stock adjustment
+      operationId: GetStockAdjustment-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockAdjustment'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    StockAdjustment:
+      type: object
+      properties:
+        adjustment_type:
+          type: string
+          enum:
+          - Correction
+          - Damaged
+          - Item Sold
+          - Other
+          - Out of Date
+          - Returned
+          - Stock Purchase
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/stock_adjustments/1
+        notes:
+          type:
+          - string
+          - 'null'
+        product:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/products/1
+        quantity:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        updated_at:
+          type: string
+          format: date-time
+        user:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/users/1
+      x-tags:
+      - Stock Adjustment
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  requestBodies:
+    StockAdjustment:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              quantity:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                description: A negative value is only allowed when a decreasing adjustment type has been selected and vice versa.
+              adjustment_type:
+                type: string
+                enum:
+                - Correction
+                - Damaged
+                - Item Sold
+                - Other
+                - Out of Date
+                - Returned
+                - Stock Purchase
+                description: 'The reason for modifying the stock level.
+
+
+                  **Increase types**: `Stock Purchase`, `Returned`, `Other`
+
+
+                  **Decrease types**: `Damaged`, `Out of Date`, `Item Sold`, `Other`, `Correction`
+
+                  '
+              notes:
+                type:
+                - string
+                - 'null'
+              product_id:
+                type: string
+                format: int64
+                description: The existing product you want to adjust the stock level of.
+                example: '1'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

@@ -1,17 +1,18 @@
 aid: cliniko
+
 url: https://raw.githubusercontent.com/api-evangelist/cliniko/refs/heads/main/apis.yml
+
 name: Cliniko
+
 kind: company
-description: Cliniko is practice management software for allied health practices and
-  clinics - physiotherapy, osteopathy, chiropractic, podiatry, psychology, massage,
-  and similar - covering patient records, appointment scheduling and online bookings,
-  practitioners and businesses (locations), treatment notes, invoicing, and payments.
-  Cliniko exposes a well-documented public REST API over HTTPS. The API is
-  region-sharded - the base host is derived from the shard suffix on your API key
-  (for example `https://api.au1.cliniko.com/v1/`) - and is authenticated with an
-  API key passed as the username in HTTP Basic authentication. Every request must
-  also send a `User-Agent` header containing an app/vendor name and a valid contact
-  email, or requests may be blocked.
+
+description: Cliniko is practice management software for allied health practices and clinics - physiotherapy, osteopathy, chiropractic, podiatry,
+  psychology, massage, and similar - covering patient records, appointment scheduling and online bookings, practitioners and businesses (locations),
+  treatment notes, invoicing, and payments. Cliniko exposes a well-documented public REST API over HTTPS. The API is region-sharded - the base
+  host is derived from the shard suffix on your API key (for example `https://api.au1.cliniko.com/v1/`) - and is authenticated with an API key
+  passed as the username in HTTP Basic authentication. Every request must also send a `User-Agent` header containing an app/vendor name and a
+  valid contact email, or requests may be blocked.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -24,6 +25,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -37,10 +39,15 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cliniko.png
+
 x-docs-platform: redocly
+
 x-docs-platform-confidence: high
+
 x-docs-platform-checked: 2026-09-24
+
 tags:
 - Practice Management
 - Healthcare
@@ -52,6 +59,7 @@ tags:
 - Clinics
 - Booking
 - Software-as-a-Service
+
 tags_raw:
 - Practice Management
 - Healthcare
@@ -63,181 +71,62 @@ tags_raw:
 - Clinics
 - Bookings
 - SaaS
+
 created: '2026-07-12'
-modified: '2026-10-06'
+
+modified: '2026-10-21'
+
 specificationVersion: '0.23'
-apis:
-- aid: cliniko:cliniko-appointment-types-api
-  name: Cliniko Appointment Types API
-  description: The named services a clinic offers.
-  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  baseURL: https://api.au1.cliniko.com/v1
-  tags:
-  - Appointment Types
-  properties:
-  - type: OpenAPI
-    url: openapi/cliniko-appointment-types-api-openapi.yml
-  - type: Documentation
-    url: https://docs.api.cliniko.com/
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
-- aid: cliniko:cliniko-appointments-api
-  name: Cliniko Appointments API
-  description: Individual appointments and the unified bookings feed.
-  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  baseURL: https://api.au1.cliniko.com/v1
-  tags:
-  - Appointments
-  properties:
-  - type: OpenAPI
-    url: openapi/cliniko-appointments-api-openapi.yml
-  - type: Documentation
-    url: https://docs.api.cliniko.com/
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
-- aid: cliniko:cliniko-businesses-api
-  name: Cliniko Businesses API
-  description: Businesses / physical locations in a Cliniko account.
-  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  baseURL: https://api.au1.cliniko.com/v1
-  tags:
-  - Business
-  tags_raw:
-  - Businesses
-  properties:
-  - type: OpenAPI
-    url: openapi/cliniko-businesses-api-openapi.yml
-  - type: Documentation
-    url: https://docs.api.cliniko.com/
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
-- aid: cliniko:cliniko-invoices-api
-  name: Cliniko Invoices API
-  description: Patient and appointment invoices.
-  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  baseURL: https://api.au1.cliniko.com/v1
-  tags:
-  - Invoices
-  properties:
-  - type: OpenAPI
-    url: openapi/cliniko-invoices-api-openapi.yml
-  - type: Documentation
-    url: https://docs.api.cliniko.com/
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
-- aid: cliniko:cliniko-patients-api
-  name: Cliniko Patients API
-  description: The people who book in for appointments.
-  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  baseURL: https://api.au1.cliniko.com/v1
-  tags:
-  - Patients
-  properties:
-  - type: OpenAPI
-    url: openapi/cliniko-patients-api-openapi.yml
-  - type: Documentation
-    url: https://docs.api.cliniko.com/
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
-- aid: cliniko:cliniko-practitioners-api
-  name: Cliniko Practitioners API
-  description: Practitioners and the businesses (locations) they work from.
-  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  baseURL: https://api.au1.cliniko.com/v1
-  tags:
-  - Practitioners
-  properties:
-  - type: OpenAPI
-    url: openapi/cliniko-practitioners-api-openapi.yml
-  - type: Documentation
-    url: https://docs.api.cliniko.com/
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
-- aid: cliniko:cliniko-treatment-notes-api
-  name: Cliniko Treatment Notes API
-  description: Structured clinical notes about a patient visit.
-  humanURL: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  baseURL: https://api.au1.cliniko.com/v1
-  tags:
-  - Treatment Notes
-  properties:
-  - type: OpenAPI
-    url: openapi/cliniko-treatment-notes-api-openapi.yml
-  - type: Documentation
-    url: https://docs.api.cliniko.com/
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/patients.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/individual_appointments.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/practitioners.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/appointment_types.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/invoices.md
-  - type: APIReference
-    url: https://github.com/redguava/cliniko-api/blob/main/sections/treatment_notes.md
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
 common:
+- type: Spectral
+  url: rules/cliniko-rules.yml
+- type: JSONLD
+  url: json-ld/cliniko-context.jsonld
+- type: Vocabulary
+  url: vocabulary/cliniko-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/cliniko-data-model.yml
+- type: ChangeLog
+  url: changelog/cliniko-changelog.yml
+- type: Conventions
+  url: conventions/cliniko-conventions.yml
+- type: Sandbox
+  url: sandbox/cliniko-sandbox.yml
+- type: Compliance
+  url: https://www.cliniko.com/security/
+- type: Lifecycle
+  url: lifecycle/cliniko-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/cliniko-problem-types.yml
+- type: Conformance
+  url: conformance/cliniko-conformance.yml
+- type: Overlay
+  url: overlays/cliniko-openapi-overlay.yaml
+- type: LLMsTxt
+  url: llms/cliniko-llms.txt
+- type: SecurityTxt
+  url: well-known/cliniko-status-security.txt
+- type: SecurityTxt
+  url: well-known/cliniko-help-security.txt
+- type: WellKnown
+  url: well-known/cliniko-well-known.yml
+- type: Hosts
+  url: hosts/cliniko-hosts.yml
+- type: IntegrationEdges
+  url: integrations/cliniko-integration-edges.yml
+- type: Vendors
+  url: vendors/cliniko-vendors.yml
+- type: GettingStarted
+  url: https://help.cliniko.com/en/articles/3420485-getting-started-with-patient-cases
+- type: TrustCenter
+  url: security/cliniko-trust-center.yml
 - url: https://www.cliniko.com/blog/
   type: Blog
 - type: CapabilityMap
@@ -256,13 +145,1401 @@ common:
 - type: Website
   url: https://www.cliniko.com
 - type: Documentation
-  url: https://docs.api.cliniko.com
+  url: https://docs.api.cliniko.com/
 - type: Plans
   url: plans/cliniko-plans-pricing.yml
 - type: RateLimits
   url: rate-limits/cliniko-rate-limits.yml
 - type: FinOps
   url: finops/cliniko-finops.yml
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+- type: APIReference
+  url: https://docs.api.cliniko.com/openapi
+- type: ChangeLog
+  url: https://docs.api.cliniko.com/changelog
+- type: Pricing
+  url: https://www.cliniko.com/pricing/
+- type: SignUp
+  url: https://www.cliniko.com/free-trial/
+- type: Login
+  url: https://www.cliniko.com/login/
+- type: Support
+  url: https://help.cliniko.com/en/
+- type: StatusPage
+  url: https://status.cliniko.com
+- type: Security
+  url: https://www.cliniko.com/security/
+- type: TermsOfService
+  url: https://www.cliniko.com/policies/terms/
+- type: PrivacyPolicy
+  url: https://www.cliniko.com/policies/privacy
+
+apis:
+- aid: cliniko:cliniko-appointment-type-api
+  name: Cliniko Appointment Type API
+  description: The Appointment Type API from Cliniko — 4 operation(s) for appointment type.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Appointment Type
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-appointment-type-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-appointment-type-billable-item-api
+  name: Cliniko Appointment Type Billable Item API
+  description: >-
+    The Appointment Type Billable Item API from Cliniko — 2 operation(s) for appointment type billable
+    item.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Appointment Type Billable Item
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-appointment-type-billable-item-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-appointment-type-product-api
+  name: Cliniko Appointment Type Product API
+  description: >-
+    The Appointment Type Product API from Cliniko — 2 operation(s) for appointment type product.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Appointment Type Product
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-appointment-type-product-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-attendee-api
+  name: Cliniko Attendee API
+  description: The Attendee API from Cliniko — 7 operation(s) for attendee.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Attendee
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-attendee-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-availability-block-api
+  name: Cliniko Availability Block API
+  description: The Availability Block API from Cliniko — 2 operation(s) for availability block.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Availability Block
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-availability-block-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-available-time-api
+  name: Cliniko Available Time API
+  description: >-
+    Cliniko users can configure how available times are displayed in our online bookings module.
+
+
+    The API endpoints that retrieve available times will respect these settings.  The settings are:
+
+
+    <h3>Maximum number of appointments per day segment</h3>
+
+
+    Day parts are morning (before Midday), afternoon (Midday to 5pm) and evening (5pm onwards).
+
+
+    Possible settings are: 1, 2, 3, 4, 5 or unlimited.
+
+
+    <h3>Minimum advance time required for online bookings</h3>
+
+
+    This is the minimum amount of time from now that a available time will be shown.
+
+
+    Possible settings are: Now, 1 Hour, 2 Hours, 4 Hours, 6 Hours, 12 Hours, 18 Hours, 1 Day, 2 Days,
+    3 Days, 1 Week, 2 Weeks, 3 Weeks or 4 Weeks.
+
+
+    <h3>How far ahead bookings are offered</h3>
+
+
+    This limits how far in the future available times are offered.
+
+
+    Possible settings are: 1 Day, 1 Week, 2 Weeks, 4 Weeks, 6 Weeks, 8 Weeks, 12 Weeks, 6 Months, 1 Year,
+    18 Months or 2 Years
+
+
+    <h3>Business to be displayed in online bookings</h3>
+
+
+    Setting to choose which businesses can be displayed in our online bookings module.
+
+
+    The API will not return available times for businesses not enabled for online bookings.
+
+
+    <h3>Appointment Type to be displayed in online bookings</h3>
+
+
+    Setting to choose which appointment types can be displayed in our online bookings module.
+
+
+    The API will not return available times for appointment types not enabled for online bookings.
+
+
+    <h3>Practitioner to be displayed in online bookings</h3>
+
+
+    Setting to choose which practitioners can be displayed in our online bookings module.
+
+
+    The API will not return available times for practitioners not enabled for online bookings.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Available Time
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-available-time-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-billable-item-api
+  name: Cliniko Billable Item API
+  description: The Billable Item API from Cliniko — 3 operation(s) for billable item.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Billable Item
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-billable-item-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-body-chart-api
+  name: Cliniko Body Chart API
+  description: The Body Chart API from Cliniko — 2 operation(s) for body chart.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Body Chart
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-body-chart-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-booking-api
+  name: Cliniko Booking API
+  description: The Booking API from Cliniko — 3 operation(s) for booking.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Booking
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-booking-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-business-api
+  name: Cliniko Business API
+  description: >-
+    Businesses represent a business or location (e.g. a clinic). Each Cliniko account can have unlimited
+    businesses.
+
+
+    These are typically used for each physical location if there is more than one. Most Cliniko accounts
+    have just one
+
+    business.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Business
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-business-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-communication-api
+  name: Cliniko Communication API
+  description: The Communication API from Cliniko — 3 operation(s) for communication.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Communication
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-communication-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-concession-price-api
+  name: Cliniko Concession Price API
+  description: The Concession Price API from Cliniko — 2 operation(s) for concession price.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Concession Price
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-concession-price-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-concession-type-api
+  name: Cliniko Concession Type API
+  description: The Concession Type API from Cliniko — 2 operation(s) for concession type.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Concession Type
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-concession-type-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-contact-api
+  name: Cliniko Contact API
+  description: The Contact API from Cliniko — 3 operation(s) for contact.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Contact
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-contact-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-daily-availability-api
+  name: Cliniko Daily Availability API
+  description: The regularly scheduled availabilities of a practitioner at a business
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Daily Availability
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-daily-availability-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-group-appointment-api
+  name: Cliniko Group Appointment API
+  description: The Group Appointment API from Cliniko — 4 operation(s) for group appointment.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Group Appointment
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-group-appointment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-individual-appointment-api
+  name: Cliniko Individual Appointment API
+  description: The Individual Appointment API from Cliniko — 5 operation(s) for individual appointment.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Individual Appointment
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-individual-appointment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-invoice-api
+  name: Cliniko Invoice API
+  description: The Invoice API from Cliniko — 7 operation(s) for invoice.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-invoice-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-invoice-item-api
+  name: Cliniko Invoice Item API
+  description: The Invoice Item API from Cliniko — 3 operation(s) for invoice item.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Invoice Item
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-invoice-item-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-medical-alert-api
+  name: Cliniko Medical Alert API
+  description: The Medical Alert API from Cliniko — 3 operation(s) for medical alert.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Medical Alert
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-medical-alert-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-patient-api
+  name: Cliniko Patient API
+  description: >-
+    Patients are the people that book in for appointments. There isn't much in Cliniko that doesn't revolve
+    around
+
+    patients.
+
+
+    When you're working with patient information, make sure you abide by the relevant regulations for
+    security and
+
+    privacy.
+
+
+    A couple of fields in the patient record deserve special consideration:
+
+
+    `accepted_privacy_policy` stores the patient's consent to the business's own privacy policy. Values
+    can be null
+
+    (no response), true (accepted) or false (rejected). Please consider how this may affect you storing
+    information
+
+    on this patient.
+
+
+    `time_zone` will contain a valid IANA time zone identifier if the patient's time zone has been set,
+    or null if it
+
+    hasn't. It can be set via the API, in which case it accepts IANA time zone identifiers.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Patient
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-patient-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-patient-attachment-api
+  name: Cliniko Patient Attachment API
+  description: The Patient Attachment API from Cliniko — 6 operation(s) for patient attachment.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Patient Attachment
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-patient-attachment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-patient-case-api
+  name: Cliniko Patient Case API
+  description: The Patient Case API from Cliniko — 4 operation(s) for patient case.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Patient Case
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-patient-case-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-patient-form-api
+  name: Cliniko Patient Form API
+  description: >-
+    HTML is supported in answers to paragraph questions. We sanitize these answers to ensure the HTML
+    is safe
+
+    and our editor can support the formatting.
+
+
+    Currently, the following tags are supported: `p`, `div`, `br`, `ul`, `ol`, `li`, `blockquote`, `h1`,
+    `h2`,  `b`, `i`, `u`, and `a`.
+
+
+    The angle bracket characters (`<`, and `>`) should be sent as html encodings (ex: `<` should be sent
+    as `&lt;`).
+
+
+    Content inside unescaped angle brackets could be identified as unsupported HTML and will be stripped.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Patient Form
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-patient-form-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-patient-form-template-api
+  name: Cliniko Patient Form Template API
+  description: The Patient Form Template API from Cliniko — 3 operation(s) for patient form template.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Patient Form Template
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-patient-form-template-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-practitioner-api
+  name: Cliniko Practitioner API
+  description: >-
+    All practitioners have an associated user account. Not all users are practitioners (e.g. receptionists
+    wouldn't be).
+
+
+    You can only create appointments for practitioners (not for users).
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Practitioner
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-practitioner-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-practitioner-reference-number-api
+  name: Cliniko Practitioner Reference Number API
+  description: >-
+    The Practitioner Reference Number API from Cliniko — 3 operation(s) for practitioner reference number.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Practitioner Reference Number
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-practitioner-reference-number-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-product-api
+  name: Cliniko Product API
+  description: The Product API from Cliniko — 3 operation(s) for product.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Product
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-product-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-product-supplier-api
+  name: Cliniko Product Supplier API
+  description: The Product Supplier API from Cliniko — 2 operation(s) for product supplier.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Product Supplier
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-product-supplier-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-public-settings-api
+  name: Cliniko Public Settings API
+  description: The Public Settings API from Cliniko — 1 operation(s) for public settings.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Public Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-public-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-recall-api
+  name: Cliniko Recall API
+  description: The Recall API from Cliniko — 3 operation(s) for recall.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Recall
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-recall-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-recall-type-api
+  name: Cliniko Recall Type API
+  description: The Recall Type API from Cliniko — 3 operation(s) for recall type.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Recall Type
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-recall-type-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-referral-source-api
+  name: Cliniko Referral Source API
+  description: Referral source of a patient
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Referral Source
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-referral-source-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-referral-source-type-api
+  name: Cliniko Referral Source Type API
+  description: Types of referrals for patients
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Referral Source Type
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-referral-source-type-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-relationship-api
+  name: Cliniko Relationship API
+  description: The Relationship API from Cliniko — 3 operation(s) for relationship.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Relationship
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-relationship-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-service-api
+  name: Cliniko Service API
+  description: The Service API from Cliniko — 2 operation(s) for service.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Service
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-service-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-settings-api
+  name: Cliniko Settings API
+  description: The Settings API from Cliniko — 1 operation(s) for settings.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-signature-api
+  name: Cliniko Signature API
+  description: The Signature API from Cliniko — 1 operation(s) for signature.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Signature
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-signature-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-stock-adjustment-api
+  name: Cliniko Stock Adjustment API
+  description: The Stock Adjustment API from Cliniko — 2 operation(s) for stock adjustment.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Stock Adjustment
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-stock-adjustment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-tax-api
+  name: Cliniko Tax API
+  description: The Tax API from Cliniko — 2 operation(s) for tax.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Tax
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-tax-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-treatment-note-api
+  name: Cliniko Treatment Note API
+  description: >-
+    Notes taken about a patient visit.
+
+
+    HTML is supported in answers to paragraph questions. We sanitize these answers to ensure the HTML
+    is safe
+
+    and our editor can support the formatting.
+
+
+    Currently, the following tags are supported: `p`, `div`, `br`, `ul`, `ol`, `li`, `blockquote`, `h1`,
+    `h2`,  `b`, `i`, `u`, and `a`.
+
+
+    The angle bracket characters (`<`, and `>`) should be sent as html encodings (ex: `<` should be sent
+    as `&lt;`).
+
+
+    Content inside unescaped angle brackets could be identified as unsupported HTML and will be stripped.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Treatment Note
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-treatment-note-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-treatment-note-template-api
+  name: Cliniko Treatment Note Template API
+  description: >-
+    Templates that are the starting point for treatment notes.
+
+
+    HTML is supported in answers to paragraph questions. We sanitize these answers to ensure the HTML
+    is safe
+
+    and our editor can support the formatting.
+
+
+    Currently, the following tags are supported: `p`, `div`, `br`, `ul`, `ol`, `li`, `blockquote`, `h1`,
+    `h2`,  `b`, `i`, `u`, and `a`.
+
+
+    The angle bracket characters (`<`, and `>`) should be sent as html encodings (ex: `<` should be sent
+    as `&lt;`).
+
+
+    Content inside unescaped angle brackets could be identified as unsupported HTML and will be stripped.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Treatment Note Template
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-treatment-note-template-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-unavailable-block-api
+  name: Cliniko Unavailable Block API
+  description: The Unavailable Block API from Cliniko — 4 operation(s) for unavailable block.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Unavailable Block
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-unavailable-block-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-unavailable-block-type-api
+  name: Cliniko Unavailable Block Type API
+  description: The Unavailable Block Type API from Cliniko — 3 operation(s) for unavailable block type.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - Unavailable Block Type
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-unavailable-block-type-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+- aid: cliniko:cliniko-user-api
+  name: Cliniko User API
+  description: The User API from Cliniko — 3 operation(s) for user.
+  humanURL: https://docs.api.cliniko.com/openapi
+  baseURL: https://api.au1.cliniko.com/v1
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/cliniko-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.api.cliniko.com/
+  - type: APIReference
+    url: https://docs.api.cliniko.com/openapi
+  - type: JSONSchema
+    url: json-schema/cliniko-patient-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-public-settings-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-individual-appointment-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-invoice-schema.json
+  - type: JSONSchema
+    url: json-schema/cliniko-attendee-schema.json
+x-coverage:
+  state: covered
+  reason: enriched
+  detail: 'Identity pass 2026-10-21: Website www.cliniko.com verified 200 (names Cliniko); per-API humanURLs repointed from the archived redguava/cliniko-api
+    GitHub repo to the current docs.api.cliniko.com/openapi resource pages; link-property pointers added from site_links found on cliniko.com,
+    docs.api.cliniko.com and status.cliniko.com.'
+  evidence:
+  - url: https://www.cliniko.com
+    status: 200
+  - url: https://docs.api.cliniko.com/
+    status: 200
+  - url: https://docs.api.cliniko.com/openapi
+    status: 200
+  - url: https://github.com/redguava
+    status: 200
+  - url: https://www.linkedin.com/company/cliniko
+    status: 200
+  - url: https://www.cliniko.com/blog/
+    status: 200
+  - url: https://docs.api.cliniko.com/changelog
+    status: 200
+  - url: https://www.cliniko.com/pricing/
+    status: 200
+  - url: https://www.cliniko.com/free-trial/
+    status: 200
+  - url: https://www.cliniko.com/login/
+    status: 200
+  - url: https://help.cliniko.com/en/
+    status: 200
+  - url: https://status.cliniko.com
+    status: 200
+  - url: https://www.cliniko.com/security/
+    status: 200
+  - url: https://www.cliniko.com/policies/terms/
+    status: 200
+  - url: https://www.cliniko.com/policies/privacy
+    status: 200
+x-enrichment:
+  date: '2026-10-21'
+  status: enriched
+  artifacts_added: 35
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

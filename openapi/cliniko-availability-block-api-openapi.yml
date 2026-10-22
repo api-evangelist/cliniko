@@ -1,0 +1,312 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Availability Block API
+  version: v1
+  description: 'Operations tagged Availability Block across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Availability Block
+paths:
+  /availability_blocks:
+    get:
+      tags:
+      - Availability Block
+      summary: List availability blocks
+      operationId: ListAvailabilityBlocks-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  availability_blocks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AvailabilityBlock'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/availability_blocks?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/availability_blocks?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/availability_blocks?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | starts_at | [date-time](/#datetime-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Availability Block
+      summary: Create availability block
+      operationId: CreateAvailabilityBlock-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityBlock'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/AvailabilityBlock'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /availability_blocks/{id}:
+    get:
+      tags:
+      - Availability Block
+      summary: Get availability block
+      operationId: GetAvailabilityBlock-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityBlock'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    AvailabilityBlock:
+      type: object
+      properties:
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        created_at:
+          type: string
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/availability_blocks/1
+        practitioner:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/practitioners/1
+        repeat_rule:
+          type:
+          - object
+          - 'null'
+          properties:
+            number_of_repeats:
+              type:
+              - integer
+              - 'null'
+              exclusiveMinimum: 0
+            repeat_type:
+              type:
+              - string
+              - 'null'
+              enum:
+              - Daily
+              - Monthly
+              - Weekly
+            repeating_interval:
+              type:
+              - integer
+              - 'null'
+              maximum: 100
+              exclusiveMinimum: 0
+        starts_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Availability Block
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  requestBodies:
+    AvailabilityBlock:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              business_id:
+                type: string
+                format: int64
+                description: business id
+                example: '1'
+              ends_at:
+                type: string
+                format: date-time
+              practitioner_id:
+                type: string
+                format: int64
+                description: practitioner id
+                example: '1'
+              starts_at:
+                type: string
+                format: date-time
+              repeat_rule:
+                type:
+                - object
+                - 'null'
+                properties:
+                  number_of_repeats:
+                    type:
+                    - integer
+                    - 'null'
+                    exclusiveMinimum: 0
+                  repeat_type:
+                    type:
+                    - string
+                    - 'null'
+                    enum:
+                    - Daily
+                    - Monthly
+                    - Weekly
+                  repeating_interval:
+                    type:
+                    - integer
+                    - 'null'
+                    maximum: 100
+                    exclusiveMinimum: 0
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

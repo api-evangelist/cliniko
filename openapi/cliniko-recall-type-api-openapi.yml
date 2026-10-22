@@ -1,0 +1,339 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Recall Type API
+  version: v1
+  description: 'Operations tagged Recall Type across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Recall Type
+paths:
+  /recall_types:
+    get:
+      tags:
+      - Recall Type
+      summary: List recall types
+      operationId: ListRecallTypes-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recall_types:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecallType'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/recall_types?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/recall_types?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/recall_types?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Recall Type
+      summary: Create recall type
+      operationId: CreateRecallType-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecallType'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/RecallType'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /recall_types/{id}:
+    get:
+      tags:
+      - Recall Type
+      summary: Get recall type
+      operationId: GetRecallType-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecallType'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Recall Type
+      summary: Update recall type
+      operationId: UpdateRecallType-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecallType'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/RecallType'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /recall_types/{id}/archive:
+    post:
+      tags:
+      - Recall Type
+      summary: Archive recall type
+      operationId: ArchiveRecallType-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    RecallType:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        default_duration:
+          type: integer
+          exclusiveMinimum: 0
+        default_duration_type:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 10
+          - 20
+          - 30
+          description: '| Enum Value | Description |
+
+            |---|---|
+
+            | 10 | Day |
+
+            | 20 | Week |
+
+            | 30 | Month |'
+        default_duration_type_description:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Day
+          - Month
+          - Week
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/recall_types/1
+        name:
+          type: string
+          maxLength: 255
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Recall Type
+  requestBodies:
+    RecallType:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              default_duration:
+                type: integer
+                exclusiveMinimum: 0
+              default_duration_type:
+                type:
+                - integer
+                - 'null'
+                enum:
+                - 10
+                - 20
+                - 30
+                description: '| Enum Value | Description |
+
+                  |---|---|
+
+                  | 10 | Day |
+
+                  | 20 | Week |
+
+                  | 30 | Month |'
+              name:
+                type: string
+                maxLength: 255
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

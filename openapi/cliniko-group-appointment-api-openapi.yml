@@ -1,0 +1,538 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Group Appointment API
+  version: v1
+  description: 'Operations tagged Group Appointment across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Group Appointment
+paths:
+  /group_appointments:
+    get:
+      tags:
+      - Group Appointment
+      summary: List group appointments
+      operationId: ListGroupAppointments-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  group_appointments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GroupAppointment'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/group_appointments?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/group_appointments?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/group_appointments?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_type_id | [int64](/#numeric-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | business_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | ends_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | patient_ids | [array](/#array-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | repeated_from_id | [int64](/#numeric-filter-operators) |
+
+          | starts_at | [date-time](/#datetime-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Group Appointment
+      summary: Create group appointment
+      operationId: CreateGroupAppointment-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupAppointment'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/GroupAppointment'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /group_appointments/{id}:
+    get:
+      tags:
+      - Group Appointment
+      summary: Get group appointment
+      operationId: GetGroupAppointment-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupAppointment'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Group Appointment
+      summary: Update group appointment
+      operationId: UpdateGroupAppointment-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupAppointment'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/GroupAppointment'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Group Appointment
+      summary: Archive group appointment
+      operationId: DeleteGroupAppointment-Delete
+      responses:
+        '204':
+          description: Resource was archived successfully
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      deprecated: true
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /group_appointments/{id}/archive:
+    post:
+      tags:
+      - Group Appointment
+      summary: Archive group appointment
+      operationId: ArchiveGroupAppointment-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /group_appointments/{id}/conflicts:
+    get:
+      tags:
+      - Group Appointment
+      summary: Get conflicts for a group appointment
+      operationId: GetGroupAppointmentConflicts-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conflicts:
+                    type: object
+                    properties:
+                      exist:
+                        type: boolean
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    GroupAppointment:
+      type: object
+      properties:
+        appointment_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_types/1
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendees:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/group_appointments/1/attendees
+        business:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1
+        conflicts:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/group_appointments/1/conflicts
+                  format: uri
+                  type: string
+              type: object
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ends_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/group_appointments/1
+        max_attendees:
+          type: integer
+          exclusiveMinimum: 1
+          exclusiveMaximum: 100
+        notes:
+          type:
+          - string
+          - 'null'
+        patient_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: int64
+            example: '1'
+        practitioner:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/practitioners/1
+        repeat_rule:
+          type:
+          - object
+          - 'null'
+          properties:
+            number_of_repeats:
+              type:
+              - integer
+              - 'null'
+              exclusiveMinimum: 0
+            repeat_type:
+              type:
+              - string
+              - 'null'
+              enum:
+              - Daily
+              - Monthly
+              - Weekly
+            repeating_interval:
+              type:
+              - integer
+              - 'null'
+              maximum: 100
+              exclusiveMinimum: 0
+        repeated_from:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/group_appointments/1
+        repeats:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/group_appointments?q[]=repeated_from_id:=1
+                  format: uri
+                  type: string
+              type: object
+        starts_at:
+          type: string
+          format: date-time
+        telehealth_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Group Appointment
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  requestBodies:
+    GroupAppointment:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              appointment_type_id:
+                type: string
+                format: int64
+                description: appointment type id
+                example: '1'
+              business_id:
+                type: string
+                format: int64
+                description: business id
+                example: '1'
+              ends_at:
+                type: string
+                format: date-time
+                description: If not provided on create or set to null on update, this will be based on the duration of the appointment type.
+              max_attendees:
+                type: integer
+                description: If not provided on create, this will be based on the max_attendees of the appointment type.
+                exclusiveMinimum: 1
+                exclusiveMaximum: 100
+              notes:
+                type:
+                - string
+                - 'null'
+              practitioner_id:
+                type: string
+                format: int64
+                description: practitioner id
+                example: '1'
+              starts_at:
+                type: string
+                format: date-time
+              repeat_rule:
+                type:
+                - object
+                - 'null'
+                properties:
+                  number_of_repeats:
+                    type:
+                    - integer
+                    - 'null'
+                    exclusiveMinimum: 0
+                  repeat_type:
+                    type:
+                    - string
+                    - 'null'
+                    enum:
+                    - Daily
+                    - Monthly
+                    - Weekly
+                  repeating_interval:
+                    type:
+                    - integer
+                    - 'null'
+                    maximum: 100
+                    exclusiveMinimum: 0
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

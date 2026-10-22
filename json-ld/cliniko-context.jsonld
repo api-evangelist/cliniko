@@ -1,0 +1,1192 @@
+{
+  "@context": {
+    "@vocab": "https://cliniko.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "cliniko": "https://cliniko.com/schema#",
+    "AppointmentType": "cliniko:AppointmentType",
+    "add_deposit_to_account_credit": {
+      "@id": "cliniko:add_deposit_to_account_credit",
+      "@type": "xsd:boolean"
+    },
+    "appointment_confirmation_template_ids": {
+      "@id": "cliniko:appointment_confirmation_template_ids",
+      "@container": "@list"
+    },
+    "appointment_follow_up_template_ids": {
+      "@id": "cliniko:appointment_follow_up_template_ids",
+      "@container": "@list"
+    },
+    "appointment_reminder_template_ids": {
+      "@id": "cliniko:appointment_reminder_template_ids",
+      "@container": "@list"
+    },
+    "appointment_type_billable_items": {
+      "@id": "cliniko:appointment_type_billable_items"
+    },
+    "appointment_type_products": {
+      "@id": "cliniko:appointment_type_products"
+    },
+    "archived_at": {
+      "@id": "cliniko:archived_at",
+      "@type": "xsd:dateTime"
+    },
+    "billable_item": {
+      "@id": "cliniko:billable_item"
+    },
+    "category": {
+      "@id": "cliniko:category",
+      "@type": "xsd:string"
+    },
+    "color": {
+      "@id": "cliniko:color",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "cliniko:created_at",
+      "@type": "xsd:dateTime"
+    },
+    "deposit_price": {
+      "@id": "cliniko:deposit_price",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "cliniko:description",
+      "@type": "xsd:string"
+    },
+    "duration_in_minutes": {
+      "@id": "cliniko:duration_in_minutes",
+      "@type": "xsd:integer"
+    },
+    "id": {
+      "@id": "cliniko:id",
+      "@type": "xsd:string"
+    },
+    "links": {
+      "@id": "cliniko:links"
+    },
+    "max_attendees": {
+      "@id": "cliniko:max_attendees",
+      "@type": "xsd:integer"
+    },
+    "name": {
+      "@id": "cliniko:name",
+      "@type": "xsd:string"
+    },
+    "online_bookings_lead_time_hours": {
+      "@id": "cliniko:online_bookings_lead_time_hours",
+      "@type": "xsd:integer"
+    },
+    "online_payments_enabled": {
+      "@id": "cliniko:online_payments_enabled",
+      "@type": "xsd:boolean"
+    },
+    "online_payments_mode": {
+      "@id": "cliniko:online_payments_mode",
+      "@type": "xsd:string"
+    },
+    "practitioners": {
+      "@id": "cliniko:practitioners"
+    },
+    "product": {
+      "@id": "cliniko:product"
+    },
+    "show_in_online_bookings": {
+      "@id": "cliniko:show_in_online_bookings",
+      "@type": "xsd:boolean"
+    },
+    "telehealth_enabled": {
+      "@id": "cliniko:telehealth_enabled",
+      "@type": "xsd:boolean"
+    },
+    "treatment_note_template": {
+      "@id": "cliniko:treatment_note_template"
+    },
+    "updated_at": {
+      "@id": "cliniko:updated_at",
+      "@type": "xsd:dateTime"
+    },
+    "AppointmentTypeBillableItem": "cliniko:AppointmentTypeBillableItem",
+    "appointment_type": {
+      "@id": "cliniko:appointment_type"
+    },
+    "discount_percentage": {
+      "@id": "cliniko:discount_percentage",
+      "@type": "xsd:string"
+    },
+    "discounted_amount": {
+      "@id": "cliniko:discounted_amount",
+      "@type": "xsd:string"
+    },
+    "is_monetary_discount": {
+      "@id": "cliniko:is_monetary_discount",
+      "@type": "xsd:boolean"
+    },
+    "quantity": {
+      "@id": "cliniko:quantity",
+      "@type": "xsd:string"
+    },
+    "AppointmentTypeProduct": "cliniko:AppointmentTypeProduct",
+    "AttachmentPresignedPost": "cliniko:AttachmentPresignedPost",
+    "fields": {
+      "@id": "cliniko:fields"
+    },
+    "url": {
+      "@id": "cliniko:url",
+      "@type": "@id"
+    },
+    "Attendee": "cliniko:Attendee",
+    "arrived": {
+      "@id": "cliniko:arrived",
+      "@type": "xsd:boolean"
+    },
+    "booking": {
+      "@id": "cliniko:booking"
+    },
+    "booking_ip_address": {
+      "@id": "cliniko:booking_ip_address",
+      "@type": "xsd:string"
+    },
+    "cancellation_note": {
+      "@id": "cliniko:cancellation_note",
+      "@type": "xsd:string"
+    },
+    "cancellation_reason": {
+      "@id": "cliniko:cancellation_reason",
+      "@type": "xsd:integer"
+    },
+    "cancellation_reason_description": {
+      "@id": "cliniko:cancellation_reason_description",
+      "@type": "xsd:string"
+    },
+    "cancellation_url": {
+      "@id": "cliniko:cancellation_url",
+      "@type": "@id"
+    },
+    "cancelled_at": {
+      "@id": "cliniko:cancelled_at",
+      "@type": "xsd:dateTime"
+    },
+    "deleted_at": {
+      "@id": "cliniko:deleted_at",
+      "@type": "xsd:dateTime"
+    },
+    "email_reminder_sent": {
+      "@id": "cliniko:email_reminder_sent",
+      "@type": "xsd:boolean"
+    },
+    "invoice_status": {
+      "@id": "cliniko:invoice_status",
+      "@type": "xsd:integer"
+    },
+    "invoices": {
+      "@id": "cliniko:invoices"
+    },
+    "notes": {
+      "@id": "cliniko:notes",
+      "@type": "xsd:string"
+    },
+    "online_booking_policy_accepted": {
+      "@id": "cliniko:online_booking_policy_accepted",
+      "@type": "xsd:boolean"
+    },
+    "patient": {
+      "@id": "cliniko:patient"
+    },
+    "patient_case": {
+      "@id": "cliniko:patient_case"
+    },
+    "patient_forms": {
+      "@id": "cliniko:patient_forms"
+    },
+    "sent_email_follow_ups_count": {
+      "@id": "cliniko:sent_email_follow_ups_count",
+      "@type": "xsd:integer"
+    },
+    "sent_email_reminders_count": {
+      "@id": "cliniko:sent_email_reminders_count",
+      "@type": "xsd:integer"
+    },
+    "sent_sms_follow_ups_count": {
+      "@id": "cliniko:sent_sms_follow_ups_count",
+      "@type": "xsd:integer"
+    },
+    "sent_sms_reminders_count": {
+      "@id": "cliniko:sent_sms_reminders_count",
+      "@type": "xsd:integer"
+    },
+    "sms_reminder_sent": {
+      "@id": "cliniko:sms_reminder_sent",
+      "@type": "xsd:boolean"
+    },
+    "telehealth_url": {
+      "@id": "cliniko:telehealth_url",
+      "@type": "@id"
+    },
+    "treatment_note_status": {
+      "@id": "cliniko:treatment_note_status",
+      "@type": "xsd:integer"
+    },
+    "treatment_notes": {
+      "@id": "cliniko:treatment_notes"
+    },
+    "AvailabilityBlock": "cliniko:AvailabilityBlock",
+    "business": {
+      "@id": "cliniko:business"
+    },
+    "ends_at": {
+      "@id": "cliniko:ends_at",
+      "@type": "xsd:dateTime"
+    },
+    "practitioner": {
+      "@id": "cliniko:practitioner"
+    },
+    "repeat_rule": {
+      "@id": "cliniko:repeat_rule"
+    },
+    "starts_at": {
+      "@id": "cliniko:starts_at",
+      "@type": "xsd:dateTime"
+    },
+    "BillableItem": "cliniko:BillableItem",
+    "concession_prices": {
+      "@id": "cliniko:concession_prices"
+    },
+    "item_code": {
+      "@id": "cliniko:item_code",
+      "@type": "xsd:string"
+    },
+    "item_type": {
+      "@id": "cliniko:item_type",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "cliniko:price",
+      "@type": "xsd:string"
+    },
+    "tax": {
+      "@id": "cliniko:tax"
+    },
+    "BodyChart": "cliniko:BodyChart",
+    "images": {
+      "@id": "cliniko:images"
+    },
+    "treatment_note": {
+      "@id": "cliniko:treatment_note"
+    },
+    "Business": "cliniko:Business",
+    "additional_information": {
+      "@id": "cliniko:additional_information",
+      "@type": "xsd:string"
+    },
+    "additional_invoice_information": {
+      "@id": "cliniko:additional_invoice_information",
+      "@type": "xsd:string"
+    },
+    "address_1": {
+      "@id": "cliniko:address_1",
+      "@type": "xsd:string"
+    },
+    "address_2": {
+      "@id": "cliniko:address_2",
+      "@type": "xsd:string"
+    },
+    "appointment_reminders_enabled": {
+      "@id": "cliniko:appointment_reminders_enabled",
+      "@type": "xsd:boolean"
+    },
+    "appointment_type_ids": {
+      "@id": "cliniko:appointment_type_ids",
+      "@container": "@list"
+    },
+    "appointments": {
+      "@id": "cliniko:appointments"
+    },
+    "business_name": {
+      "@id": "cliniko:business_name",
+      "@type": "xsd:string"
+    },
+    "business_registration_name": {
+      "@id": "cliniko:business_registration_name",
+      "@type": "xsd:string"
+    },
+    "business_registration_value": {
+      "@id": "cliniko:business_registration_value",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "cliniko:city",
+      "@type": "xsd:string"
+    },
+    "contact_information": {
+      "@id": "cliniko:contact_information",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "cliniko:country",
+      "@type": "xsd:string"
+    },
+    "country_code": {
+      "@id": "cliniko:country_code",
+      "@type": "xsd:string"
+    },
+    "display_name": {
+      "@id": "cliniko:display_name",
+      "@type": "xsd:string"
+    },
+    "email_reply_to": {
+      "@id": "cliniko:email_reply_to",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "cliniko:label",
+      "@type": "xsd:string"
+    },
+    "post_code": {
+      "@id": "cliniko:post_code",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "cliniko:state",
+      "@type": "xsd:string"
+    },
+    "time_zone": {
+      "@id": "cliniko:time_zone",
+      "@type": "xsd:string"
+    },
+    "time_zone_identifier": {
+      "@id": "cliniko:time_zone_identifier",
+      "@type": "xsd:string"
+    },
+    "website_address": {
+      "@id": "cliniko:website_address",
+      "@type": "xsd:string"
+    },
+    "ConcessionPrice": "cliniko:ConcessionPrice",
+    "concession_type": {
+      "@id": "cliniko:concession_type"
+    },
+    "ConcessionType": "cliniko:ConcessionType",
+    "Contact": "cliniko:Contact",
+    "address_3": {
+      "@id": "cliniko:address_3",
+      "@type": "xsd:string"
+    },
+    "company_name": {
+      "@id": "cliniko:company_name",
+      "@type": "xsd:string"
+    },
+    "doctor_type": {
+      "@id": "cliniko:doctor_type",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "cliniko:email",
+      "@type": "xsd:string"
+    },
+    "first_name": {
+      "@id": "cliniko:first_name",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "cliniko:last_name",
+      "@type": "xsd:string"
+    },
+    "occupation": {
+      "@id": "cliniko:occupation",
+      "@type": "xsd:string"
+    },
+    "phone_numbers": {
+      "@id": "cliniko:phone_numbers",
+      "@container": "@list"
+    },
+    "preferred_name": {
+      "@id": "cliniko:preferred_name",
+      "@type": "xsd:string"
+    },
+    "provider_number": {
+      "@id": "cliniko:provider_number",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "cliniko:title",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "cliniko:type",
+      "@type": "xsd:string"
+    },
+    "type_code": {
+      "@id": "cliniko:type_code",
+      "@type": "xsd:integer"
+    },
+    "DailyAvailability": "cliniko:DailyAvailability",
+    "availabilities": {
+      "@id": "cliniko:availabilities",
+      "@container": "@list"
+    },
+    "day_of_week": {
+      "@id": "cliniko:day_of_week",
+      "@type": "xsd:integer"
+    },
+    "EmailCommunication": "cliniko:EmailCommunication",
+    "attendee": {
+      "@id": "cliniko:attendee"
+    },
+    "category_code": {
+      "@id": "cliniko:category_code",
+      "@type": "xsd:integer"
+    },
+    "content": {
+      "@id": "cliniko:content",
+      "@type": "xsd:string"
+    },
+    "content_subject": {
+      "@id": "cliniko:content_subject",
+      "@type": "xsd:string"
+    },
+    "direction_code": {
+      "@id": "cliniko:direction_code",
+      "@type": "xsd:integer"
+    },
+    "direction_description": {
+      "@id": "cliniko:direction_description",
+      "@type": "xsd:string"
+    },
+    "from": {
+      "@id": "cliniko:from",
+      "@type": "xsd:string"
+    },
+    "invoice": {
+      "@id": "cliniko:invoice"
+    },
+    "letter": {
+      "@id": "cliniko:letter"
+    },
+    "payment": {
+      "@id": "cliniko:payment"
+    },
+    "to": {
+      "@id": "cliniko:to",
+      "@type": "xsd:string"
+    },
+    "FullPatientExport": "cliniko:FullPatientExport",
+    "content_type": {
+      "@id": "cliniko:content_type",
+      "@type": "xsd:string"
+    },
+    "filename": {
+      "@id": "cliniko:filename",
+      "@type": "xsd:string"
+    },
+    "pinned_at": {
+      "@id": "cliniko:pinned_at",
+      "@type": "xsd:dateTime"
+    },
+    "processed_at": {
+      "@id": "cliniko:processed_at",
+      "@type": "xsd:dateTime"
+    },
+    "processing_completed": {
+      "@id": "cliniko:processing_completed",
+      "@type": "xsd:boolean"
+    },
+    "size": {
+      "@id": "cliniko:size",
+      "@type": "xsd:string"
+    },
+    "user": {
+      "@id": "cliniko:user"
+    },
+    "FullPatientExportBody": "cliniko:FullPatientExportBody",
+    "GroupAppointment": "cliniko:GroupAppointment",
+    "attendees": {
+      "@id": "cliniko:attendees"
+    },
+    "conflicts": {
+      "@id": "cliniko:conflicts"
+    },
+    "patient_ids": {
+      "@id": "cliniko:patient_ids",
+      "@container": "@list"
+    },
+    "repeated_from": {
+      "@id": "cliniko:repeated_from"
+    },
+    "repeats": {
+      "@id": "cliniko:repeats"
+    },
+    "IndividualAppointment": "cliniko:IndividualAppointment",
+    "did_not_arrive": {
+      "@id": "cliniko:did_not_arrive",
+      "@type": "xsd:boolean"
+    },
+    "has_patient_appointment_notes": {
+      "@id": "cliniko:has_patient_appointment_notes",
+      "@type": "xsd:boolean"
+    },
+    "patient_arrived": {
+      "@id": "cliniko:patient_arrived",
+      "@type": "xsd:boolean"
+    },
+    "patient_name": {
+      "@id": "cliniko:patient_name",
+      "@type": "xsd:string"
+    },
+    "Invoice": "cliniko:Invoice",
+    "appointment": {
+      "@id": "cliniko:appointment"
+    },
+    "calculation_method": {
+      "@id": "cliniko:calculation_method",
+      "@type": "xsd:integer"
+    },
+    "calculation_method_description": {
+      "@id": "cliniko:calculation_method_description",
+      "@type": "xsd:string"
+    },
+    "closed_at": {
+      "@id": "cliniko:closed_at",
+      "@type": "xsd:dateTime"
+    },
+    "invoice_items": {
+      "@id": "cliniko:invoice_items"
+    },
+    "invoice_to": {
+      "@id": "cliniko:invoice_to",
+      "@type": "xsd:string"
+    },
+    "issue_date": {
+      "@id": "cliniko:issue_date",
+      "@type": "xsd:date"
+    },
+    "net_amount": {
+      "@id": "cliniko:net_amount",
+      "@type": "xsd:string"
+    },
+    "number": {
+      "@id": "cliniko:number",
+      "@type": "xsd:integer"
+    },
+    "online_payment_url": {
+      "@id": "cliniko:online_payment_url",
+      "@type": "@id"
+    },
+    "original_invoice": {
+      "@id": "cliniko:original_invoice"
+    },
+    "patient_extra_information": {
+      "@id": "cliniko:patient_extra_information",
+      "@type": "xsd:string"
+    },
+    "reversed_invoices": {
+      "@id": "cliniko:reversed_invoices"
+    },
+    "signature": {
+      "@id": "cliniko:signature"
+    },
+    "status": {
+      "@id": "cliniko:status",
+      "@type": "xsd:integer"
+    },
+    "status_description": {
+      "@id": "cliniko:status_description",
+      "@type": "xsd:string"
+    },
+    "tax_amount": {
+      "@id": "cliniko:tax_amount",
+      "@type": "xsd:string"
+    },
+    "total_amount": {
+      "@id": "cliniko:total_amount",
+      "@type": "xsd:string"
+    },
+    "InvoiceItem": "cliniko:InvoiceItem",
+    "code": {
+      "@id": "cliniko:code",
+      "@type": "xsd:string"
+    },
+    "concession_type_name": {
+      "@id": "cliniko:concession_type_name",
+      "@type": "xsd:string"
+    },
+    "net_price": {
+      "@id": "cliniko:net_price",
+      "@type": "xsd:string"
+    },
+    "tax_name": {
+      "@id": "cliniko:tax_name",
+      "@type": "xsd:string"
+    },
+    "tax_rate": {
+      "@id": "cliniko:tax_rate",
+      "@type": "xsd:string"
+    },
+    "total_including_tax": {
+      "@id": "cliniko:total_including_tax",
+      "@type": "xsd:decimal"
+    },
+    "unit_price": {
+      "@id": "cliniko:unit_price",
+      "@type": "xsd:string"
+    },
+    "MedicalAlert": "cliniko:MedicalAlert",
+    "MemoCommunication": "cliniko:MemoCommunication",
+    "confidential": {
+      "@id": "cliniko:confidential",
+      "@type": "xsd:boolean"
+    },
+    "MemoCommunicationBody": "cliniko:MemoCommunicationBody",
+    "patient_id": {
+      "@id": "cliniko:patient_id",
+      "@type": "xsd:string"
+    },
+    "Patient": "cliniko:Patient",
+    "accepted_email_marketing": {
+      "@id": "cliniko:accepted_email_marketing",
+      "@type": "xsd:boolean"
+    },
+    "accepted_privacy_policy": {
+      "@id": "cliniko:accepted_privacy_policy",
+      "@type": "xsd:boolean"
+    },
+    "accepted_sms_marketing": {
+      "@id": "cliniko:accepted_sms_marketing",
+      "@type": "xsd:boolean"
+    },
+    "appointment_notes": {
+      "@id": "cliniko:appointment_notes",
+      "@type": "xsd:string"
+    },
+    "custom_fields": {
+      "@id": "cliniko:custom_fields"
+    },
+    "date_of_birth": {
+      "@id": "cliniko:date_of_birth",
+      "@type": "xsd:date"
+    },
+    "dva_card_number": {
+      "@id": "cliniko:dva_card_number",
+      "@type": "xsd:string"
+    },
+    "emergency_contact": {
+      "@id": "cliniko:emergency_contact",
+      "@type": "xsd:string"
+    },
+    "follow_ups_communication_channels": {
+      "@id": "cliniko:follow_ups_communication_channels",
+      "@container": "@list"
+    },
+    "follow_ups_communication_channels_description": {
+      "@id": "cliniko:follow_ups_communication_channels_description",
+      "@type": "xsd:string"
+    },
+    "gender": {
+      "@id": "cliniko:gender",
+      "@type": "xsd:string"
+    },
+    "gender_identity": {
+      "@id": "cliniko:gender_identity",
+      "@type": "xsd:string"
+    },
+    "invoice_default_to": {
+      "@id": "cliniko:invoice_default_to",
+      "@type": "xsd:string"
+    },
+    "invoice_email": {
+      "@id": "cliniko:invoice_email",
+      "@type": "xsd:string"
+    },
+    "invoice_extra_information": {
+      "@id": "cliniko:invoice_extra_information",
+      "@type": "xsd:string"
+    },
+    "latest_booking": {
+      "@id": "cliniko:latest_booking"
+    },
+    "medical_alerts": {
+      "@id": "cliniko:medical_alerts"
+    },
+    "medicare": {
+      "@id": "cliniko:medicare",
+      "@type": "xsd:string"
+    },
+    "medicare_reference_number": {
+      "@id": "cliniko:medicare_reference_number",
+      "@type": "xsd:string"
+    },
+    "merged_at": {
+      "@id": "cliniko:merged_at",
+      "@type": "xsd:dateTime"
+    },
+    "merged_with_patient": {
+      "@id": "cliniko:merged_with_patient"
+    },
+    "old_reference_id": {
+      "@id": "cliniko:old_reference_id",
+      "@type": "xsd:string"
+    },
+    "patient_attachments": {
+      "@id": "cliniko:patient_attachments"
+    },
+    "patient_phone_numbers": {
+      "@id": "cliniko:patient_phone_numbers",
+      "@container": "@list"
+    },
+    "preferred_first_name": {
+      "@id": "cliniko:preferred_first_name",
+      "@type": "xsd:string"
+    },
+    "pronouns": {
+      "@id": "cliniko:pronouns"
+    },
+    "receives_cancellation_emails": {
+      "@id": "cliniko:receives_cancellation_emails",
+      "@type": "xsd:boolean"
+    },
+    "receives_confirmation_emails": {
+      "@id": "cliniko:receives_confirmation_emails",
+      "@type": "xsd:boolean"
+    },
+    "referral_source": {
+      "@id": "cliniko:referral_source",
+      "@type": "xsd:string"
+    },
+    "referring_doctor": {
+      "@id": "cliniko:referring_doctor"
+    },
+    "relationships": {
+      "@id": "cliniko:relationships"
+    },
+    "reminder_type": {
+      "@id": "cliniko:reminder_type",
+      "@type": "xsd:string"
+    },
+    "reminders_communication_channels": {
+      "@id": "cliniko:reminders_communication_channels",
+      "@container": "@list"
+    },
+    "reminders_communication_channels_description": {
+      "@id": "cliniko:reminders_communication_channels_description",
+      "@type": "xsd:string"
+    },
+    "sex": {
+      "@id": "cliniko:sex",
+      "@type": "xsd:string"
+    },
+    "PatientCase": "cliniko:PatientCase",
+    "attendee_ids": {
+      "@id": "cliniko:attendee_ids",
+      "@container": "@list"
+    },
+    "bookings": {
+      "@id": "cliniko:bookings"
+    },
+    "closed": {
+      "@id": "cliniko:closed",
+      "@type": "xsd:boolean"
+    },
+    "contact": {
+      "@id": "cliniko:contact"
+    },
+    "expiry_date": {
+      "@id": "cliniko:expiry_date",
+      "@type": "xsd:date"
+    },
+    "include_cancelled_attendees": {
+      "@id": "cliniko:include_cancelled_attendees",
+      "@type": "xsd:boolean"
+    },
+    "include_dna_attendees": {
+      "@id": "cliniko:include_dna_attendees",
+      "@type": "xsd:boolean"
+    },
+    "max_invoiceable_amount": {
+      "@id": "cliniko:max_invoiceable_amount",
+      "@type": "xsd:string"
+    },
+    "max_sessions": {
+      "@id": "cliniko:max_sessions",
+      "@type": "xsd:integer"
+    },
+    "referral": {
+      "@id": "cliniko:referral",
+      "@type": "xsd:boolean"
+    },
+    "referral_type": {
+      "@id": "cliniko:referral_type",
+      "@type": "xsd:string"
+    },
+    "PatientCustomFieldCheckboxes": "cliniko:PatientCustomFieldCheckboxes",
+    "options": {
+      "@id": "cliniko:options",
+      "@container": "@list"
+    },
+    "other": {
+      "@id": "cliniko:other"
+    },
+    "archived": {
+      "@id": "cliniko:archived",
+      "@type": "xsd:boolean"
+    },
+    "token": {
+      "@id": "cliniko:token",
+      "@type": "xsd:string"
+    },
+    "PatientCustomFieldDate": "cliniko:PatientCustomFieldDate",
+    "value": {
+      "@id": "cliniko:value",
+      "@type": "xsd:date"
+    },
+    "PatientCustomFieldDefinitionCheckboxes": "cliniko:PatientCustomFieldDefinitionCheckboxes",
+    "PatientCustomFieldDefinitionDate": "cliniko:PatientCustomFieldDefinitionDate",
+    "PatientCustomFieldDefinitionParagraph": "cliniko:PatientCustomFieldDefinitionParagraph",
+    "PatientCustomFieldDefinitionRadiobuttons": "cliniko:PatientCustomFieldDefinitionRadiobuttons",
+    "PatientCustomFieldDefinitionText": "cliniko:PatientCustomFieldDefinitionText",
+    "PatientCustomFieldParagraph": "cliniko:PatientCustomFieldParagraph",
+    "PatientCustomFieldRadiobuttons": "cliniko:PatientCustomFieldRadiobuttons",
+    "PatientCustomFieldText": "cliniko:PatientCustomFieldText",
+    "PatientForm": "cliniko:PatientForm",
+    "completed_at": {
+      "@id": "cliniko:completed_at",
+      "@type": "xsd:dateTime"
+    },
+    "edited_at": {
+      "@id": "cliniko:edited_at",
+      "@type": "xsd:dateTime"
+    },
+    "email_to_patient_on_completion": {
+      "@id": "cliniko:email_to_patient_on_completion",
+      "@type": "xsd:boolean"
+    },
+    "expired": {
+      "@id": "cliniko:expired",
+      "@type": "xsd:boolean"
+    },
+    "expires_at": {
+      "@id": "cliniko:expires_at",
+      "@type": "xsd:dateTime"
+    },
+    "patient_form_template": {
+      "@id": "cliniko:patient_form_template"
+    },
+    "restricted_to_practitioner": {
+      "@id": "cliniko:restricted_to_practitioner",
+      "@type": "xsd:boolean"
+    },
+    "signatures": {
+      "@id": "cliniko:signatures"
+    },
+    "PatientFormQuestionAddress": "cliniko:PatientFormQuestionAddress",
+    "answer": {
+      "@id": "cliniko:answer"
+    },
+    "required": {
+      "@id": "cliniko:required",
+      "@type": "xsd:boolean"
+    },
+    "patient_field_connection": {
+      "@id": "cliniko:patient_field_connection",
+      "@type": "xsd:string"
+    },
+    "PatientFormQuestionCheckboxes": "cliniko:PatientFormQuestionCheckboxes",
+    "answers": {
+      "@id": "cliniko:answers",
+      "@container": "@list"
+    },
+    "custom_field_token": {
+      "@id": "cliniko:custom_field_token",
+      "@type": "xsd:string"
+    },
+    "PatientFormQuestionDate": "cliniko:PatientFormQuestionDate",
+    "PatientFormQuestionEmail": "cliniko:PatientFormQuestionEmail",
+    "PatientFormQuestionFullName": "cliniko:PatientFormQuestionFullName",
+    "PatientFormQuestionParagraph": "cliniko:PatientFormQuestionParagraph",
+    "PatientFormQuestionPhone": "cliniko:PatientFormQuestionPhone",
+    "PatientFormQuestionPronouns": "cliniko:PatientFormQuestionPronouns",
+    "PatientFormQuestionRadiobuttons": "cliniko:PatientFormQuestionRadiobuttons",
+    "PatientFormQuestionSelect": "cliniko:PatientFormQuestionSelect",
+    "PatientFormQuestionSignature": "cliniko:PatientFormQuestionSignature",
+    "signature_id": {
+      "@id": "cliniko:signature_id",
+      "@type": "xsd:string"
+    },
+    "PatientFormQuestionText": "cliniko:PatientFormQuestionText",
+    "PatientFormTemplate": "cliniko:PatientFormTemplate",
+    "PatientFormTemplateQuestionAddress": "cliniko:PatientFormTemplateQuestionAddress",
+    "PatientFormTemplateQuestionCheckboxes": "cliniko:PatientFormTemplateQuestionCheckboxes",
+    "PatientFormTemplateQuestionDate": "cliniko:PatientFormTemplateQuestionDate",
+    "PatientFormTemplateQuestionEmail": "cliniko:PatientFormTemplateQuestionEmail",
+    "PatientFormTemplateQuestionFullName": "cliniko:PatientFormTemplateQuestionFullName",
+    "PatientFormTemplateQuestionParagraph": "cliniko:PatientFormTemplateQuestionParagraph",
+    "PatientFormTemplateQuestionPhone": "cliniko:PatientFormTemplateQuestionPhone",
+    "PatientFormTemplateQuestionPronouns": "cliniko:PatientFormTemplateQuestionPronouns",
+    "PatientFormTemplateQuestionRadiobuttons": "cliniko:PatientFormTemplateQuestionRadiobuttons",
+    "PatientFormTemplateQuestionSelect": "cliniko:PatientFormTemplateQuestionSelect",
+    "PatientFormTemplateQuestionSignature": "cliniko:PatientFormTemplateQuestionSignature",
+    "PatientFormTemplateQuestionText": "cliniko:PatientFormTemplateQuestionText",
+    "PhoneNumber": "cliniko:PhoneNumber",
+    "normalized_number": {
+      "@id": "cliniko:normalized_number",
+      "@type": "xsd:string"
+    },
+    "phone_type": {
+      "@id": "cliniko:phone_type",
+      "@type": "xsd:string"
+    },
+    "Practitioner": "cliniko:Practitioner",
+    "active": {
+      "@id": "cliniko:active",
+      "@type": "xsd:boolean"
+    },
+    "appointment_types": {
+      "@id": "cliniko:appointment_types"
+    },
+    "default_appointment_type": {
+      "@id": "cliniko:default_appointment_type"
+    },
+    "designation": {
+      "@id": "cliniko:designation",
+      "@type": "xsd:string"
+    },
+    "practitioner_reference_numbers": {
+      "@id": "cliniko:practitioner_reference_numbers"
+    },
+    "PractitionerReferenceNumber": "cliniko:PractitionerReferenceNumber",
+    "reference_number": {
+      "@id": "cliniko:reference_number",
+      "@type": "xsd:string"
+    },
+    "Product": "cliniko:Product",
+    "cost_price": {
+      "@id": "cliniko:cost_price",
+      "@type": "xsd:string"
+    },
+    "price_ex_tax": {
+      "@id": "cliniko:price_ex_tax",
+      "@type": "xsd:string"
+    },
+    "price_including_tax": {
+      "@id": "cliniko:price_including_tax",
+      "@type": "xsd:string"
+    },
+    "product_supplier": {
+      "@id": "cliniko:product_supplier"
+    },
+    "serial_number": {
+      "@id": "cliniko:serial_number",
+      "@type": "xsd:string"
+    },
+    "stock_adjustments": {
+      "@id": "cliniko:stock_adjustments"
+    },
+    "stock_level": {
+      "@id": "cliniko:stock_level",
+      "@type": "xsd:string"
+    },
+    "product_supplier_id": {
+      "@id": "cliniko:product_supplier_id",
+      "@type": "xsd:string"
+    },
+    "ProductSupplier": "cliniko:ProductSupplier",
+    "PublicSettings": "cliniko:PublicSettings",
+    "account": {
+      "@id": "cliniko:account"
+    },
+    "calendar": {
+      "@id": "cliniko:calendar"
+    },
+    "documents_and_printing": {
+      "@id": "cliniko:documents_and_printing"
+    },
+    "integrations": {
+      "@id": "cliniko:integrations"
+    },
+    "online_bookings": {
+      "@id": "cliniko:online_bookings"
+    },
+    "online_payments": {
+      "@id": "cliniko:online_payments"
+    },
+    "patient_custom_fields_definition": {
+      "@id": "cliniko:patient_custom_fields_definition"
+    },
+    "patient_privacy": {
+      "@id": "cliniko:patient_privacy"
+    },
+    "reminders": {
+      "@id": "cliniko:reminders"
+    },
+    "sms": {
+      "@id": "cliniko:sms"
+    },
+    "terminology": {
+      "@id": "cliniko:terminology"
+    },
+    "wait_list": {
+      "@id": "cliniko:wait_list"
+    },
+    "Recall": "cliniko:Recall",
+    "recall_at": {
+      "@id": "cliniko:recall_at",
+      "@type": "xsd:date"
+    },
+    "recall_type": {
+      "@id": "cliniko:recall_type"
+    },
+    "recalled": {
+      "@id": "cliniko:recalled",
+      "@type": "xsd:boolean"
+    },
+    "recalled_at": {
+      "@id": "cliniko:recalled_at",
+      "@type": "xsd:dateTime"
+    },
+    "recalled_by_user": {
+      "@id": "cliniko:recalled_by_user"
+    },
+    "RecallType": "cliniko:RecallType",
+    "default_duration": {
+      "@id": "cliniko:default_duration",
+      "@type": "xsd:integer"
+    },
+    "default_duration_type": {
+      "@id": "cliniko:default_duration_type",
+      "@type": "xsd:integer"
+    },
+    "default_duration_type_description": {
+      "@id": "cliniko:default_duration_type_description",
+      "@type": "xsd:string"
+    },
+    "ReferralSource": "cliniko:ReferralSource",
+    "referral_source_type": {
+      "@id": "cliniko:referral_source_type"
+    },
+    "referrer": {
+      "@id": "cliniko:referrer"
+    },
+    "referrer_type": {
+      "@id": "cliniko:referrer_type",
+      "@type": "xsd:string"
+    },
+    "subcategory": {
+      "@id": "cliniko:subcategory",
+      "@type": "xsd:string"
+    },
+    "ReferralSourceType": "cliniko:ReferralSourceType",
+    "referrers": {
+      "@id": "cliniko:referrers"
+    },
+    "subcategories": {
+      "@id": "cliniko:subcategories",
+      "@container": "@list"
+    },
+    "Relationship": "cliniko:Relationship",
+    "related_patient": {
+      "@id": "cliniko:related_patient"
+    },
+    "relation": {
+      "@id": "cliniko:relation",
+      "@type": "xsd:integer"
+    },
+    "relation_description": {
+      "@id": "cliniko:relation_description",
+      "@type": "xsd:string"
+    },
+    "Service": "cliniko:Service",
+    "Settings": "cliniko:Settings",
+    "Signature": "cliniko:Signature",
+    "image": {
+      "@id": "cliniko:image",
+      "@type": "xsd:string"
+    },
+    "SmsCommunication": "cliniko:SmsCommunication",
+    "StockAdjustment": "cliniko:StockAdjustment",
+    "adjustment_type": {
+      "@id": "cliniko:adjustment_type",
+      "@type": "xsd:string"
+    },
+    "Tax": "cliniko:Tax",
+    "amount": {
+      "@id": "cliniko:amount",
+      "@type": "xsd:string"
+    },
+    "rate": {
+      "@id": "cliniko:rate",
+      "@type": "xsd:string"
+    },
+    "TimeZone": "cliniko:TimeZone",
+    "TimeZoneIdentifier": "cliniko:TimeZoneIdentifier",
+    "TreatmentNote": "cliniko:TreatmentNote",
+    "author_name": {
+      "@id": "cliniko:author_name",
+      "@type": "xsd:string"
+    },
+    "body_charts": {
+      "@id": "cliniko:body_charts"
+    },
+    "draft": {
+      "@id": "cliniko:draft",
+      "@type": "xsd:boolean"
+    },
+    "finalized_at": {
+      "@id": "cliniko:finalized_at",
+      "@type": "xsd:dateTime"
+    },
+    "TreatmentNoteHistoryExport": "cliniko:TreatmentNoteHistoryExport",
+    "TreatmentNoteHistoryExportBody": "cliniko:TreatmentNoteHistoryExportBody",
+    "TreatmentNoteQuestionBodycharts": "cliniko:TreatmentNoteQuestionBodycharts",
+    "body_chart_ids": {
+      "@id": "cliniko:body_chart_ids",
+      "@container": "@list"
+    },
+    "TreatmentNoteQuestionCheckboxes": "cliniko:TreatmentNoteQuestionCheckboxes",
+    "TreatmentNoteQuestionDate": "cliniko:TreatmentNoteQuestionDate",
+    "TreatmentNoteQuestionParagraph": "cliniko:TreatmentNoteQuestionParagraph",
+    "TreatmentNoteQuestionRadiobuttons": "cliniko:TreatmentNoteQuestionRadiobuttons",
+    "TreatmentNoteQuestionText": "cliniko:TreatmentNoteQuestionText",
+    "TreatmentNoteTemplate": "cliniko:TreatmentNoteTemplate",
+    "print_settings": {
+      "@id": "cliniko:print_settings"
+    },
+    "TreatmentNoteTemplateQuestionBodycharts": "cliniko:TreatmentNoteTemplateQuestionBodycharts",
+    "TreatmentNoteTemplateQuestionCheckboxes": "cliniko:TreatmentNoteTemplateQuestionCheckboxes",
+    "TreatmentNoteTemplateQuestionDate": "cliniko:TreatmentNoteTemplateQuestionDate",
+    "TreatmentNoteTemplateQuestionParagraph": "cliniko:TreatmentNoteTemplateQuestionParagraph",
+    "TreatmentNoteTemplateQuestionRadiobuttons": "cliniko:TreatmentNoteTemplateQuestionRadiobuttons",
+    "TreatmentNoteTemplateQuestionText": "cliniko:TreatmentNoteTemplateQuestionText",
+    "UnavailableBlock": "cliniko:UnavailableBlock",
+    "unavailable_block_type": {
+      "@id": "cliniko:unavailable_block_type"
+    },
+    "UnavailableBlockType": "cliniko:UnavailableBlockType",
+    "system_controlled": {
+      "@id": "cliniko:system_controlled",
+      "@type": "xsd:boolean"
+    },
+    "UploadedPatientAttachment": "cliniko:UploadedPatientAttachment",
+    "UploadedPatientAttachmentBody": "cliniko:UploadedPatientAttachmentBody",
+    "User": "cliniko:User",
+    "role": {
+      "@id": "cliniko:role",
+      "@type": "xsd:string"
+    },
+    "user_active": {
+      "@id": "cliniko:user_active",
+      "@type": "xsd:boolean"
+    },
+    "AvailableTime": "cliniko:AvailableTime",
+    "appointment_start": {
+      "@id": "cliniko:appointment_start",
+      "@type": "xsd:dateTime"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Cliniko API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Cliniko's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-21) from openapi/cliniko-openapi.yml.",
+  "dcterms:created": "2026-10-21",
+  "dcterms:source": [
+    "openapi/cliniko-openapi.yml"
+  ]
+}

@@ -1,0 +1,491 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Product API
+  version: v1
+  description: 'Operations tagged Product across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Product
+paths:
+  /products:
+    get:
+      tags:
+      - Product
+      summary: List products
+      operationId: ListProducts-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/products?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/products?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/products?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | name | [string](/#string-filter-operators) |
+
+          | tax_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Product
+      summary: Create product
+      operationId: CreateProduct-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/Product'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /products/{id}:
+    get:
+      tags:
+      - Product
+      summary: Get product
+      operationId: GetProduct-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Product
+      summary: Update product
+      operationId: UpdateProduct-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/ProductUpdate'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Product
+      summary: Archive product
+      operationId: DeleteProduct-Delete
+      responses:
+        '204':
+          description: Resource was archived successfully
+      deprecated: true
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /products/{id}/archive:
+    post:
+      tags:
+      - Product
+      summary: Archive product
+      operationId: ArchiveProduct-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    Product:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              item_code:
+                type:
+                - string
+                - 'null'
+                maxLength: 100
+              name:
+                type: string
+                maxLength: 255
+              serial_number:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              price:
+                type: number
+                format: decimal
+              price_includes_tax:
+                type:
+                - boolean
+                - 'null'
+                description: Set the attribute to `true` if `price` is inclusive of tax and the account’s [tax calculation method](/openapi/public-settings/publicsettings#path=account/invoice_calculation_method) is `Legacy`.
+              product_supplier_id:
+                type: string
+                format: int64
+                description: product supplier id
+                example: '1'
+              stock_level:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                exclusiveMinimum: -4000000000
+                exclusiveMaximum: 4000000000
+              tax_id:
+                type:
+                - string
+                - 'null'
+                format: int64
+                description: Required if `price_includes_tax` is `true`.
+                example: '1'
+              cost_price:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: 0
+                exclusiveMaximum: 4000000000
+              notes:
+                type:
+                - string
+                - 'null'
+    ProductUpdate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              item_code:
+                type:
+                - string
+                - 'null'
+                maxLength: 100
+              name:
+                type: string
+                maxLength: 255
+              serial_number:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              price:
+                type: number
+                format: decimal
+              price_includes_tax:
+                type:
+                - boolean
+                - 'null'
+                description: Set the attribute to `true` if `price` is inclusive of tax and the account’s [tax calculation method](/openapi/public-settings/publicsettings#path=account/invoice_calculation_method) is `Legacy`.
+              product_supplier_id:
+                type: string
+                format: int64
+                description: product supplier id
+                example: '1'
+              stock_level:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                exclusiveMinimum: -4000000000
+                exclusiveMaximum: 4000000000
+              tax_id:
+                type:
+                - string
+                - 'null'
+                format: int64
+                description: Required if `price_includes_tax` is `true`.
+                example: '1'
+              cost_price:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: 0
+                exclusiveMaximum: 4000000000
+              notes:
+                type:
+                - string
+                - 'null'
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    Product:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        cost_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          minimum: 0
+          exclusiveMaximum: 4000000000
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        item_code:
+          type:
+          - string
+          - 'null'
+          maxLength: 100
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/products/1
+        name:
+          type: string
+          maxLength: 255
+        notes:
+          type:
+          - string
+          - 'null'
+        price_ex_tax:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        price_including_tax:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        product_supplier:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/product_suppliers/1
+        serial_number:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        stock_adjustments:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/stock_adjustments?q%5B%5D=product_id%3A%3D1
+        stock_level:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          exclusiveMinimum: -4000000000
+          exclusiveMaximum: 4000000000
+        tax:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/taxes/1
+        updated_at:
+          type: string
+          format: date-time
+        product_supplier_id:
+          format: int64
+          type: string
+      x-tags:
+      - Product
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

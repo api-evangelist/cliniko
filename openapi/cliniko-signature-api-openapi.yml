@@ -1,0 +1,88 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Signature API
+  version: v1
+  description: 'Operations tagged Signature across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Signature
+paths:
+  /patient_forms/{patient_form_id}/signatures/{id}:
+    get:
+      tags:
+      - Signature
+      summary: Get signature
+      operationId: GetSignature-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signature'
+      parameters:
+      - name: patient_form_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    Signature:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        image:
+          type: string
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/signatures/1
+        updated_at:
+          type: string
+          format: date-time
+        user:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/users/1
+      x-tags:
+      - Signature
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

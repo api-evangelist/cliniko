@@ -1,0 +1,247 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Available Time API
+  version: v1
+  description: 'Operations tagged Available Time across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Available Time
+  description: 'Cliniko users can configure how available times are displayed in our online bookings module.
+
+
+    The API endpoints that retrieve available times will respect these settings. The settings are:
+
+
+    Maximum number of appointments per day segment
+
+
+    Day parts are morning (before Midday), afternoon (Midday to 5pm) and evening (5pm onwards).
+
+
+    Possible settings are: 1, 2, 3, 4, 5 or unlimited.
+
+
+    Minimum advance time required for online bookings
+
+
+    This is the minimum amount of time from now that a available time will be shown.
+
+
+    Possible settings are: Now, 1 Hour, 2 Hours, 4 Hours, 6 Hours, 12 Hours, 18 Hours, 1 Day, 2 Days, 3 Days, 1 Week, 2 Weeks, 3 Weeks or 4 Weeks.
+
+
+    How far ahead bookings are offered
+
+
+    This limits how far in the future available times are offered.
+
+
+    Possible settings are: 1 Day, 1 Week, 2 Weeks, 4 Weeks, 6 Weeks, 8 Weeks, 12 Weeks, 6 Months, 1 Year, 18 Months or 2 Years
+
+
+    Business to be displayed in online bookings
+
+
+    Setting to choose which businesses can be displayed in our online bookings module.
+
+
+    The API will not return available times for businesses not enabled for online bookings.
+
+
+    Appointment Type to be displayed in online bookings
+
+
+    Setting to choose which appointment types can be displayed in our online bookings module.
+
+
+    The API will not return available times for appointment types not enabled for online bookings.
+
+
+    Practitioner to be displayed in online bookings
+
+
+    Setting to choose which practitioners can be displayed in our online bookings module.
+
+
+    The API will not return available times for practitioners not enabled for online bookings.'
+paths:
+  /businesses/{business_id}/practitioners/{practitioner_id}/appointment_types/{appointment_type_id}/available_times:
+    get:
+      tags:
+      - Available Time
+      summary: Get all available times
+      operationId: GetAllAvailableTimes-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses/1/practitioners/1/appointment_types/1/available_times?from=2013-05-21&to=2013-05-22&page=2"
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses/1/practitioners/1/appointment_types/1/available_times?from=2013-05-21&to=2013-05-22&page=1"
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses/1/practitioners/1/appointment_types/1/available_times?from=2013-05-21&to=2013-05-22&page=3"
+                  available_times:
+                    items:
+                      $ref: '#/components/schemas/AvailableTime'
+      parameters:
+      - in: path
+        name: business_id
+        required: true
+        schema:
+          example: '1'
+          format: int64
+          type: string
+      - in: path
+        name: practitioner_id
+        required: true
+        schema:
+          example: '1'
+          format: int64
+          type: string
+      - in: path
+        name: appointment_type_id
+        required: true
+        schema:
+          example: '1'
+          format: int64
+          type: string
+      - description: Cannot be more than 7 days before `to`. Cannot be older than the current date in the account's time zone.
+        in: query
+        name: from
+        required: true
+        schema:
+          format: date
+          type: string
+      - description: Cannot be more than 7 days after `from`. Cannot be older than the current date in the account's time zone.
+        in: query
+        name: to
+        required: true
+        schema:
+          format: date
+          type: string
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      description: Find appointment start times that are currently available for the practitioner based on parameters provided.
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /businesses/{business_id}/practitioners/{practitioner_id}/appointment_types/{appointment_type_id}/next_available_time:
+    get:
+      tags:
+      - Available Time
+      summary: Get next available time
+      operationId: GetNextAvailableTime-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses/1/practitioners/1/appointment_types/1/next_available_time
+                  appointment_start:
+                    format: date-time
+                    type: string
+      parameters:
+      - in: path
+        name: business_id
+        required: true
+        schema:
+          example: '1'
+          format: int64
+          type: string
+      - in: path
+        name: practitioner_id
+        required: true
+        schema:
+          example: '1'
+          format: int64
+          type: string
+      - in: path
+        name: appointment_type_id
+        required: true
+        schema:
+          example: '1'
+          format: int64
+          type: string
+      - description: Cannot be more than 7 days before `to`. Cannot be older than the current date in the account's time zone.
+        in: query
+        name: from
+        required: true
+        schema:
+          format: date
+          type: string
+      - description: Cannot be more than 7 days after `from`. Cannot be older than the current date in the account's time zone.
+        in: query
+        name: to
+        required: true
+        schema:
+          format: date
+          type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    AvailableTime:
+      properties:
+        appointment_start:
+          format: date-time
+          type: string
+      x-tags:
+      - Available Time
+  parameters:
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

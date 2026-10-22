@@ -1,0 +1,26 @@
+generated: '2026-10-21'
+method: searched
+source: https://docs.api.cliniko.com/
+standards:
+- id: tls-1.2
+  conforms: true
+  evidence: 'https://docs.api.cliniko.com/index.html.md: "Ensure that the HTTP client is up-to-date and has the latest TLS (minimum of 1.2)" and
+    "HTTP is not supported."'
+- id: rfc7617-http-basic
+  conforms: true
+  evidence: 'https://docs.api.cliniko.com/index.html.md: "The Cliniko API uses HTTP Basic authentication."'
+- id: oauth2
+  conforms: false
+  evidence: No OAuth flow is documented; authentication is per-user API keys over HTTP Basic.
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.3
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: pagination
+  conforms: true
+  evidence: list operations take page, per_page

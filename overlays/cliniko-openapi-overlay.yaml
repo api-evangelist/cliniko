@@ -1,0 +1,121 @@
+overlay: 1.0.0
+info:
+  title: Cliniko API enhancements overlay
+  version: 1.0.0
+extends: ../openapi/_original/cliniko-openapi.yml
+actions:
+- target: $.info
+  description: Record provenance of the enhanced contract
+  update:
+    x-apievangelist-generated: '2026-10-21'
+    x-apievangelist-source: https://docs.api.cliniko.com/_bundle/openapi.yaml
+- target: $.servers[0]
+  description: Document the shard-based server selection
+  update:
+    description: Production. The shard (for example au1 or uk1) is the suffix of your API key; replace au1 accordingly.
+- target: $.components.securitySchemes.basicAuth
+  description: Clarify credential usage
+  update:
+    description: 'HTTP Basic auth: the Cliniko API key is the username and the password is blank. Requests must also send a User-Agent naming
+      the app and a contact email.'
+- target: $.info
+  description: Rate limit note
+  update:
+    x-rate-limit:
+      limit_text: 200 requests per minute per user (API key); 429 with X-RateLimit-Reset on exceed
+      source: rate-limits/cliniko-rate-limits.yml
+- target: $.paths['/appointment_types/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/appointment_type_billable_items/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/appointment_type_products/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/attendees/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/billable_items/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/businesses/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/contacts/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/group_appointments/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/individual_appointments/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/medical_alerts/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/patients/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/patient_attachments/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/practitioner_reference_numbers/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/products/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/product_suppliers/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/taxes/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/treatment_notes/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/treatment_note_templates/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true
+- target: $.paths['/unavailable_blocks/{id}'].delete
+  description: Agent hint
+  update:
+    x-agent-read-only: false
+    x-agent-destructive: true

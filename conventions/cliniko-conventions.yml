@@ -1,0 +1,67 @@
+generated: '2026-10-21'
+method: searched
+source: https://docs.api.cliniko.com/
+docs: https://docs.api.cliniko.com/index.html.md
+style: REST, JSON only ("We only support JSON for serialization of data.")
+base_url: https://api.{shard}.cliniko.com/v1
+regional_sharding:
+  docs: https://docs.api.cliniko.com/guides/sharding.md
+  note: Accounts live in a regional shard (au1, uk1, ca1 ...); the shard is the suffix on the API key.
+authentication:
+  style: HTTP Basic, API key as username, empty password
+  see: authentication/cliniko-authentication.yml
+required_headers: [Accept: application/json, "User-Agent: APP_VENDOR_NAME (APP_VENDOR_EMAIL)"]
+idempotency:
+  coverage: none
+  note: No idempotency key or replay protection is documented in the introduction or the OpenAPI contract.
+pagination:
+  style: page-number
+  params: [page, per_page]
+  default_page_size: 50
+  max_page_size: 100
+  response_fields: [total_entries, links.next, links.self, links.previous]
+  text: Requests that return multiple items will be paginated to 50 items by default. You can specify further pages with the `page` parameter. You can also set a custom page size up to 100 with the `per_page` parameter.
+filtering:
+  param: q[]
+  format: '[FIELDNAME]:[OPERATOR][VALUE]'
+  operators: ['=', '!=', '>=', '>', '<=', '<', '~', '~~', '?', '!?', '*']
+  incremental_sync: q[]=updated_at:>2014-08-30T18:00:00Z
+sorting:
+  params: [sort, order]
+  default: ascending by created_at
+dates: All dates and times are expected to be in UTC.
+field_expansion: none documented
+request_id: none documented
+versioning:
+  scheme: URI path major version (/v1); dated additive and breaking changes published in the changelog
+  see: lifecycle/cliniko-lifecycle.yml
+errors:
+  shape: Conventional HTTP status codes (2xx success, 4xx caller error, 5xx server error); no error envelope or code registry is published in the introduction.
+rate_limit_signaling:
+  status: 429
+  headers: [X-RateLimit-Reset]
+  see: rate-limits/cliniko-rate-limits.yml
+dry_run_mode: none documented
+reversibility:
+  verdict: documented
+  note: Reversal paths exist for archiving and appointment cancellation, but no time window is stated in the docs, so none is recorded. Most DELETE operations are deprecated in favour of POST .../archive, which the `*` filter operator can still return ("to find cancelled or archived records").
+  surfaces:
+  - write: ArchivePatient-Post
+    reversal: UnarchivePatient-Post
+    window: null
+  - write: ArchiveBusiness-Post
+    reversal: UnarchiveBusiness-Post
+    window: null
+  - write: ArchiveTreatmentNote-Post
+    reversal: UnarchiveTreatmentNote-Post
+    window: null
+  - write: CreateIndividualAppointment-Post
+    reversal: CancelIndividualAppointment-Patch
+    window: null
+  - write: CreateAttendee-Post
+    reversal: CancelAttendee-Patch
+    window: null
+  - write: other archive operations (appointment types, contacts, products, recalls ...)
+    reversal: none documented (no unarchive operation in the contract)
+    window: null
+  docs: https://docs.api.cliniko.com/openapi.md

@@ -1,0 +1,309 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Unavailable Block Type API
+  version: v1
+  description: 'Operations tagged Unavailable Block Type across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Unavailable Block Type
+paths:
+  /unavailable_block_types:
+    get:
+      tags:
+      - Unavailable Block Type
+      summary: List unavailable block types
+      operationId: ListUnavailableBlockTypes-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unavailable_block_types:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UnavailableBlockType'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/unavailable_block_types?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/unavailable_block_types?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/unavailable_block_types?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Unavailable Block Type
+      summary: Create unavailable block type
+      operationId: CreateUnavailableBlockType-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnavailableBlockType'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/UnavailableBlockType'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /unavailable_block_types/{id}:
+    get:
+      tags:
+      - Unavailable Block Type
+      summary: Get unavailable block type
+      operationId: GetUnavailableBlockType-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnavailableBlockType'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Unavailable Block Type
+      summary: Update unavailable block type
+      operationId: UpdateUnavailableBlockType-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnavailableBlockType'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/UnavailableBlockType'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /unavailable_block_types/{id}/archive:
+    post:
+      tags:
+      - Unavailable Block Type
+      summary: Archive unavailable block type
+      operationId: ArchiveUnavailableBlockType-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    UnavailableBlockType:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              color:
+                type: string
+                pattern: ^#(\h{6}|\h{3})$
+              duration_in_minutes:
+                type: integer
+                exclusiveMinimum: 0
+                exclusiveMaximum: 1440
+              name:
+                type: string
+                maxLength: 255
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    UnavailableBlockType:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        color:
+          type: string
+          pattern: ^#(\h{6}|\h{3})$
+        created_at:
+          type: string
+          format: date-time
+        duration_in_minutes:
+          type: integer
+          exclusiveMinimum: 0
+          exclusiveMaximum: 1440
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/unavailable_block_types/1
+        name:
+          type: string
+          maxLength: 255
+        system_controlled:
+          type:
+          - boolean
+          - 'null'
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Unavailable Block Type
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

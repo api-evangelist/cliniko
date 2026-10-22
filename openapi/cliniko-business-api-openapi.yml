@@ -1,0 +1,563 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Business API
+  version: v1
+  description: 'Operations tagged Business across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Business
+  description: 'Businesses represent a business or location (e.g. a clinic). Each Cliniko account can have unlimited businesses.
+
+
+    These are typically used for each physical location if there is more than one. Most Cliniko accounts have just one
+
+    business.'
+paths:
+  /businesses:
+    get:
+      tags:
+      - Business
+      summary: List businesses
+      operationId: ListBusinesses-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  businesses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Business'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/businesses?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_type_ids | [array](/#array-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | show_in_online_bookings | [boolean](/#boolean-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Business
+      summary: Create business
+      operationId: CreateBusiness-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Business'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/Business'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /businesses/{id}:
+    get:
+      tags:
+      - Business
+      summary: Get business
+      operationId: GetBusiness-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Business'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Business
+      summary: Update business
+      operationId: UpdateBusiness-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Business'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/Business'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Business
+      summary: Archive business
+      operationId: DeleteBusiness-Delete
+      responses:
+        '204':
+          description: Resource was archived successfully
+      deprecated: true
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /businesses/{id}/archive:
+    post:
+      tags:
+      - Business
+      summary: Archive business
+      operationId: ArchiveBusiness-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /businesses/{id}/unarchive:
+    post:
+      tags:
+      - Business
+      summary: Unarchive business
+      operationId: UnarchiveBusiness-Post
+      responses:
+        '200':
+          description: Resource was unarchived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Business'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    Business:
+      type: object
+      properties:
+        additional_information:
+          type:
+          - string
+          - 'null'
+          maxLength: 5000
+        additional_invoice_information:
+          type:
+          - string
+          - 'null'
+          maxLength: 5000
+        address_1:
+          type:
+          - string
+          - 'null'
+        address_2:
+          type:
+          - string
+          - 'null'
+        appointment_reminders_enabled:
+          type:
+          - boolean
+          - 'null'
+        appointment_type_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: int64
+            example: '1'
+        appointments:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1/appointments
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        business_name:
+          type:
+          - string
+          - 'null'
+        business_registration_name:
+          type:
+          - string
+          - 'null'
+        business_registration_value:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        contact_information:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        country_code:
+          type:
+          - string
+          - 'null'
+          description: '[ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code'
+          example: AU
+        created_at:
+          type: string
+          format: date-time
+        display_name:
+          type:
+          - string
+          - 'null'
+        email_reply_to:
+          type:
+          - string
+          - 'null'
+          pattern: ^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
+        id:
+          type: string
+          format: int64
+        label:
+          type:
+          - string
+          - 'null'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/businesses/1
+        post_code:
+          type:
+          - string
+          - 'null'
+        practitioners:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/businesses/1/practitioners
+        show_in_online_bookings:
+          type:
+          - boolean
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        time_zone:
+          type:
+          - string
+          - 'null'
+          description: Human-readable label for a time zone. See link below for supported values.
+          example: Melbourne
+          externalDocs:
+            description: Time zone Support through the API
+            url: /guides/time_zone_support/
+        time_zone_identifier:
+          type:
+          - string
+          - 'null'
+          description: IANA identifier for a time zone. See link below for supported values.
+          example: Australia/Melbourne
+          externalDocs:
+            description: Time zone Support through the API
+            url: /guides/time_zone_support/
+        updated_at:
+          type: string
+          format: date-time
+        website_address:
+          type:
+          - string
+          - 'null'
+      x-tags:
+      - Business
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  requestBodies:
+    Business:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              additional_information:
+                type:
+                - string
+                - 'null'
+                maxLength: 5000
+              additional_invoice_information:
+                type:
+                - string
+                - 'null'
+                maxLength: 5000
+              address_1:
+                type:
+                - string
+                - 'null'
+              address_2:
+                type:
+                - string
+                - 'null'
+              appointment_reminders_enabled:
+                type:
+                - boolean
+                - 'null'
+              business_name:
+                type:
+                - string
+                - 'null'
+              business_registration_name:
+                type:
+                - string
+                - 'null'
+              business_registration_value:
+                type:
+                - string
+                - 'null'
+              city:
+                type:
+                - string
+                - 'null'
+              contact_information:
+                type:
+                - string
+                - 'null'
+              country_code:
+                type:
+                - string
+                - 'null'
+                description: '[ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code'
+                example: AU
+              display_name:
+                type:
+                - string
+                - 'null'
+              email_reply_to:
+                type:
+                - string
+                - 'null'
+                pattern: ^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
+              logo:
+                type: string
+                description: Base64 encoded file attachment
+              logo_height:
+                type: integer
+              post_code:
+                type:
+                - string
+                - 'null'
+              remove_logo:
+                type: boolean
+              show_in_online_bookings:
+                type:
+                - boolean
+                - 'null'
+              state:
+                type:
+                - string
+                - 'null'
+              time_zone:
+                type:
+                - string
+                - 'null'
+                description: 'See: [supported time zones](/guides/time_zone_support/#accepted-values-for-time_zone)'
+                example: Melbourne
+              time_zone_identifier:
+                type:
+                - string
+                - 'null'
+                description: 'See: [supported time zone identifiers](/guides/time_zone_support/#accepted-values-for-time_zone_identifier)'
+                example: Australia/Melbourne
+              website_address:
+                type:
+                - string
+                - 'null'
+              appointment_type_ids:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: string
+                  format: int64
+                  example: '1'
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

@@ -1,0 +1,301 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Concession Price API
+  version: v1
+  description: 'Operations tagged Concession Price across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Concession Price
+paths:
+  /concession_prices:
+    get:
+      tags:
+      - Concession Price
+      summary: List concession prices
+      operationId: ListConcessionPrices-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  concession_prices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConcessionPrice'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/concession_prices?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/concession_prices?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/concession_prices?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | billable_item_id | [int64](/#numeric-filter-operators) |
+
+          | concession_type_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Concession Price
+      summary: Create concession price
+      operationId: CreateConcessionPrice-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcessionPrice'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/ConcessionPriceCreate'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /concession_prices/{id}:
+    get:
+      tags:
+      - Concession Price
+      summary: Get concession price
+      operationId: GetConcessionPrice-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcessionPrice'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    patch:
+      tags:
+      - Concession Price
+      summary: Update concession price
+      operationId: UpdateConcessionPrice-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcessionPrice'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/ConcessionPriceUpdate'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    ConcessionPriceUpdate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              price:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: -4000000000
+                exclusiveMaximum: 4000000000
+    ConcessionPriceCreate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              billable_item_id:
+                type: string
+                format: int64
+                description: billable item id
+                example: '1'
+              concession_type_id:
+                type: string
+                format: int64
+                description: concession type id
+                example: '1'
+              price:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: -4000000000
+                exclusiveMaximum: 4000000000
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    ConcessionPrice:
+      type: object
+      properties:
+        billable_item:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/billable_items/1
+        concession_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/concession_types/1
+        created_at:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/concession_prices/1
+        price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          minimum: -4000000000
+          exclusiveMaximum: 4000000000
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Concession Price
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

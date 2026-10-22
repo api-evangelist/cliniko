@@ -1,0 +1,18 @@
+generated: '2026-10-21'
+method: searched
+source: https://docs.api.cliniko.com/changelog
+versioning: >-
+  Single major version in the URI path (https://api.{shard}.cliniko.com/v1, OpenAPI info.version v1).
+  Changes are published as dated entries in the API changelog, generated as OpenAPI diffs
+  (endpoint added, property deprecated, api path removed with deprecation).
+deprecation: >-
+  Deprecation is signalled in the contract (25 operations carry deprecated: true, mostly DELETE
+  endpoints superseded by POST .../archive) and in the changelog ("response property `deleted_at`
+  deprecated" 2026-07-23, removed 2026-08-26; "POST /medical_alerts/{id}/archive - api path removed
+  with deprecation" 2026-08-10). No written deprecation policy, notice period, or Sunset/Deprecation
+  headers are documented.
+deprecated_operation_count: 25
+status_page: https://status.cliniko.com
+changelog: https://docs.api.cliniko.com/changelog
+announcements: Cliniko API Developers Group (cliniko-api+subscribe@redguava.com.au)
+sla: none published

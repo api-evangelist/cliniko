@@ -1,0 +1,1284 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Patient API
+  version: v1
+  description: 'Operations tagged Patient across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Patient
+  description: 'Patients are the people that book in for appointments. There isn''t much in Cliniko that doesn''t revolve around
+
+    patients.
+
+
+    When you''re working with patient information, make sure you abide by the relevant regulations for security and
+
+    privacy.
+
+
+    A couple of fields in the patient record deserve special consideration:
+
+
+    `accepted_privacy_policy` stores the patient''s consent to the business''s own privacy policy. Values can be null
+
+    (no response), true (accepted) or false (rejected). Please consider how this may affect you storing information
+
+    on this patient.
+
+
+    `time_zone` will contain a valid IANA time zone identifier if the patient''s time zone has been set, or null if it
+
+    hasn''t. It can be set via the API, in which case it accepts IANA time zone identifiers.'
+paths:
+  /patients:
+    get:
+      tags:
+      - Patient
+      summary: List patients
+      operationId: ListPatients-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patients:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Patient'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | accepted_privacy_policy | [boolean](/#boolean-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | date_of_birth | [date](/#date-filter-operators) |
+
+          | email | [string](/#string-filter-operators) |
+
+          | first_name | [string](/#string-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | last_name | [string](/#string-filter-operators) |
+
+          | old_reference_id | [string](/#string-filter-operators) |
+
+          | preferred_first_name | [string](/#string-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Patient
+      summary: Create patient
+      operationId: CreatePatient-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/Patient'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patients/{id}:
+    get:
+      tags:
+      - Patient
+      summary: Get patient
+      operationId: GetPatient-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Patient
+      summary: Update patient
+      operationId: UpdatePatient-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/Patient'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Patient
+      summary: Archive patient
+      operationId: ArchivePatient-Delete
+      responses:
+        '204':
+          description: Resource was archived successfully
+      deprecated: true
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patients/{id}/archive:
+    post:
+      tags:
+      - Patient
+      summary: Archive patient
+      operationId: ArchivePatient-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patients/{id}/unarchive:
+    post:
+      tags:
+      - Patient
+      summary: Unarchive patient
+      operationId: UnarchivePatient-Post
+      responses:
+        '200':
+          description: Resource was unarchived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        accepted_email_marketing:
+          type:
+          - boolean
+          - 'null'
+        accepted_privacy_policy:
+          type:
+          - boolean
+          - 'null'
+        accepted_sms_marketing:
+          type:
+          - boolean
+          - 'null'
+        address_1:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        address_2:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        address_3:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        appointment_notes:
+          type:
+          - string
+          - 'null'
+        appointments:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1/appointments
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendees:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/attendees?q%5B%5D=patient_id%3A%3D1
+        city:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        concession_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/concession_types/1
+        country:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        country_code:
+          type:
+          - string
+          - 'null'
+          description: '[ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code'
+          example: AU
+        created_at:
+          type: string
+          format: date-time
+        custom_fields:
+          type:
+          - object
+          - 'null'
+          properties:
+            sections:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type:
+                    - string
+                    - 'null'
+                  token:
+                    type: string
+                    format: uuid
+                    example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+                  archived:
+                    type:
+                    - boolean
+                    - 'null'
+                  fields:
+                    type: array
+                    items:
+                      oneOf:
+                      - $ref: '#/components/schemas/PatientCustomFieldText'
+                      - $ref: '#/components/schemas/PatientCustomFieldParagraph'
+                      - $ref: '#/components/schemas/PatientCustomFieldDate'
+                      - $ref: '#/components/schemas/PatientCustomFieldCheckboxes'
+                      - $ref: '#/components/schemas/PatientCustomFieldRadiobuttons'
+                required:
+                - token
+                - fields
+        date_of_birth:
+          type:
+          - string
+          - 'null'
+          format: date
+        dva_card_number:
+          type:
+          - string
+          - 'null'
+          pattern: ^[NVQSWT]([A-Z ][0-9]{1,6}|[A-Z]{2}[0-9]{1,5}|[A-Z]{3}[0-9]{1,4})[A-Z]?$
+        email:
+          type:
+          - string
+          - 'null'
+          pattern: ^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
+          maxLength: 255
+        emergency_contact:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        first_name:
+          type: string
+          maxLength: 50
+        follow_ups_communication_channels:
+          type: array
+          items:
+            enum:
+            - 1
+            - 2
+            type: integer
+          description: 'Channels through which the patient will receive appointment follow-up messages.
+
+            | Enum Value | Description |
+
+            |---|---|
+
+            | 1 | SMS |
+
+            | 2 | Email |
+
+            '
+          example:
+          - 1
+          - 2
+        follow_ups_communication_channels_description:
+          type: string
+          enum:
+          - None
+          - SMS
+          - Email
+          - SMS & Email
+        gender:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        gender_identity:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: int64
+        invoice_default_to:
+          type:
+          - string
+          - 'null'
+        invoice_email:
+          type:
+          - string
+          - 'null'
+          pattern: ^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
+        invoice_extra_information:
+          type:
+          - string
+          - 'null'
+        invoices:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1/invoices
+        label:
+          type:
+          - string
+          - 'null'
+          description: Full name
+        last_name:
+          type: string
+          maxLength: 255
+        latest_booking:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/bookings/1
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/patients/1
+        medical_alerts:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1/medical_alerts
+        medicare:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        medicare_reference_number:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        merged_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        merged_with_patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        notes:
+          type:
+          - string
+          - 'null'
+        occupation:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        old_reference_id:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        patient_attachments:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1/patient_attachments
+        patient_phone_numbers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PhoneNumber'
+        post_code:
+          type:
+          - string
+          - 'null'
+        preferred_first_name:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        pronouns:
+          type:
+          - object
+          - 'null'
+          properties:
+            accusative:
+              type: string
+              maxLength: 50
+            nominative:
+              type: string
+              maxLength: 50
+            predicative_possessive:
+              type: string
+              maxLength: 50
+            pronominal_possessive:
+              type: string
+              maxLength: 50
+            reflexive:
+              type: string
+              maxLength: 50
+          required:
+          - accusative
+          - nominative
+          - predicative_possessive
+          - pronominal_possessive
+          - reflexive
+        receives_cancellation_emails:
+          type:
+          - boolean
+          - 'null'
+        receives_confirmation_emails:
+          type: boolean
+        referral_source:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        referring_doctor:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/contacts/1
+        relationships:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/relationships?q%5B%5D=patient_id%3A%3D1
+        reminder_type:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          description: Please use the `reminders_communication_channels` attribute instead.
+          enum:
+          - None
+          - SMS
+          - Email
+          - SMS & Email
+        reminders_communication_channels:
+          type: array
+          items:
+            enum:
+            - 1
+            - 2
+            type: integer
+          description: 'Channels through which the patient will receive appointment reminders.
+
+            | Enum Value | Description |
+
+            |---|---|
+
+            | 1 | SMS |
+
+            | 2 | Email |
+
+            '
+          example:
+          - 1
+          - 2
+        reminders_communication_channels_description:
+          type: string
+          enum:
+          - None
+          - SMS
+          - Email
+          - SMS & Email
+        sex:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        time_zone:
+          type:
+          - string
+          - 'null'
+          description: 'See: [supported time zone identifiers](/guides/time_zone_support/#accepted-values-for-time_zone_identifier)'
+          example: Australia/Melbourne
+        title:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Patient
+    PatientCustomFieldText:
+      type: object
+      properties:
+        value:
+          type: string
+        archived:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - text
+      required:
+      - token
+      title: Text
+    PatientCustomFieldCheckboxes:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              archived:
+                type:
+                - boolean
+                - 'null'
+              name:
+                type:
+                - string
+                - 'null'
+              token:
+                type: string
+                format: uuid
+                example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+              selected:
+                type: boolean
+            required:
+            - token
+        other:
+          type: object
+          properties:
+            enabled:
+              type:
+              - boolean
+              - 'null'
+            archived:
+              type:
+              - boolean
+              - 'null'
+            selected:
+              type: boolean
+            value:
+              type: string
+              maxLength: 255
+        archived:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - checkboxes
+      required:
+      - token
+      title: Checkboxes
+    PatientCustomFieldParagraph:
+      type: object
+      properties:
+        value:
+          type: string
+        archived:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - paragraph
+      required:
+      - token
+      title: Paragraph
+    PatientCustomFieldRadiobuttons:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              archived:
+                type:
+                - boolean
+                - 'null'
+              name:
+                type:
+                - string
+                - 'null'
+              token:
+                type: string
+                format: uuid
+                example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+              selected:
+                type: boolean
+            required:
+            - token
+        other:
+          type: object
+          properties:
+            enabled:
+              type:
+              - boolean
+              - 'null'
+            archived:
+              type:
+              - boolean
+              - 'null'
+            selected:
+              type: boolean
+            value:
+              type: string
+              maxLength: 255
+        archived:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - radiobuttons
+      required:
+      - token
+      title: Radiobuttons
+    PatientCustomFieldDate:
+      type: object
+      properties:
+        value:
+          type: string
+          format: date
+        archived:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - date
+      required:
+      - token
+      title: Date
+    PhoneNumber:
+      type: object
+      properties:
+        normalized_number:
+          type: string
+          format: phone
+          example: '39012345678'
+        number:
+          type: string
+          format: phone
+          example: 0-123-456-78
+        phone_type:
+          type: string
+          enum:
+          - Fax
+          - Home
+          - Mobile
+          - Other
+          - Work
+  requestBodies:
+    Patient:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              accepted_email_marketing:
+                type:
+                - boolean
+                - 'null'
+              accepted_privacy_policy:
+                type:
+                - boolean
+                - 'null'
+              address_1:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              address_2:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              address_3:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              appointment_notes:
+                type:
+                - string
+                - 'null'
+              city:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              concession_type_id:
+                type: string
+                format: int64
+                description: concession type id
+                example: '1'
+              country:
+                type:
+                - string
+                - 'null'
+              country_code:
+                type:
+                - string
+                - 'null'
+                description: '[ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code'
+                example: AU
+              custom_fields:
+                type:
+                - object
+                - 'null'
+                properties:
+                  sections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type:
+                          - string
+                          - 'null'
+                        token:
+                          type: string
+                          format: uuid
+                          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+                        archived:
+                          type:
+                          - boolean
+                          - 'null'
+                        fields:
+                          type: array
+                          items:
+                            oneOf:
+                            - $ref: '#/components/schemas/PatientCustomFieldText'
+                            - $ref: '#/components/schemas/PatientCustomFieldParagraph'
+                            - $ref: '#/components/schemas/PatientCustomFieldDate'
+                            - $ref: '#/components/schemas/PatientCustomFieldCheckboxes'
+                            - $ref: '#/components/schemas/PatientCustomFieldRadiobuttons'
+                      required:
+                      - token
+                      - fields
+              date_of_birth:
+                type:
+                - string
+                - 'null'
+                format: date
+              dva_card_number:
+                type:
+                - string
+                - 'null'
+                pattern: ^[NVQSWT]([A-Z ][0-9]{1,6}|[A-Z]{2}[0-9]{1,5}|[A-Z]{3}[0-9]{1,4})[A-Z]?$
+              email:
+                type:
+                - string
+                - 'null'
+                pattern: ^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
+                maxLength: 255
+              emergency_contact:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              first_name:
+                type: string
+                maxLength: 50
+              gender_identity:
+                type:
+                - string
+                - 'null'
+              invoice_default_to:
+                type:
+                - string
+                - 'null'
+              invoice_email:
+                type:
+                - string
+                - 'null'
+                pattern: ^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
+              invoice_extra_information:
+                type:
+                - string
+                - 'null'
+              last_name:
+                type: string
+                maxLength: 255
+              medicare_reference_number:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              medicare:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              notes:
+                type:
+                - string
+                - 'null'
+              occupation:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              old_reference_id:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              post_code:
+                type:
+                - string
+                - 'null'
+              preferred_first_name:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              pronouns:
+                type:
+                - object
+                - 'null'
+                properties:
+                  accusative:
+                    type: string
+                    maxLength: 50
+                  nominative:
+                    type: string
+                    maxLength: 50
+                  predicative_possessive:
+                    type: string
+                    maxLength: 50
+                  pronominal_possessive:
+                    type: string
+                    maxLength: 50
+                  reflexive:
+                    type: string
+                    maxLength: 50
+                required:
+                - accusative
+                - nominative
+                - predicative_possessive
+                - pronominal_possessive
+                - reflexive
+              receives_cancellation_emails:
+                type:
+                - boolean
+                - 'null'
+              receives_confirmation_emails:
+                type: boolean
+              referral_source:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              referring_doctor_id:
+                type: string
+                format: int64
+                description: contact id
+                example: '1'
+              reminder_type:
+                type:
+                - string
+                - 'null'
+                deprecated: true
+                description: Please use the `reminders_communication_channels` attribute instead.
+                enum:
+                - None
+                - SMS
+                - Email
+                - SMS & Email
+              sex:
+                type:
+                - string
+                - 'null'
+              state:
+                type:
+                - string
+                - 'null'
+              time_zone:
+                type:
+                - string
+                - 'null'
+                description: 'See: [supported time zone identifiers](/guides/time_zone_support/#accepted-values-for-time_zone_identifier)'
+                example: Australia/Melbourne
+              title:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              unsubscribe_sms_marketing:
+                type: boolean
+              follow_ups_communication_channels:
+                type: array
+                items:
+                  enum:
+                  - 1
+                  - 2
+                  type: integer
+                description: 'The array of communication channels that will be used for this patient''s follow-up messages.
+
+                  | Enum Value | Description |
+
+                  |---|---|
+
+                  | 1 | SMS |
+
+                  | 2 | Email |
+
+                  '
+                example:
+                - 1
+                - 2
+              reminders_communication_channels:
+                type: array
+                items:
+                  enum:
+                  - 1
+                  - 2
+                  type: integer
+                description: 'The array of communication channels that will be used for this patient''s reminders.
+
+                  | Enum Value | Description |
+
+                  |---|---|
+
+                  | 1 | SMS |
+
+                  | 2 | Email |
+
+                  '
+                example:
+                - 1
+                - 2
+              patient_phone_numbers:
+                items:
+                  properties:
+                    number:
+                      example: 0-123-456-78
+                      format: phone
+                      type: string
+                    phone_type:
+                      enum:
+                      - Fax
+                      - Home
+                      - Mobile
+                      - Other
+                      - Work
+                      type: string
+                  type: object
+                type: array
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

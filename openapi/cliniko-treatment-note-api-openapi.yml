@@ -1,0 +1,782 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Treatment Note API
+  version: v1
+  description: 'Operations tagged Treatment Note across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Treatment Note
+  description: 'Notes taken about a patient visit.
+
+
+    HTML is supported in answers to paragraph questions. We sanitize these answers to ensure the HTML is safe
+
+    and our editor can support the formatting.
+
+
+    Currently, the following tags are supported: `p`, `div`, `br`, `ul`, `ol`, `li`, `blockquote`, `h1`, `h2`, `b`, `i`, `u`, and `a`.
+
+
+    The angle bracket characters (``) should be sent as html encodings (ex: `<` should be sent as `<`).
+
+
+    Content inside unescaped angle brackets could be identified as unsupported HTML and will be stripped.'
+paths:
+  /treatment_notes:
+    get:
+      tags:
+      - Treatment Note
+      summary: List treatment notes
+      operationId: ListTreatmentNotes-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  treatment_notes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TreatmentNote'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/treatment_notes?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/treatment_notes?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/treatment_notes?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | attendee_id | [int64](/#numeric-filter-operators) |
+
+          | booking_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | draft | [boolean](/#boolean-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | treatment_note_template_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Treatment Note
+      summary: Create treatment note
+      operationId: CreateTreatmentNote-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentNote'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/TreatmentNote'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /treatment_notes/{id}:
+    get:
+      tags:
+      - Treatment Note
+      summary: Get treatment note
+      operationId: GetTreatmentNote-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentNote'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Treatment Note
+      summary: Update treatment note
+      operationId: UpdateTreatmentNote-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentNote'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/TreatmentNote'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Treatment Note
+      summary: Archive treatment note
+      operationId: DeleteTreatmentNote-Delete
+      responses:
+        '204':
+          description: Resource was archived successfully
+      deprecated: true
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patients/{patient_id}/treatment_notes:
+    get:
+      tags:
+      - Treatment Note
+      summary: List treatment notes for patient
+      operationId: ListTreatmentNotesForPatient-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  treatment_notes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TreatmentNote'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/treatment_notes?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/treatment_notes?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/treatment_notes?page=3
+      parameters:
+      - name: patient_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | attendee_id | [int64](/#numeric-filter-operators) |
+
+          | booking_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | deleted_at | [date-time](/#datetime-filter-operators) |
+
+          | draft | [boolean](/#boolean-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | practitioner_id | [int64](/#numeric-filter-operators) |
+
+          | treatment_note_template_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /treatment_notes/{id}/archive:
+    post:
+      tags:
+      - Treatment Note
+      summary: Archive treatment note
+      operationId: ArchiveTreatmentNote-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /treatment_notes/{id}/unarchive:
+    post:
+      tags:
+      - Treatment Note
+      summary: Unarchive treatment note
+      operationId: UnarchiveTreatmentNote-Post
+      responses:
+        '200':
+          description: Resource was unarchived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatmentNote'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    TreatmentNoteQuestionDate:
+      type: object
+      properties:
+        answer:
+          type: string
+          format: date
+        name:
+          type: string
+          maxLength: 255
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - date
+      required:
+      - name
+      - type
+      title: Date
+    TreatmentNote:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendee:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/attendees/1
+        author_name:
+          type:
+          - string
+          - 'null'
+        body_charts:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/body_charts?q%5B%5D=treatment_note_id%3A%3D1
+        booking:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/bookings/1
+        content:
+          type:
+          - object
+          - 'null'
+          properties:
+            sections:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type:
+                    - string
+                    - 'null'
+                    maxLength: 255
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                  questions:
+                    type: array
+                    items:
+                      oneOf:
+                      - $ref: '#/components/schemas/TreatmentNoteQuestionText'
+                      - $ref: '#/components/schemas/TreatmentNoteQuestionParagraph'
+                      - $ref: '#/components/schemas/TreatmentNoteQuestionDate'
+                      - $ref: '#/components/schemas/TreatmentNoteQuestionBodycharts'
+                      - $ref: '#/components/schemas/TreatmentNoteQuestionCheckboxes'
+                      - $ref: '#/components/schemas/TreatmentNoteQuestionRadiobuttons'
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        draft:
+          type: boolean
+        finalized_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/treatment_notes/1
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        pinned_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        practitioner:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/practitioners/1
+        title:
+          type: string
+        treatment_note_template:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/treatment_note_templates/1
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Treatment Note
+      description: 'For body chart questions, `content.sections[].questions[].body_chart_ids` contains
+
+        string IDs identifying the charts belonging to each question. Follow
+
+        `body_charts.links.self` to fetch the note''s chart collection, match records by
+
+        ID, and follow each chart''s image URLs to download the rendered images.
+
+        '
+    TreatmentNoteQuestionCheckboxes:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              selected:
+                type:
+                - boolean
+                - 'null'
+        other:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            selected:
+              type: boolean
+            value:
+              type: string
+              maxLength: 255
+        name:
+          type: string
+          maxLength: 255
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - checkboxes
+      required:
+      - name
+      - type
+      title: Checkboxes
+    TreatmentNoteQuestionBodycharts:
+      type: object
+      properties:
+        body_chart_ids:
+          type: array
+          items:
+            type: string
+            format: int64
+            example: '1'
+        name:
+          type: string
+          maxLength: 255
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - bodycharts
+      required:
+      - name
+      - type
+      title: Bodycharts
+    TreatmentNoteQuestionText:
+      type: object
+      properties:
+        answer:
+          type: string
+        name:
+          type: string
+          maxLength: 255
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - text
+      required:
+      - name
+      - type
+      title: Text
+    TreatmentNoteQuestionRadiobuttons:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              selected:
+                type:
+                - boolean
+                - 'null'
+        other:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            selected:
+              type: boolean
+            value:
+              type: string
+              maxLength: 255
+        name:
+          type: string
+          maxLength: 255
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - radiobuttons
+      required:
+      - name
+      - type
+      title: Radiobuttons
+    TreatmentNoteQuestionParagraph:
+      type: object
+      properties:
+        answer:
+          type: string
+        name:
+          type: string
+          maxLength: 255
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - paragraph
+      required:
+      - name
+      - type
+      title: Paragraph
+  requestBodies:
+    TreatmentNote:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              attendee_id:
+                type: string
+                format: int64
+                description: attendee id
+                example: '1'
+              booking_id:
+                type: string
+                format: int64
+                description: booking id
+                example: '1'
+              content:
+                type:
+                - object
+                - 'null'
+                properties:
+                  sections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type:
+                          - string
+                          - 'null'
+                          maxLength: 255
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        questions:
+                          type: array
+                          items:
+                            oneOf:
+                            - $ref: '#/components/schemas/TreatmentNoteQuestionText'
+                            - $ref: '#/components/schemas/TreatmentNoteQuestionParagraph'
+                            - $ref: '#/components/schemas/TreatmentNoteQuestionDate'
+                            - $ref: '#/components/schemas/TreatmentNoteQuestionBodycharts'
+                            - $ref: '#/components/schemas/TreatmentNoteQuestionCheckboxes'
+                            - $ref: '#/components/schemas/TreatmentNoteQuestionRadiobuttons'
+              draft:
+                type: boolean
+              patient_id:
+                type: string
+                format: int64
+                description: patient id
+                example: '1'
+              title:
+                type: string
+              treatment_note_template_id:
+                type: string
+                format: int64
+                description: treatment note template id
+                example: '1'
+  parameters:
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

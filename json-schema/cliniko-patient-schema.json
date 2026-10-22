@@ -1,0 +1,942 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cliniko/main/json-schema/cliniko-patient-schema.json",
+  "title": "Patient",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cliniko-openapi.yml#/components/schemas/Patient",
+  "type": "object",
+  "properties": {
+    "accepted_email_marketing": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "accepted_privacy_policy": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "accepted_sms_marketing": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "address_1": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "address_2": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "address_3": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "appointment_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "appointments": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "archived_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "attendees": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "city": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "concession_type": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "country": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "deprecated": true
+    },
+    "country_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "[ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": false
+    },
+    "custom_fields": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "sections": {
+          "type": "array",
+          "nullable": false,
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "token": {
+                "type": "string",
+                "format": "uuid",
+                "nullable": false
+              },
+              "archived": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "fields": {
+                "type": "array",
+                "nullable": false,
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/PatientCustomFieldText"
+                    },
+                    {
+                      "$ref": "#/$defs/PatientCustomFieldParagraph"
+                    },
+                    {
+                      "$ref": "#/$defs/PatientCustomFieldDate"
+                    },
+                    {
+                      "$ref": "#/$defs/PatientCustomFieldCheckboxes"
+                    },
+                    {
+                      "$ref": "#/$defs/PatientCustomFieldRadiobuttons"
+                    }
+                  ]
+                }
+              }
+            },
+            "required": [
+              "token",
+              "fields"
+            ]
+          }
+        }
+      }
+    },
+    "date_of_birth": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "dva_card_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[NVQSWT]([A-Z ][0-9]{1,6}|[A-Z]{2}[0-9]{1,5}|[A-Z]{3}[0-9]{1,4})[A-Z]?$"
+    },
+    "email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\\.[A-Z]{2,63}$",
+      "maxLength": 255
+    },
+    "emergency_contact": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "first_name": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "follow_ups_communication_channels": {
+      "type": "array",
+      "nullable": false,
+      "items": {
+        "enum": [
+          1,
+          2
+        ],
+        "nullable": false,
+        "type": "integer"
+      },
+      "description": "Channels through which the patient will receive appointment follow-up messages.\n| Enum Value | Description |\n|---|---|\n| 1 | SMS |\n| 2 | Email |\n"
+    },
+    "follow_ups_communication_channels_description": {
+      "type": "string",
+      "nullable": false,
+      "enum": [
+        "None",
+        "SMS",
+        "Email",
+        "SMS & Email"
+      ]
+    },
+    "gender": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "deprecated": true
+    },
+    "gender_identity": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "format": "int64",
+      "nullable": false
+    },
+    "invoice_default_to": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "invoice_email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z0-9!#$%&'*+/=?^_`{|}~.-]+@[A-Z0-9.-]+\\.[A-Z]{2,63}$"
+    },
+    "invoice_extra_information": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "invoices": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "label": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Full name"
+    },
+    "last_name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "latest_booking": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "medical_alerts": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "medicare": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "medicare_reference_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "merged_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "merged_with_patient": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "occupation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "old_reference_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "patient_attachments": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "patient_phone_numbers": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/PhoneNumber"
+      }
+    },
+    "post_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "preferred_first_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "pronouns": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "accusative": {
+          "type": "string",
+          "nullable": false,
+          "maxLength": 50
+        },
+        "nominative": {
+          "type": "string",
+          "nullable": false,
+          "maxLength": 50
+        },
+        "predicative_possessive": {
+          "type": "string",
+          "nullable": false,
+          "maxLength": 50
+        },
+        "pronominal_possessive": {
+          "type": "string",
+          "nullable": false,
+          "maxLength": 50
+        },
+        "reflexive": {
+          "type": "string",
+          "nullable": false,
+          "maxLength": 50
+        }
+      },
+      "required": [
+        "accusative",
+        "nominative",
+        "predicative_possessive",
+        "pronominal_possessive",
+        "reflexive"
+      ]
+    },
+    "receives_cancellation_emails": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "receives_confirmation_emails": {
+      "type": "boolean"
+    },
+    "referral_source": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "referring_doctor": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "reminder_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "deprecated": true,
+      "description": "Please use the `reminders_communication_channels` attribute instead.",
+      "enum": [
+        "None",
+        "SMS",
+        "Email",
+        "SMS & Email"
+      ]
+    },
+    "reminders_communication_channels": {
+      "type": "array",
+      "nullable": false,
+      "items": {
+        "enum": [
+          1,
+          2
+        ],
+        "nullable": false,
+        "type": "integer"
+      },
+      "description": "Channels through which the patient will receive appointment reminders.\n| Enum Value | Description |\n|---|---|\n| 1 | SMS |\n| 2 | Email |\n"
+    },
+    "reminders_communication_channels_description": {
+      "type": "string",
+      "nullable": false,
+      "enum": [
+        "None",
+        "SMS",
+        "Email",
+        "SMS & Email"
+      ]
+    },
+    "sex": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "time_zone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "See: [supported time zone identifiers](/guides/time_zone_support/#accepted-values-for-time_zone_identifier)"
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": false
+    }
+  },
+  "x-tags": [
+    "Patient"
+  ],
+  "$defs": {
+    "PatientCustomFieldCheckboxes": {
+      "type": "object",
+      "nullable": false,
+      "properties": {
+        "options": {
+          "type": "array",
+          "nullable": false,
+          "items": {
+            "type": "object",
+            "properties": {
+              "archived": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "token": {
+                "type": "string",
+                "format": "uuid",
+                "nullable": false
+              },
+              "selected": {
+                "type": "boolean",
+                "nullable": false
+              }
+            },
+            "required": [
+              "token"
+            ]
+          }
+        },
+        "other": {
+          "type": "object",
+          "nullable": false,
+          "properties": {
+            "enabled": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "archived": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "selected": {
+              "type": "boolean",
+              "nullable": false
+            },
+            "value": {
+              "type": "string",
+              "nullable": false,
+              "maxLength": 255
+            }
+          }
+        },
+        "archived": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "token": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": false
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "checkboxes"
+          ]
+        }
+      },
+      "required": [
+        "token"
+      ],
+      "title": "Checkboxes"
+    },
+    "PatientCustomFieldDate": {
+      "type": "object",
+      "nullable": false,
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "date",
+          "nullable": false
+        },
+        "archived": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "token": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": false
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "date"
+          ]
+        }
+      },
+      "required": [
+        "token"
+      ],
+      "title": "Date"
+    },
+    "PatientCustomFieldParagraph": {
+      "type": "object",
+      "nullable": false,
+      "properties": {
+        "value": {
+          "type": "string",
+          "nullable": false
+        },
+        "archived": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "token": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": false
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "paragraph"
+          ]
+        }
+      },
+      "required": [
+        "token"
+      ],
+      "title": "Paragraph"
+    },
+    "PatientCustomFieldRadiobuttons": {
+      "type": "object",
+      "nullable": false,
+      "properties": {
+        "options": {
+          "type": "array",
+          "nullable": false,
+          "items": {
+            "type": "object",
+            "properties": {
+              "archived": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "token": {
+                "type": "string",
+                "format": "uuid",
+                "nullable": false
+              },
+              "selected": {
+                "type": "boolean",
+                "nullable": false
+              }
+            },
+            "required": [
+              "token"
+            ]
+          }
+        },
+        "other": {
+          "type": "object",
+          "nullable": false,
+          "properties": {
+            "enabled": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "archived": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "selected": {
+              "type": "boolean",
+              "nullable": false
+            },
+            "value": {
+              "type": "string",
+              "nullable": false,
+              "maxLength": 255
+            }
+          }
+        },
+        "archived": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "token": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": false
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "radiobuttons"
+          ]
+        }
+      },
+      "required": [
+        "token"
+      ],
+      "title": "Radiobuttons"
+    },
+    "PatientCustomFieldText": {
+      "type": "object",
+      "nullable": false,
+      "properties": {
+        "value": {
+          "type": "string",
+          "nullable": false
+        },
+        "archived": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "token": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": false
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "text"
+          ]
+        }
+      },
+      "required": [
+        "token"
+      ],
+      "title": "Text"
+    },
+    "PhoneNumber": {
+      "type": "object",
+      "properties": {
+        "normalized_number": {
+          "type": "string",
+          "format": "phone"
+        },
+        "number": {
+          "type": "string",
+          "format": "phone"
+        },
+        "phone_type": {
+          "type": "string",
+          "enum": [
+            "Fax",
+            "Home",
+            "Mobile",
+            "Other",
+            "Work"
+          ]
+        }
+      }
+    }
+  }
+}

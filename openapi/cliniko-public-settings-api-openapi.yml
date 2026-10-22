@@ -1,0 +1,524 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Public Settings API
+  version: v1
+  description: 'Operations tagged Public Settings across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Public Settings
+paths:
+  /settings/public:
+    get:
+      tags:
+      - Public Settings
+      summary: Get public settings
+      operationId: GetPublicSettings-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicSettings'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    PatientCustomFieldDefinitionRadiobuttons:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              archived:
+                type: boolean
+              name:
+                type: string
+                maxLength: 255
+              token:
+                type: string
+                format: uuid
+                example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+            required:
+            - name
+            - token
+        other:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            archived:
+              type: boolean
+        archived:
+          type: boolean
+        name:
+          type: string
+          maxLength: 255
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - radiobuttons
+      required:
+      - options
+      - name
+      - token
+      - type
+      title: Radiobuttons
+    PatientCustomFieldDefinitionDate:
+      type: object
+      properties:
+        archived:
+          type: boolean
+        name:
+          type: string
+          maxLength: 255
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - date
+      required:
+      - name
+      - token
+      - type
+      title: Date
+    PatientCustomFieldDefinitionCheckboxes:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              archived:
+                type: boolean
+              name:
+                type: string
+                maxLength: 255
+              token:
+                type: string
+                format: uuid
+                example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+            required:
+            - name
+            - token
+        other:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            archived:
+              type: boolean
+        archived:
+          type: boolean
+        name:
+          type: string
+          maxLength: 255
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - checkboxes
+      required:
+      - options
+      - name
+      - token
+      - type
+      title: Checkboxes
+    PatientCustomFieldDefinitionText:
+      type: object
+      properties:
+        archived:
+          type: boolean
+        name:
+          type: string
+          maxLength: 255
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - text
+      required:
+      - name
+      - token
+      - type
+      title: Text
+    PatientCustomFieldDefinitionParagraph:
+      type: object
+      properties:
+        archived:
+          type: boolean
+        name:
+          type: string
+          maxLength: 255
+        token:
+          type: string
+          format: uuid
+          example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - paragraph
+      required:
+      - name
+      - token
+      - type
+      title: Paragraph
+    PublicSettings:
+      type: object
+      properties:
+        account:
+          type:
+          - object
+          - 'null'
+          properties:
+            country:
+              type: string
+            country_code:
+              description: '[ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code'
+              example: AU
+              type: string
+            currency_symbol:
+              type: string
+            has_time_travelers:
+              type: boolean
+            id:
+              example: '1'
+              format: int64
+              type: string
+            invoice_calculation_method:
+              description: 'The account''s tax calculation method.
+
+                | Enum Value | Description |
+
+                |---|---|
+
+                | 1 | Legacy |
+
+                | 2 | Tax exclusive |
+
+                | 3 | Tax inclusive |
+
+                '
+              enum:
+              - 1
+              - 2
+              - 3
+              type: integer
+            invoice_calculation_method_description:
+              enum:
+              - Legacy
+              - Tax exclusive
+              - Tax inclusive
+              type: string
+            name:
+              type: string
+            subdomain:
+              type: string
+            time_zone_support:
+              type: boolean
+        calendar:
+          type:
+          - object
+          - 'null'
+          properties:
+            end_hour:
+              type: integer
+            multiple_appointments_gap:
+              type: boolean
+            show_current_time_indicator:
+              type: boolean
+            start_hour:
+              type: integer
+            timeslot_height_in_pixels:
+              type: integer
+            timeslot_size_in_minutes:
+              type: integer
+        documents_and_printing:
+          type:
+          - object
+          - 'null'
+          properties:
+            logo_height:
+              type: integer
+            logo_url:
+              format: uri
+              type:
+              - string
+              - 'null'
+        integrations:
+          type:
+          - object
+          - 'null'
+          properties:
+            mail_chimp:
+              properties:
+                enabled:
+                  type: boolean
+              type: object
+            xero:
+              properties:
+                enabled:
+                  type: boolean
+              type: object
+        online_bookings:
+          type:
+          - object
+          - 'null'
+          properties:
+            allow_bookings_days_in_advance:
+              type: integer
+            allow_online_bookings_time_zone_choice:
+              type: boolean
+            booking_reservation_minutes:
+              type: integer
+            calendar_info:
+              type:
+              - string
+              - 'null'
+            daily_bookings_limit:
+              type: integer
+            disabled_text:
+              type:
+              - string
+              - 'null'
+            disabled_title:
+              type:
+              - string
+              - 'null'
+            enabled:
+              type: boolean
+            logo_url:
+              format: uri
+              type:
+              - string
+              - 'null'
+            max_appointments_per_day_segment:
+              type: integer
+            min_hours_advance_required_to_book:
+              type: integer
+            min_hours_notice_for_patient_cancellation:
+              type: integer
+            notice_enabled:
+              type: boolean
+            notice_text:
+              type:
+              - string
+              - 'null'
+            notice_title:
+              type:
+              - string
+              - 'null'
+            notify_practitioner_by_email:
+              type: boolean
+            notify_practitioner_by_sms:
+              type: boolean
+            policy:
+              type:
+              - string
+              - 'null'
+            practitioner_order:
+              items:
+                format: int64
+                type: string
+              type:
+              - array
+              - 'null'
+            privacy_policy_url:
+              format: uri
+              type:
+              - string
+              - 'null'
+            require_patient_address:
+              type: boolean
+            show_appointment_duration:
+              type: boolean
+            show_prices:
+              type: boolean
+        online_payments:
+          type:
+          - object
+          - 'null'
+          properties:
+            activated:
+              type: boolean
+        patient_custom_fields_definition:
+          type:
+          - object
+          - 'null'
+          properties:
+            sections:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    maxLength: 255
+                  token:
+                    type: string
+                    format: uuid
+                    example: ef4c43ec-105d-489c-88cc-0f3c5f67dc70
+                  archived:
+                    type: boolean
+                  fields:
+                    type: array
+                    items:
+                      oneOf:
+                      - $ref: '#/components/schemas/PatientCustomFieldDefinitionText'
+                      - $ref: '#/components/schemas/PatientCustomFieldDefinitionParagraph'
+                      - $ref: '#/components/schemas/PatientCustomFieldDefinitionDate'
+                      - $ref: '#/components/schemas/PatientCustomFieldDefinitionCheckboxes'
+                      - $ref: '#/components/schemas/PatientCustomFieldDefinitionRadiobuttons'
+                required:
+                - name
+                - token
+                - fields
+          required:
+          - sections
+        patient_privacy:
+          type:
+          - object
+          - 'null'
+          properties:
+            browser_title_name_format:
+              enum:
+              - first_name
+              - full_name
+              - initials
+              - anonymous
+              - semi_anonymous
+              type: string
+            ical_patient_name_option:
+              enum:
+              - first_name
+              - full_name
+              - initials
+              - anonymous
+              - semi_anonymous
+              type: string
+            prevent_sending_financial_data_by_email:
+              type: boolean
+            prevent_sending_treatment_notes_by_email:
+              type: boolean
+            requires_hipaa_compliance:
+              type: boolean
+        reminders:
+          type:
+          - object
+          - 'null'
+          properties:
+            default_reminder_type:
+              deprecated: true
+              description: Please use the `default_reminders_communication_channels_description` attribute instead.
+              enum:
+              - None
+              - SMS
+              - Email
+              - SMS & Email
+              type: string
+            default_reminders_communication_channels:
+              description: 'The array of communication channels that will be used for new patient reminders.
+
+                | Enum Value | Description |
+
+                |---|---|
+
+                | 1 | SMS |
+
+                | 2 | Email |
+
+                '
+              items:
+                type: integer
+                enum:
+                - 1
+                - 2
+              type: array
+            default_reminders_communication_channels_description:
+              enum:
+              - None
+              - SMS
+              - Email
+              - SMS & Email
+              type: string
+        sms:
+          type:
+          - object
+          - 'null'
+          properties:
+            alphanumeric_source_number_required:
+              type: boolean
+            default_alphanumeric_source_number:
+              type: string
+            max_message_length:
+              type:
+              - integer
+              - 'null'
+            number_of_usable_characters_per_message:
+              type: integer
+            replies_supported:
+              type: boolean
+        terminology:
+          type:
+          - object
+          - 'null'
+          properties:
+            patient:
+              enum:
+              - patient
+              - client
+              type: string
+            titles:
+              items:
+                type: string
+              type: array
+        wait_list:
+          type:
+          - object
+          - 'null'
+          properties:
+            default_wait_list_expiry_period:
+              type: integer
+      x-tags:
+      - Public Settings
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

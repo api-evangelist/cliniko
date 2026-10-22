@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cliniko/main/json-schema/cliniko-individual-appointment-schema.json",
+  "title": "IndividualAppointment",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cliniko-openapi.yml#/components/schemas/IndividualAppointment",
+  "type": "object",
+  "properties": {
+    "appointment_type": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "archived_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "attendees": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "booking_ip_address": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "ipv4"
+    },
+    "business": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "cancellation_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cancellation_reason": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "cancellation_reason_description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Feeling Better",
+        "Condition Worse",
+        "Sick",
+        "COVID-19 related",
+        "Away",
+        "Other",
+        "Work"
+      ]
+    },
+    "cancelled_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "conflicts": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "links": {
+          "properties": {
+            "self": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": false
+    },
+    "deleted_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "did_not_arrive": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "email_reminder_sent": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "ends_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "has_patient_appointment_notes": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "format": "int64",
+      "nullable": false
+    },
+    "invoice_status": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "online_booking_policy_accepted": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "patient": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "patient_arrived": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "patient_case": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "patient_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "practitioner": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "repeat_rule": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "number_of_repeats": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "exclusiveMinimum": true
+        },
+        "repeat_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "Daily",
+            "Monthly",
+            "Weekly"
+          ]
+        },
+        "repeating_interval": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100,
+          "exclusiveMinimum": true
+        }
+      }
+    },
+    "repeated_from": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "repeats": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "links": {
+          "properties": {
+            "self": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "sms_reminder_sent": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "starts_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "telehealth_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "treatment_note_status": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": false
+    }
+  },
+  "x-tags": [
+    "Individual Appointment"
+  ]
+}

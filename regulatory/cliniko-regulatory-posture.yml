@@ -1,0 +1,109 @@
+generated: '2026-10-21'
+method: searched
+probe: true
+source:
+- https://www.cliniko.com/policies/privacy
+- https://www.cliniko.com/policies/terms/
+- https://www.cliniko.com/security/
+- https://help.cliniko.com/en/articles/1877915-cliniko-subprocessors
+note: >-
+  Cliniko is operated by Red Guava Pty. Ltd. (Australia). The policies hub (https://www.cliniko.com/policies/, 200)
+  links privacy, terms and cookies. EU and UK DPAs exist at /policies/eu_dpa/ and /policies/uk_dpa/ (both 200, served
+  as binary/PDF-like documents that were not parsed for this pass). No signals recorded for AI transparency, GPC,
+  accessibility conformance, SBOM, transparency report, age assurance or notice-and-action: the pages read do not speak to them.
+signals:
+  data_subject_request:
+    url: https://www.cliniko.com/policies/privacy
+    section: Access, correct or delete Personal Information about you
+    channel: privacy@cliniko.com
+    rights_named: [access, correction, erasure, portability, withdrawal of consent]
+    evidence:
+    - source: https://www.cliniko.com/policies/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "This enables you to receive a copy of the data and to check that we are lawfully processing it."
+    - source: https://www.cliniko.com/policies/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "We will provide to you, or a third party that you have chosen, your data in a structured, commonly used, machine-readable format."
+    - source: https://www.cliniko.com/policies/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "If personal information pertaining to you as an individual has been submitted to us by a Cliniko customer and you wish to exercise any rights you may have to access, correct, amend, or delete such data, please inquire directly with our customer."
+    note: >-
+      Access requests go by email to privacy@cliniko.com; correction, erasure, transfer (portability) and consent
+      withdrawal are named. Patients whose data was entered by a clinic are routed to that clinic (the controller),
+      and Cliniko says it will refer the request on. No response SLA is stated.
+  subprocessors:
+    url: https://help.cliniko.com/en/articles/1877915-cliniko-subprocessors
+    section: Cliniko subprocessors
+    change_notice: email subprocessor+subscribe@redguava.com.au to be notified of new subprocessors
+    listed: [Amazon Web Services, Fastly, Microsoft (Azure), Intercom, Mailgun, The Rocket Science Group, Message4u, Slack, Honeybadger, Pusher, Stripe, Datadog, Twilio, Tailscale]
+    evidence:
+    - source: https://www.cliniko.com/policies/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "We work with third-party services in Australia and the USA (such as our web host, data backup and payment provider) that we allow access to Personal Information, and may use it on our behalf strictly for the purposes for which they are engaged."
+    - source: https://help.cliniko.com/en/articles/1877915-cliniko-subprocessors
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "This page provides important information about the identity, location and role of each Subprocessor."
+    note: >-
+      A public, named subprocessor list with activity and location per entry (the privacy policy's link
+      help.cliniko.com/privacy/data-processing/cliniko-subprocessors redirects to it), plus an email subscription for new-subprocessor notices.
+  incident_notification:
+    url: https://www.cliniko.com/policies/privacy
+    stated_sla: 72 hours of discovering the breach
+    evidence:
+    - source: https://www.cliniko.com/policies/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "In the event that there is a breach and your Personal Information that we have collected directly is at risk, you will be notified within 72 hours of discovering the breach."
+    - source: https://www.cliniko.com/policies/privacy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "To the extent permissible at law, in the event that there is a breach and indirectly collected information is at risk, we will follow the same protocol, however the affected Customers (rather than the individuals) will be notified instead."
+    note: 72-hour breach notice to individuals for directly collected data; for customer-entered (patient) data the clinic is notified instead.
+  data_residency:
+    url: https://www.cliniko.com/security/
+    section: Data stored close to home
+    regions: [Australia, United Kingdom, Canada, Ireland (EU)]
+    evidence:
+    - source: https://www.cliniko.com/security/
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "For those of you creating your account in Europe, we’ve got you covered with data storage in Ireland—keeping it in the EU. And if you're located anywhere else in the world, your data will be securely housed on servers right here in Australia."
+    - source: https://www.cliniko.com/policies/terms/
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "You consent to Red Guava Pty. Ltd. transferring your data to third party IT providers, including our website host and back-up service provider, outside of Australia."
+    note: >-
+      Account data is stored by signup region (AU, UK, Canada, EU/Ireland; elsewhere Australia), but the terms
+      take consent for transfers to IT providers outside Australia and the subprocessor list is mostly US-located.
+  data_retention:
+    url: https://www.cliniko.com/policies/terms/
+    section: Cancellation and termination
+    retention_after_termination: 90 days
+    evidence:
+    - source: https://www.cliniko.com/policies/terms/
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "All of your content and data will be deleted 90 days after cancellation or termination of your account. This information will not be able to be recovered."
+    - source: https://www.cliniko.com/security/
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "And, if the time ever comes for us to say goodbye, your data will be held for a minimum of 90 days after cancellation."
+    note: Post-termination retention is 90 days, then deletion; the terms say deletion, the security page says "a minimum of 90 days".
+  exit_assistance:
+    url: https://www.cliniko.com/policies/terms/
+    section: Cancellation and termination
+    evidence:
+    - source: https://www.cliniko.com/policies/terms/
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "We recommend you use the export functionality of the Service prior to cancellation to retain any information you may require."
+    - source: https://www.cliniko.com/security/
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "If ever you’d like to transfer your info outside of Cliniko for any reason, you can take it anywhere you want using Cliniko’s data export feature."
+    note: Exit is self-service via the product's data export feature within the 90-day window; no assisted migration commitment is stated.

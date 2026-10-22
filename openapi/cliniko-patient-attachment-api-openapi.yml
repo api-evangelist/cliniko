@@ -1,0 +1,895 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Patient Attachment API
+  version: v1
+  description: 'Operations tagged Patient Attachment across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Patient Attachment
+paths:
+  /patient_attachments:
+    get:
+      tags:
+      - Patient Attachment
+      summary: List patient attachments
+      operationId: ListPatientAttachments-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patient_attachments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PatientAttachment'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_attachments?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_attachments?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_attachments?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | category | [string](/#string-filter-operators) |
+
+          | content_type | [string](/#string-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | description | [string](/#string-filter-operators) |
+
+          | filename | [string](/#string-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | processed_at | [date-time](/#datetime-filter-operators) |
+
+          | size | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          | user_id | [int64](/#numeric-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Patient Attachment
+      summary: Create uploaded patient attachment
+      operationId: CreateUploadedPatientAttachment-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedPatientAttachment'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/UploadedPatientAttachmentCreate'
+      description: To create a patient attachment, you must first generate a presigned URL, upload your file to that URL, and then supply that URL and response key in the `upload_url` request body parameter.
+      externalDocs:
+        description: Uploading patient attachments
+        url: /guides/uploading_patient_attachments/
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_attachments/{id}:
+    get:
+      tags:
+      - Patient Attachment
+      summary: Get patient attachment
+      operationId: GetPatientAttachment-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientAttachment'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Patient Attachment
+      summary: Update patient attachment
+      operationId: UpdatePatientAttachment-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientAttachment'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/FullPatientExportBody'
+              - $ref: '#/components/schemas/TreatmentNoteHistoryExportBody'
+              - $ref: '#/components/schemas/UploadedPatientAttachmentBody'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Patient Attachment
+      summary: Archive patient attachment
+      operationId: DeletePatientAttachment-Delete
+      responses:
+        '204':
+          description: Resource was archived successfully
+      deprecated: true
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_attachments/{id}/archive:
+    post:
+      tags:
+      - Patient Attachment
+      summary: Archive patient attachment
+      operationId: ArchivePatientAttachment-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_cases/{patient_case_id}/patient_attachments:
+    get:
+      tags:
+      - Patient Attachment
+      summary: List patient attachments for patient case
+      operationId: ListPatientAttachmentsForPatientCase-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patient_attachments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PatientAttachment'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/patient_attachments?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/patient_attachments?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/1/patient_attachments?page=3
+      parameters:
+      - name: patient_case_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | category | [string](/#string-filter-operators) |
+
+          | content_type | [string](/#string-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | description | [string](/#string-filter-operators) |
+
+          | filename | [string](/#string-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | processed_at | [date-time](/#datetime-filter-operators) |
+
+          | size | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          | user_id | [int64](/#numeric-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patients/{patient_id}/attachment_presigned_post:
+    get:
+      tags:
+      - Patient Attachment
+      summary: Get a presigned URL to upload your file to S3
+      operationId: PresignedPost-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachmentPresignedPost'
+      parameters:
+      - in: path
+        name: patient_id
+        required: true
+        schema:
+          example: '1'
+          format: int64
+          type: string
+      externalDocs:
+        description: Uploading patient attachments
+        url: /guides/uploading_patient_attachments/
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patients/{patient_id}/patient_attachments:
+    get:
+      tags:
+      - Patient Attachment
+      summary: List patient attachments for patient
+      operationId: ListPatientAttachmentsForPatient-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patient_attachments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PatientAttachment'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/patient_attachments?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/patient_attachments?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patients/1/patient_attachments?page=3
+      deprecated: true
+      parameters:
+      - name: patient_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | category | [string](/#string-filter-operators) |
+
+          | content_type | [string](/#string-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | description | [string](/#string-filter-operators) |
+
+          | filename | [string](/#string-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | processed_at | [date-time](/#datetime-filter-operators) |
+
+          | size | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          | user_id | [int64](/#numeric-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  schemas:
+    FullPatientExportBody:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    UploadedPatientAttachmentBody:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    TreatmentNoteHistoryExportBody:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+    AttachmentPresignedPost:
+      type: object
+      properties:
+        fields:
+          type:
+          - object
+          - 'null'
+          properties:
+            key:
+              type: string
+            policy:
+              type: string
+            success_action_status:
+              enum:
+              - '201'
+              format: integer
+              type: string
+            x-amz-algorithm:
+              type: string
+            x-amz-credential:
+              type: string
+            x-amz-signature:
+              type: string
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+      x-tags:
+      - Patient Attachment
+    TreatmentNoteHistoryExport:
+      type: object
+      properties:
+        category:
+          type:
+          - string
+          - 'null'
+          enum:
+          - audio
+          - data
+          - document
+          - image
+          - other
+          - video
+        content:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/patient_attachments/1/content
+                  format: uri
+                  type: string
+              type: object
+        content_type:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        filename:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/patient_attachments/1
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        pinned_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        processed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        processing_completed:
+          type:
+          - boolean
+          - 'null'
+        size:
+          type:
+          - string
+          - 'null'
+          format: int64
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Treatment Note History Export
+    UploadedPatientAttachment:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        category:
+          type:
+          - string
+          - 'null'
+          enum:
+          - audio
+          - data
+          - document
+          - image
+          - other
+          - video
+        content:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/patient_attachments/1
+                  format: uri
+                  type: string
+              type: object
+        content_type:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        filename:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/patient_attachments/1
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        pinned_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        processed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        processing_completed:
+          type:
+          - boolean
+          - 'null'
+        size:
+          type:
+          - string
+          - 'null'
+          format: int64
+        updated_at:
+          type: string
+          format: date-time
+        user:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/users/1
+      x-tags:
+      - Uploaded Patient Attachment
+    FullPatientExport:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        category:
+          type:
+          - string
+          - 'null'
+          enum:
+          - audio
+          - data
+          - document
+          - image
+          - other
+          - video
+        content:
+          type:
+          - object
+          - 'null'
+          properties:
+            links:
+              properties:
+                self:
+                  example: https://api.au1.cliniko.com/v1/patient_attachments/1/content
+                  format: uri
+                  type: string
+              type: object
+        content_type:
+          type:
+          - string
+          - 'null'
+          description: mime type
+          example: text/plain
+        created_at:
+          type: string
+          format: date-time
+        description:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        filename:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/patient_attachments/1
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        pinned_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        processed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        processing_completed:
+          type:
+          - boolean
+          - 'null'
+        size:
+          type:
+          - string
+          - 'null'
+          format: int64
+        updated_at:
+          type: string
+          format: date-time
+        user:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/users/1
+      x-tags:
+      - Full Patient Export
+    PatientAttachment:
+      anyOf:
+      - $ref: '#/components/schemas/FullPatientExport'
+      - $ref: '#/components/schemas/TreatmentNoteHistoryExport'
+      - $ref: '#/components/schemas/UploadedPatientAttachment'
+      x-tags:
+      - Patient Attachment
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  requestBodies:
+    UploadedPatientAttachmentCreate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              patient_id:
+                type: string
+                format: int64
+                description: patient id
+                example: '1'
+              description:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+              upload_url:
+                type: string
+                description: Must be a presigned URL returned by the [presigned URL upload process](/guides/uploading_patient_attachments/)
+                example: https://cliniko-files-example-bucket.s3.amazonaws.com/123/patients/456/attachments/temp/s0m3-w31rd-l0c4t10n-1na-t3mpd1r/the-name-of-the-file.txt
+                format: uri
+              filename:
+                type:
+                - string
+                - 'null'
+                maxLength: 255
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

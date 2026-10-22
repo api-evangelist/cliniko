@@ -1,0 +1,318 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cliniko/main/json-schema/cliniko-invoice-schema.json",
+  "title": "Invoice",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cliniko-openapi.yml#/components/schemas/Invoice",
+  "type": "object",
+  "properties": {
+    "appointment": {
+      "deprecated": true,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "archived_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "attendee": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "booking": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "business": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "calculation_method": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "description": "| Enum Value | Description |\n|---|---|\n| 1 | Legacy |\n| 2 | Tax exclusive |\n| 3 | Tax inclusive |"
+    },
+    "calculation_method_description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Legacy",
+        "Tax exclusive",
+        "Tax inclusive"
+      ]
+    },
+    "closed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": false
+    },
+    "deleted_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "discounted_amount": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal"
+    },
+    "id": {
+      "type": "string",
+      "format": "int64",
+      "nullable": false
+    },
+    "invoice_items": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "invoice_to": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "issue_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "net_amount": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "number": {
+      "type": "integer"
+    },
+    "online_payment_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "original_invoice": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "patient": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "patient_extra_information": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "practitioner": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "reversed_invoices": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "signature": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "status": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "enum": [
+        10,
+        20,
+        30,
+        40
+      ],
+      "description": "| Enum Value | Description |\n|---|---|\n| 10 | Open |\n| 20 | Paid |\n| 30 | Closed |\n| 40 | Open credit |"
+    },
+    "status_description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Open",
+        "Paid",
+        "Closed",
+        "Open credit"
+      ]
+    },
+    "tax_amount": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal"
+    },
+    "total_amount": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "decimal"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": false
+    }
+  },
+  "x-tags": [
+    "Invoice"
+  ]
+}

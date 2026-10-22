@@ -1,4 +1,37 @@
-generated: '2026-10-15'
+generated: '2026-10-21'
+method: searched
+source:
+- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://www.cliniko.com/connected-apps/
+checked:
+- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
+- https://www.cliniko.com/connected-apps/
+- https://zapier.com/apps/cliniko/integrations (404)
+- https://www.make.com/en/integrations/cliniko (403)
+- https://composio.dev/toolkits/cliniko
+- https://monid.ai/tools/cliniko
+- https://n8n.io/integrations/cliniko/
+- https://zapier.com/apps/cliniko/integrations
+summary: null
+marketplace_apps:
+- app: Cliniko Connected apps
+  marketplace: own
+  url: https://www.cliniko.com/connected-apps/
+  app_count: 91
+  app_count_text: All apps ( 91 )
+  categories:
+  - Finance & invoicing (7)
+  - Artificial intelligence (34)
+  - Appointment booking (11)
+  - Patient care & monitoring (11)
+  - Marketing & communications (10)
+  - Prescriptions (5)
+  - Forms & check-in (3)
+  - Data & reporting (4)
+  - Exercises & nutrition (6)
+  note: '"Most of these apps were developed by third parties." No install counts are published; edges below are
+    the first 50 listings in page order.'
 edges:
 - partner_name: Pipedream
   partner: pipedream
@@ -26,9 +59,504 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
-method: searched
-checked:
-- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
-- https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/
-source:
-- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
+- partner_name: 2care.ai
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/2care-ai/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Able AI Receptionist — by Lyngo
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/lyngo-ai/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: AC Connect
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/ac-connect/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Aeva AI Receptionist
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/aeva-ai/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: AI Jane
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/ai-jane/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Allie
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/allie/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Allied PROMs
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/allied-proms/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: APIANT's CRMConnect
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/apiant/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Arlo
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/arlo/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: AskNicely
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/ask-nicely/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Avaana
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/avaana/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: AxIT
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/axit/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: BodySync
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/bodysync/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: BookedSolid AI Receptionist
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/bookedsolid/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Cetra Health
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/cetra-health/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: CFone VoIP
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/cfone-voip/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: CIXLER
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/cixler/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: ClientForms
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/clientforms/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Clindoc
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/clindoc/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: ClinicDash
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/clinicdash/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: ClinicExec
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/clinicexec/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Cliniq Apps
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/cliniq-apps/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: CliniScribe AI
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/cliniscribe-ai/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: CliniScripts
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/cliniscripts/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Continua
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/continua/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Cushla
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/cushla/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: DataFlows SMS
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/dataflows-sms/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Dataplayer
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/dataplayer/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: DemandHub
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/demandhub/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: DermEngine
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/dermengine/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Doctors.com.au
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/doctors-com-au/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Effra
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/effra/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: EMGuidance Script
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/emguidance-script/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Evie Assist AI
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/evie-assist-ai/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Finger-Ink
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/finger-ink/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Foodzilla
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/foodzilla/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: GetScanned
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/getscanned/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Goto.health
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/goto-health/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: HaemoSync
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/haemosync/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: HaltH
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/halth/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Hanah
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/hanah-health/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Healistic
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/healistic/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: HealthEngine
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/healthengine/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: HealthShare
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/healthshare/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Heidi AI scribe
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/heidi/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Heron
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/heron/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: HotDoc
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/hotdoc/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: indi
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/indi/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Intavia — AI Receptionist
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/intavia-ai-receptionist/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+- partner_name: Invoice Funnel
+  partner: null
+  type: marketplace
+  marketplace: cliniko-connected-apps
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.cliniko.com/connected-apps/invoice-funnel/
+  detected_by: docs-module
+  first_seen: '2026-10-21'
+templates: []

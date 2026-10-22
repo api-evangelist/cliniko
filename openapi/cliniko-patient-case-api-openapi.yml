@@ -1,0 +1,587 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Patient Case API
+  version: v1
+  description: 'Operations tagged Patient Case across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Patient Case
+paths:
+  /patient_cases:
+    get:
+      tags:
+      - Patient Case
+      summary: List patient cases
+      operationId: ListPatientCases-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patient_cases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PatientCase'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | closed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | expiry_date | [date](/#date-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | issue_date | [date](/#date-filter-operators) |
+
+          | name | [string](/#string-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | referral_type | [string](/#string-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Patient Case
+      summary: Create patient case
+      operationId: CreatePatientCase-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientCase'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/PatientCase'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_cases/active:
+    get:
+      tags:
+      - Patient Case
+      summary: List active patient cases
+      operationId: ListActivePatientCases-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patient_cases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PatientCase'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/active?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/active?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/patient_cases/active?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | closed_at | [date-time](/#datetime-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | expiry_date | [date](/#date-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | issue_date | [date](/#date-filter-operators) |
+
+          | name | [string](/#string-filter-operators) |
+
+          | patient_id | [int64](/#numeric-filter-operators) |
+
+          | referral_type | [string](/#string-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_cases/{id}:
+    get:
+      tags:
+      - Patient Case
+      summary: Get patient case
+      operationId: GetPatientCase-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientCase'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Patient Case
+      summary: Update patient case
+      operationId: UpdatePatientCase-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientCase'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/PatientCase'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /patient_cases/{id}/archive:
+    post:
+      tags:
+      - Patient Case
+      summary: Archive patient case
+      operationId: ArchivePatientCase-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    PatientCase:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              closed:
+                type:
+                - boolean
+                - 'null'
+              contact_id:
+                type: string
+                format: int64
+                description: contact id
+                example: '1'
+              expiry_date:
+                type:
+                - string
+                - 'null'
+                format: date
+              include_cancelled_attendees:
+                type:
+                - boolean
+                - 'null'
+              include_dna_attendees:
+                type:
+                - boolean
+                - 'null'
+              issue_date:
+                type:
+                - string
+                - 'null'
+                format: date
+              name:
+                type: string
+              notes:
+                type:
+                - string
+                - 'null'
+              max_invoiceable_amount:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                exclusiveMinimum: 0
+              max_sessions:
+                type:
+                - integer
+                - 'null'
+                minimum: 1
+                maximum: 300
+              patient_id:
+                type: string
+                format: int64
+                description: patient id
+                example: '1'
+              referral:
+                type:
+                - boolean
+                - 'null'
+              referral_type:
+                type:
+                - string
+                - 'null'
+                enum:
+                - dva
+                - medicare
+              attendee_ids:
+                type:
+                - array
+                - 'null'
+                items:
+                  example: 1
+                  format: int64
+                  type: string
+              patient_attachment_ids:
+                type: array
+                description: Patient attachment ids
+                items:
+                  type: string
+                  format: int64
+                  example: '1'
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  schemas:
+    PatientCase:
+      type: object
+      properties:
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        attendee_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            format: int64
+            type: string
+        attendees:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patient_cases/1/attendees
+        bookings:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patient_cases/1/bookings
+        closed:
+          type:
+          - boolean
+          - 'null'
+          deprecated: true
+        closed_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        contact:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/contacts/1
+        created_at:
+          type: string
+          format: date-time
+        expiry_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        id:
+          type: string
+          format: int64
+        include_cancelled_attendees:
+          type:
+          - boolean
+          - 'null'
+        include_dna_attendees:
+          type:
+          - boolean
+          - 'null'
+        invoices:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patient_cases/1/invoices
+        issue_date:
+          type:
+          - string
+          - 'null'
+          format: date
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/patient_cases/1
+        max_invoiceable_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          exclusiveMinimum: 0
+        max_sessions:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+          maximum: 300
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        patient:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patients/1
+        patient_attachments:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/patient_cases/1/patient_attachments
+        referral:
+          type:
+          - boolean
+          - 'null'
+        referral_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - dva
+          - medicare
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Patient Case
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

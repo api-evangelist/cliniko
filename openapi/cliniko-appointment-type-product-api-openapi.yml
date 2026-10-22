@@ -1,0 +1,355 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Appointment Type Product API
+  version: v1
+  description: 'Operations tagged Appointment Type Product across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Appointment Type Product
+paths:
+  /appointment_type_products:
+    get:
+      tags:
+      - Appointment Type Product
+      summary: List appointment type products
+      operationId: ListAppointmentTypeProducts-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appointment_type_products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppointmentTypeProduct'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_type_products?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_type_products?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_type_products?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_type_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | product_id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Appointment Type Product
+      summary: Create appointment type product
+      operationId: CreateAppointmentTypeProduct-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentTypeProduct'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentTypeProductCreate'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /appointment_type_products/{id}:
+    get:
+      tags:
+      - Appointment Type Product
+      summary: Get appointment type product
+      operationId: GetAppointmentTypeProduct-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentTypeProduct'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    patch:
+      tags:
+      - Appointment Type Product
+      summary: Update appointment type product
+      operationId: UpdateAppointmentTypeProduct-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentTypeProduct'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentTypeProductUpdate'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Appointment Type Product
+      summary: Delete appointment type product
+      operationId: DeleteAppointmentTypeProduct-Delete
+      responses:
+        '204':
+          description: Resource was deleted successfully
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    AppointmentTypeProductCreate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              appointment_type_id:
+                type: string
+                format: int64
+                description: appointment type id
+                example: '1'
+              discount_percentage:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: 0
+                maximum: 100
+              discounted_amount:
+                type:
+                - string
+                - 'null'
+                format: decimal
+              product_id:
+                type: string
+                format: int64
+                description: product id
+                example: '1'
+              quantity:
+                type: string
+                format: decimal
+                minimum: -4000000000
+                exclusiveMaximum: 4000000000
+    AppointmentTypeProductUpdate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              discount_percentage:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: 0
+                maximum: 100
+              discounted_amount:
+                type:
+                - string
+                - 'null'
+                format: decimal
+              product_id:
+                type: string
+                format: int64
+                description: product id
+                example: '1'
+              quantity:
+                type: string
+                format: decimal
+                minimum: -4000000000
+                exclusiveMaximum: 4000000000
+  schemas:
+    AppointmentTypeProduct:
+      type: object
+      properties:
+        appointment_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_types/1
+        created_at:
+          type: string
+          format: date-time
+        discount_percentage:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          minimum: 0
+          maximum: 100
+        discounted_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        id:
+          type: string
+          format: int64
+        is_monetary_discount:
+          type:
+          - boolean
+          - 'null'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/appointment_type_products/1
+        product:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/products/1
+        quantity:
+          type: string
+          format: decimal
+          minimum: -4000000000
+          exclusiveMaximum: 4000000000
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Appointment Type Product
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

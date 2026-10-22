@@ -1,0 +1,50 @@
+name: Cliniko agent skills
+generated: '2026-10-21'
+method: generated
+source: openapi/cliniko-openapi.yml
+api: Cliniko API
+skills:
+- name: book-individual-appointment
+  file: cliniko-book-individual-appointment.md
+  description: Find an open slot for a practitioner and appointment type at a business, then book an individual appointment for a patient.
+  operations:
+  - ListBusinesses-Get
+  - ListPractitionersForBusiness-Get
+  - ListAppointmentTypesForPractitioner-Get
+  - GetNextAvailableTime-Get
+  - GetAllAvailableTimes-Get
+  - ListPatients-Get
+  - CreateIndividualAppointment-Post
+  - GetIndividualAppointmentConflicts-Get
+- name: register-patient
+  file: cliniko-register-patient.md
+  description: Search for an existing patient and create or update the patient record.
+  operations:
+  - ListPatients-Get
+  - CreatePatient-Post
+  - GetPatient-Get
+  - UpdatePatient-Patch
+- name: manage-appointment
+  file: cliniko-manage-appointment.md
+  description: Reschedule or cancel an existing individual appointment.
+  operations:
+  - ListIndividualAppointments-Get
+  - GetIndividualAppointment-Get
+  - UpdateIndividualAppointment-Patch
+  - CancelIndividualAppointment-Patch
+  - GetIndividualAppointmentConflicts-Get
+- name: patient-billing-history
+  file: cliniko-patient-billing-history.md
+  description: Retrieve a patient's invoices and invoice detail.
+  operations:
+  - GetPatient-Get
+  - ListInvoicesForPatient-Get
+  - GetInvoice-Get
+- name: record-treatment-note
+  file: cliniko-record-treatment-note.md
+  description: Write a clinical treatment note for a patient, optionally from a template.
+  operations:
+  - GetPatient-Get
+  - ListTreatmentNotesForPatient-Get
+  - CreateTreatmentNote-Post
+  - UpdateTreatmentNote-Patch

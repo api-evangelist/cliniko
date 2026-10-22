@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cliniko/main/json-schema/cliniko-attendee-schema.json",
+  "title": "Attendee",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cliniko-openapi.yml#/components/schemas/Attendee",
+  "type": "object",
+  "properties": {
+    "archived_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "arrived": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "booking": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "booking_ip_address": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "ipv4"
+    },
+    "cancellation_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cancellation_reason": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "cancellation_reason_description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Feeling Better",
+        "Condition Worse",
+        "Sick",
+        "COVID-19 related",
+        "Away",
+        "Other",
+        "Work",
+        ""
+      ]
+    },
+    "cancellation_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "cancelled_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": false
+    },
+    "deleted_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "email_reminder_sent": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "deprecated": true,
+      "description": "Please use the `sent_email_reminders_count` attribute instead."
+    },
+    "id": {
+      "type": "string",
+      "format": "int64",
+      "nullable": false
+    },
+    "invoice_status": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "| Enum Value | Description |\n|---|---|\n|10|Open|\n|20|Paid|\n|30|Closed|\n|40|Open credit|\n",
+      "enum": [
+        10,
+        20,
+        30,
+        40
+      ]
+    },
+    "invoices": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "online_booking_policy_accepted": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "patient": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "patient_case": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "patient_forms": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "sent_email_follow_ups_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "sent_email_reminders_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "sent_sms_follow_ups_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "sent_sms_reminders_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "sms_reminder_sent": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "deprecated": true,
+      "description": "Please use the `sent_sms_reminders_count` attribute instead."
+    },
+    "telehealth_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "treatment_note_status": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "description": "| Enum Value | Description |\n|---|---|\n|10|Draft|\n|90|Final|\n",
+      "enum": [
+        10,
+        90
+      ]
+    },
+    "treatment_notes": {
+      "deprecated": false,
+      "type": "object",
+      "properties": {
+        "links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": false
+    }
+  },
+  "x-tags": [
+    "Attendee"
+  ]
+}

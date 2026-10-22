@@ -1,0 +1,689 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Appointment Type API
+  version: v1
+  description: 'Operations tagged Appointment Type across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Appointment Type
+paths:
+  /appointment_types:
+    get:
+      tags:
+      - Appointment Type
+      summary: List appointment types
+      operationId: ListAppointmentTypes-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appointment_types:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppointmentType'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_types?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_types?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_types?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_confirmation_template_ids | [array](/#array-filter-operators) |
+
+          | appointment_follow_up_template_ids | [array](/#array-filter-operators) |
+
+          | appointment_reminder_template_ids | [array](/#array-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | category | [string](/#string-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | max_attendees | [integer](/#numeric-filter-operators) |
+
+          | online_payments_mode | [string](/#string-filter-operators) |
+
+          | show_in_online_bookings | [boolean](/#boolean-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Appointment Type
+      summary: Create appointment type
+      operationId: CreateAppointmentType-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentType'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentType'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /appointment_types/{id}:
+    get:
+      tags:
+      - Appointment Type
+      summary: Get appointment type
+      operationId: GetAppointmentType-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentType'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    patch:
+      tags:
+      - Appointment Type
+      summary: Update appointment type
+      operationId: UpdateAppointmentType-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentType'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentType'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Appointment Type
+      summary: Archive appointment type
+      operationId: DeleteAppointmentType-Delete
+      responses:
+        '204':
+          description: Resource was archived successfully
+      deprecated: true
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /appointment_types/{id}/archive:
+    post:
+      tags:
+      - Appointment Type
+      summary: Archive appointment type
+      operationId: ArchiveAppointmentType-Post
+      responses:
+        '204':
+          description: Resource was archived
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /practitioners/{practitioner_id}/appointment_types:
+    get:
+      tags:
+      - Appointment Type
+      summary: List appointment types for practitioner
+      operationId: ListAppointmentTypesForPractitioner-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appointment_types:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppointmentType'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/appointment_types?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/appointment_types?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/practitioners/1/appointment_types?page=3
+      parameters:
+      - name: practitioner_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_confirmation_template_ids | [array](/#array-filter-operators) |
+
+          | appointment_follow_up_template_ids | [array](/#array-filter-operators) |
+
+          | appointment_reminder_template_ids | [array](/#array-filter-operators) |
+
+          | archived_at | [date-time](/#datetime-filter-operators) |
+
+          | category | [string](/#string-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | max_attendees | [integer](/#numeric-filter-operators) |
+
+          | online_payments_mode | [string](/#string-filter-operators) |
+
+          | show_in_online_bookings | [boolean](/#boolean-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    AppointmentType:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              add_deposit_to_account_credit:
+                type:
+                - boolean
+                - 'null'
+              billable_item_id:
+                type: string
+                format: int64
+                description: billable item id
+                example: '1'
+                deprecated: true
+              category:
+                type:
+                - string
+                - 'null'
+              color:
+                type: string
+                pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+              deposit_price:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: 0
+                exclusiveMaximum: 4000000000
+              description:
+                type:
+                - string
+                - 'null'
+              duration_in_minutes:
+                type: integer
+                exclusiveMinimum: 0
+                exclusiveMaximum: 1440
+              online_bookings_lead_time_hours:
+                type:
+                - integer
+                - 'null'
+                enum:
+                - 0
+                - 1
+                - 2
+                - 4
+                - 12
+                - 18
+                - 24
+                - 48
+                - 72
+                - 168
+                - 336
+                - 504
+                - 672
+              online_payments_mode:
+                type:
+                - string
+                - 'null'
+                enum:
+                - deposit_required
+                - optional
+                - required
+              max_attendees:
+                type: integer
+                exclusiveMinimum: 0
+                exclusiveMaximum: 100
+              name:
+                type: string
+                maxLength: 255
+              product_id:
+                type: string
+                format: int64
+                description: product id
+                example: '1'
+                deprecated: true
+              show_in_online_bookings:
+                type:
+                - boolean
+                - 'null'
+              telehealth_enabled:
+                type:
+                - boolean
+                - 'null'
+              treatment_note_template_id:
+                type: string
+                format: int64
+                description: treatment note template id
+                example: '1'
+              appointment_confirmation_template_ids:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: string
+                  format: int64
+                  example: '1'
+              appointment_follow_up_template_ids:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: string
+                  format: int64
+                  example: '1'
+              appointment_reminder_template_ids:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: string
+                  format: int64
+                  example: '1'
+              business_ids:
+                type: array
+                items:
+                  example: '1'
+                  format: int64
+                  type: string
+              practitioner_ids:
+                type: array
+                description: Practitioner ids
+                items:
+                  type: string
+                  format: int64
+                  example: '1'
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  schemas:
+    AppointmentType:
+      type: object
+      properties:
+        add_deposit_to_account_credit:
+          type:
+          - boolean
+          - 'null'
+        appointment_confirmation_template_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: int64
+            example: '1'
+        appointment_follow_up_template_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: int64
+            example: '1'
+        appointment_reminder_template_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: int64
+            example: '1'
+        appointment_type_billable_items:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_type_billable_items?q%5B%5D=appointment_type_id%3A%3D1
+        appointment_type_products:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_type_products?q%5B%5D=appointment_type_id%3A%3D1
+        archived_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        billable_item:
+          deprecated: true
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/billable_items/1
+        category:
+          type:
+          - string
+          - 'null'
+        color:
+          type: string
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+        created_at:
+          type: string
+          format: date-time
+        deposit_price:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          minimum: 0
+          exclusiveMaximum: 4000000000
+        description:
+          type:
+          - string
+          - 'null'
+        duration_in_minutes:
+          type: integer
+          exclusiveMinimum: 0
+          exclusiveMaximum: 1440
+        id:
+          type: string
+          format: int64
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/appointment_types/1
+        max_attendees:
+          type: integer
+          exclusiveMinimum: 0
+          exclusiveMaximum: 100
+        name:
+          type: string
+          maxLength: 255
+        online_bookings_lead_time_hours:
+          type:
+          - integer
+          - 'null'
+          enum:
+          - 0
+          - 1
+          - 2
+          - 4
+          - 12
+          - 18
+          - 24
+          - 48
+          - 72
+          - 168
+          - 336
+          - 504
+          - 672
+        online_payments_enabled:
+          type:
+          - boolean
+          - 'null'
+        online_payments_mode:
+          type:
+          - string
+          - 'null'
+          enum:
+          - deposit_required
+          - optional
+          - required
+        practitioners:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_types/1/practitioners
+        product:
+          deprecated: true
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/products/1
+        show_in_online_bookings:
+          type:
+          - boolean
+          - 'null'
+        telehealth_enabled:
+          type:
+          - boolean
+          - 'null'
+        treatment_note_template:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/treatment_note_templates/1
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Appointment Type
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml

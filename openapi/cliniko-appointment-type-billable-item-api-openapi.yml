@@ -1,0 +1,355 @@
+openapi: 3.2.0
+info:
+  title: Cliniko Appointment Type Billable Item API
+  version: v1
+  description: 'Operations tagged Appointment Type Billable Item across 2 of this provider''s published API definitions: cliniko-openapi.yml, cliniko-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.au1.cliniko.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Appointment Type Billable Item
+paths:
+  /appointment_type_billable_items:
+    get:
+      tags:
+      - Appointment Type Billable Item
+      summary: List appointment type billable items
+      operationId: ListAppointmentTypeBillableItems-Get
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appointment_type_billable_items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppointmentTypeBillableItem'
+                  total_entries:
+                    type: integer
+                    example: 1
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_type_billable_items?page=2
+                      previous:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_type_billable_items?page=1
+                      next:
+                        type: string
+                        format: uri
+                        example: https://api.au1.cliniko.com/v1/appointment_type_billable_items?page=3
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/Order'
+      - in: query
+        name: q[]
+        description: 'Filter result by one or more fields.
+
+
+          See [Filtering Results](/#filtering-results)
+
+
+          Available filters:
+
+
+          | Value | Format |
+
+          |---|---|
+
+          | appointment_type_id | [int64](/#numeric-filter-operators) |
+
+          | billable_item_id | [int64](/#numeric-filter-operators) |
+
+          | created_at | [date-time](/#datetime-filter-operators) |
+
+          | id | [int64](/#numeric-filter-operators) |
+
+          | updated_at | [date-time](/#datetime-filter-operators) |
+
+          '
+        schema:
+          type: array
+          items:
+            type: string
+    post:
+      tags:
+      - Appointment Type Billable Item
+      summary: Create appointment type billable item
+      operationId: CreateAppointmentTypeBillableItem-Post
+      responses:
+        '201':
+          description: Resource was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentTypeBillableItem'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentTypeBillableItemCreate'
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+  /appointment_type_billable_items/{id}:
+    get:
+      tags:
+      - Appointment Type Billable Item
+      summary: Get appointment type billable item
+      operationId: GetAppointmentTypeBillableItem-Get
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentTypeBillableItem'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    patch:
+      tags:
+      - Appointment Type Billable Item
+      summary: Update appointment type billable item
+      operationId: UpdateAppointmentTypeBillableItem-Patch
+      responses:
+        '200':
+          description: Resource was updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentTypeBillableItem'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+      requestBody:
+        $ref: '#/components/requestBodies/AppointmentTypeBillableItemUpdate'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    delete:
+      tags:
+      - Appointment Type Billable Item
+      summary: Delete appointment type billable item
+      operationId: DeleteAppointmentTypeBillableItem-Delete
+      responses:
+        '204':
+          description: Resource was deleted successfully
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: int64
+    servers:
+    - url: https://api.au1.cliniko.com/v1
+      description: Production
+components:
+  requestBodies:
+    AppointmentTypeBillableItemUpdate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              billable_item_id:
+                type: string
+                format: int64
+                description: billable item id
+                example: '1'
+              discount_percentage:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: 0
+                maximum: 100
+              discounted_amount:
+                type:
+                - string
+                - 'null'
+                format: decimal
+              quantity:
+                type: string
+                format: decimal
+                minimum: -4000000000
+                exclusiveMaximum: 4000000000
+    AppointmentTypeBillableItemCreate:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              appointment_type_id:
+                type: string
+                format: int64
+                description: appointment type id
+                example: '1'
+              billable_item_id:
+                type: string
+                format: int64
+                description: billable item id
+                example: '1'
+              discount_percentage:
+                type:
+                - string
+                - 'null'
+                format: decimal
+                minimum: 0
+                maximum: 100
+              discounted_amount:
+                type:
+                - string
+                - 'null'
+                format: decimal
+              quantity:
+                type: string
+                format: decimal
+                minimum: -4000000000
+                exclusiveMaximum: 4000000000
+  parameters:
+    Sort:
+      in: query
+      name: sort
+      explode: false
+      description: 'Comma separated search fields. See: [Ordering](/#ordering)'
+      schema:
+        type: array
+        items:
+          type: string
+          example: created_at:desc
+    Order:
+      in: query
+      name: order
+      deprecated: true
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+    PerPage:
+      in: query
+      name: per_page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    ValidationError:
+      description: Resource could not be saved due to validation errors
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Validation Failed
+              errors:
+                type: object
+                additionalProperties:
+                  type: string
+                  x-additionalPropertiesName: error field
+                example:
+                  api_field: error message
+  schemas:
+    AppointmentTypeBillableItem:
+      type: object
+      properties:
+        appointment_type:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/appointment_types/1
+        billable_item:
+          deprecated: false
+          type: object
+          properties:
+            links:
+              type: object
+              properties:
+                self:
+                  type: string
+                  format: uri
+                  example: https://api.au1.cliniko.com/v1/billable_items/1
+        created_at:
+          type: string
+          format: date-time
+        discount_percentage:
+          type:
+          - string
+          - 'null'
+          format: decimal
+          minimum: 0
+          maximum: 100
+        discounted_amount:
+          type:
+          - string
+          - 'null'
+          format: decimal
+        id:
+          type: string
+          format: int64
+        is_monetary_discount:
+          type:
+          - boolean
+          - 'null'
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: uri
+              example: https://api.au1.cliniko.com/v1/appointment_type_billable_items/1
+        quantity:
+          type: string
+          format: decimal
+          minimum: -4000000000
+          exclusiveMaximum: 4000000000
+        updated_at:
+          type: string
+          format: date-time
+      x-tags:
+      - Appointment Type Billable Item
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Clinko API Developers Group
+  url: https://groups.google.com/a/redguava.com.au/d/forum/cliniko-api
+x-refined-from:
+- cliniko-openapi.yml
+- cliniko-openapi.yml
