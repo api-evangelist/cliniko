@@ -7,186 +7,111 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   authentication/cliniko-authentication.yml:
-    method: derived
+    method: searched
     evidence: declared in the artifact
   capabilities/cliniko-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  changelog/cliniko-changelog.yml:
+    method: searched
+    evidence: declared in the artifact
   collections/cliniko-appointment-types-api.opencollection.json:
-    method: derived
-    evidence: openapi/cliniko-appointment-types-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-appointment-types-api.postman_collection.json:
-    method: derived
-    evidence: openapi/cliniko-appointment-types-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-appointments-api.opencollection.json:
-    method: derived
-    evidence: openapi/cliniko-appointments-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-appointments-api.postman_collection.json:
-    method: derived
-    evidence: openapi/cliniko-appointments-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-businesses-api.opencollection.json:
-    method: derived
-    evidence: openapi/cliniko-businesses-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-businesses-api.postman_collection.json:
-    method: derived
-    evidence: openapi/cliniko-businesses-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-invoices-api.opencollection.json:
-    method: derived
-    evidence: openapi/cliniko-invoices-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-invoices-api.postman_collection.json:
-    method: derived
-    evidence: openapi/cliniko-invoices-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-patients-api.opencollection.json:
-    method: derived
-    evidence: openapi/cliniko-patients-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-patients-api.postman_collection.json:
-    method: derived
-    evidence: openapi/cliniko-patients-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-practitioners-api.opencollection.json:
-    method: derived
-    evidence: openapi/cliniko-practitioners-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-practitioners-api.postman_collection.json:
-    method: derived
-    evidence: openapi/cliniko-practitioners-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-treatment-notes-api.opencollection.json:
-    method: derived
-    evidence: openapi/cliniko-treatment-notes-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko-treatment-notes-api.postman_collection.json:
-    method: derived
-    evidence: openapi/cliniko-treatment-notes-api
+    method: unknown
+    evidence: no authorship recorded
   collections/cliniko.opencollection.json:
     method: derived
     evidence: openapi/cliniko
   collections/cliniko.postman_collection.json:
     method: derived
     evidence: openapi/cliniko
+  conformance/cliniko-conformance.yml:
+    method: searched
+    evidence: declared in the artifact
+  conventions/cliniko-conventions.yml:
+    method: searched
+    evidence: declared in the artifact
+  data-model/cliniko-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  errors/cliniko-problem-types.yml:
+    method: derived
+    evidence: declared in the artifact
   finops/cliniko-finops.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: generated
+    evidence: declared in the artifact
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
+  hosts/cliniko-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
+  integrations/_index.yml:
     method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+    evidence: carries an API Evangelist house phrase
+  integrations/cliniko-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
+  json-ld/cliniko-context.jsonld:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/cliniko-attendee-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/cliniko-individual-appointment-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/cliniko-invoice-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/cliniko-patient-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/cliniko-public-settings-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/cliniko-settings-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -270,37 +195,233 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  lifecycle/cliniko-lifecycle.yml:
+    method: searched
+    evidence: declared in the artifact
+  llms/cliniko-llms-provenance.yml:
+    method: unknown
+    evidence: no authorship recorded
+  llms/cliniko-llms.txt:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/cliniko-mcp.yml:
+    method: derived
+    evidence: declared in the artifact
   openapi/_original/cliniko-openapi.yml:
     method: harvested
     evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
       to the provider's source is unverified
-  openapi/cliniko-appointment-types-api-openapi.yml:
+  openapi/_original/cliniko-openapi_2.yml:
+    method: harvested
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
+  openapi/cliniko-appointment-type-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/cliniko-appointments-api-openapi.yml:
+  openapi/cliniko-appointment-type-billable-item-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/cliniko-businesses-api-openapi.yml:
+  openapi/cliniko-appointment-type-product-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/cliniko-invoices-api-openapi.yml:
+  openapi/cliniko-attendee-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/cliniko-patients-api-openapi.yml:
+  openapi/cliniko-availability-block-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/cliniko-practitioners-api-openapi.yml:
+  openapi/cliniko-available-time-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/cliniko-treatment-notes-api-openapi.yml:
+  openapi/cliniko-billable-item-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-body-chart-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-booking-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-business-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-communication-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-concession-price-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-concession-type-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-contact-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-daily-availability-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-group-appointment-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-individual-appointment-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-invoice-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-invoice-item-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-medical-alert-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-patient-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-patient-attachment-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-patient-case-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-patient-form-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-patient-form-template-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-practitioner-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-practitioner-reference-number-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-product-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-product-supplier-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-public-settings-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-recall-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-recall-type-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-referral-source-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-referral-source-type-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-relationship-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-service-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-settings-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-signature-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-stock-adjustment-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-tax-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-treatment-note-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-treatment-note-template-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-unavailable-block-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-unavailable-block-type-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/cliniko-user-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  overlays/cliniko-openapi-overlay.yaml:
+    method: unknown
+    evidence: no authorship recorded
+  packages/cliniko-packages.yml:
+    method: unknown
+    evidence: no authorship recorded
   plans/cliniko-plans-pricing.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: searched
+    evidence: declared in the artifact
   rate-limits/cliniko-rate-limits.yml:
+    method: searched
+    evidence: declared in the artifact
+  regulatory/cliniko-regulatory-posture.yml:
+    method: searched
+    evidence: declared in the artifact
+  rules/cliniko-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  sandbox/cliniko-sandbox.yml:
+    method: searched
+    evidence: declared in the artifact
+  security/cliniko-domain-security.yml:
     method: unknown
     evidence: no authorship recorded
-  security/cliniko-domain-security.yml:
+  security/cliniko-trust-center.yml:
+    method: searched
+    evidence: declared in the artifact
+  skills/_index.yml:
+    method: generated
+    evidence: declared in the artifact
+  skills/cliniko-book-individual-appointment.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/cliniko-manage-appointment.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/cliniko-patient-billing-history.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/cliniko-record-treatment-note.md:
+    method: generated
+    evidence: declared in the artifact
+  skills/cliniko-register-patient.md:
+    method: generated
+    evidence: declared in the artifact
+  vendors/cliniko-vendors.yml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/cliniko-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
+  well-known/cliniko-help-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/cliniko-status-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/cliniko-well-known.yml:
     method: unknown
     evidence: no authorship recorded
